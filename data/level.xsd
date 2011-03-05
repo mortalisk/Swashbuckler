@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/level" xmlns:tns="http://www.example.org/level" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/level"
+	xmlns:tns="http://www.example.org/level" elementFormDefault="qualified">
 
-    <include schemaLocation=""></include>
-    <include schemaLocation=""></include>
-    <element name="level" type="tns:levelType"></element>
-    
-    <complexType name="levelType"></complexType>
+	<include schemaLocation=""></include>
+	<include schemaLocation=""></include>
+	<element name="level" type="tns:levelType"></element>
 
-    <complexType name="obstacleType">
-    	<complexContent>
-    		<extension base="tns:objectType"></extension>
-    	</complexContent>
-    </complexType>
+	<complexType name="levelType">
+		<sequence>
+			<element ref="tns:object"></element>
+		</sequence>
+	</complexType>
+
+	<element name="object" type="tns:objectType"></element>
+	<complexType name="objectType">
+		<sequence>
+			<element ref="tns:shape"></element>
+		</sequence>
+	</complexType>
     
-    <complexType name="objectType">
+    <complexType name="shapeType">
     	<sequence>
-    		<element ref="tns:shape"></element>
+    		<element name="type" type="tns:shapeEnum" />
+    		<element name="points">
+    			<complexType>
+    				<sequence>
+    					<element name="point" type="tns:pointType" />
+    				</sequence>
+    			</complexType>
+    		</element>
     	</sequence>
     </complexType>
     
-
-
-    <complexType name="entityType">
-    	<complexContent>
-    		<extension base="tns:objectType"></extension>
-    	</complexContent>
+    <complexType name="pointType">
+    	<sequence>
+    		<element name="x"></element>
+    		<element name="y"></element>
+    	</sequence>
     </complexType>
 
-
-    <complexType name="circleType"></complexType>
-
-    <complexType name="polygonType"></complexType>
-
-    <complexType name="shapeType"></complexType>
+    <simpleType name="shapeEnum">
+	    	<restriction base="string">
+	    		<enumeration value="cirle"></enumeration>
+	    		<enumeration value="polygon"></enumeration>
+	    	</restriction>
+    </simpleType>
 
     <element name="shape" type="tns:shapeType"></element>
 </schema>
