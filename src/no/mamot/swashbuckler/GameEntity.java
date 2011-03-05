@@ -18,17 +18,15 @@ import org.newdawn.slick.particles.ConfigurableEmitter.RandomValue;
 public class GameEntity extends GameObject{
 
 	private Vector2f position = null;
-	private Vector2f gravity = new Vector2f(0.0f, 3.8f);
+	private Vector2f gravity = new Vector2f(0.0f, 0.5f);
 	private Vector2f jumpVector = new Vector2f(0.0f , 0.0f);
 	
 	private Image image = null;
 	// bounding spheres for collision
 	private float radius = 0.0f;
-	private float speed = 2.3f;
-	private float jumpSpeed = -12.0f;
+	private float speed = 2.0f;
+	private float jumpSpeed = -4.0f;
 	private float correctionSpeed = 2.3f; // should be greater then speed ??
-	
-	//private Circle sphere = null;
 
 	private ShapeRenderer renderer = null;
 
@@ -39,8 +37,7 @@ public class GameEntity extends GameObject{
 		position = new Vector2f (x,y);
 		this.radius = radius;
 		renderer = new ShapeRenderer();
-		
-		
+		this.setShape(new Circle(position.x, position.y, radius));	
 	}
 
 
@@ -49,216 +46,142 @@ public class GameEntity extends GameObject{
 		this.setShape(new Circle(position.x, position.y, radius));
 		
 		renderer.draw(this.getShape());
-	
-		
-		
-		
 	}
 	
-	public void update (GameContainer gc, int delta, GameEntity other, List <GameObstacle> obstacle){
-
-		moveOld(gc, delta, other, obstacle);
-		
+	public void update (GameContainer gc, int delta, GameEntity other, List <GameObstacle> obstacle , List<GameObject> list){
+		move(delta, gc.getInput(), list);
 	}
 	
-	
-	
-	private void moveOld(GameContainer gc, int delta, GameEntity other , List <GameObstacle> obstacleList){
-		Input input = gc.getInput();		
-		// first add gravity...
-		// and check for collision..
-		gravity = new Vector2f(0.0f, 1.2f); 
-		gravity.y = gravity.y / delta;  // some other way to do this??
-		//jumpVector.y = jumpVector.y*delta;
+	public void move(int delta, Input input, List <GameObject> gameEntityList){
+		
 		Vector2f before = position.copy();
-		if (jumpVector.y < 0) {
+		/*if (jumpVector.y < 0) {
 			jumpVector.y += gravity.y;
-		}
-		position.add(jumpVector);
-		position.add(gravity);
-		Vector2f testGravity = position.copy();
-		for (GameObstacle obstacle : obstacleList){
-			if (checkGameEntityCollision(testGravity,radius, other) || checkObstacleEntityCollision(testGravity, radius, obstacle)){
-			  position = before.copy();
+		}*/
+		
+		//set new gravity
+		Vector2f thisGravity = gravity.copy();
+		thisGravity.x = thisGravity.x / delta;
+		thisGravity.y = thisGravity.y / delta;		
+		
+		//position.add(jumpVector);
+		position.add(thisGravity);
+		
+		//setting shape to the new position
+		this.setShape(new Circle(position.x, position.y, radius));
+		
+		//Doing first check to ensure we don't jump into anything
+		for (GameObject otherEntity : gameEntityList) {
+			if (this.detectCollision(otherEntity)) {
+				//collisionCorrection(before, delta, gameEntityList, null);
+				position = before.copy();
+				break;
 			}
 		}
 		
-		if (input.isKeyDown(Input.KEY_SPACE)){
-			if (jumpVector.y >= 0)
-			jumpVector = new Vector2f(0.0f, jumpSpeed);
-		}
+		//jump
+		/*if (input.isKeyDown(Input.KEY_SPACE)){
+			if (jumpVector.y >= 0) {
+				jumpVector = new Vector2f(0.0f, jumpSpeed);
+			}			
+		}*/
 		
-		// keep position before move..
-		before = position.copy();
+		//move
 		if (input.isKeyDown(Input.KEY_W)){
-			position.y -= (speed / delta);
-			Vector2f testPosition = position.copy();
-			this.setShape(new Circle(position.x, position.y, radius));
-			for (GameObstacle obstacle : obstacleList) {
-			if (checkGameEntityCollision(testPosition,radius, other) || checkObstacleEntityCollision(testPosition, radius, obstacle)){
-				position = before.copy();				
-				position.x += correctionSpeed / delta;
-				testPosition = position.copy();
-				this.setShape(new Circle(position.x, position.y, radius));
-				if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-					position = before.copy();				
-					position.x -= correctionSpeed/delta;
-					testPosition = position.copy();
-					this.setShape(new Circle(position.x, position.y, radius));
-					if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-						position = before.copy();
-						return;
-					}
-					return;
-				}
-			}
-			}	
-				
+			position.y -= speed / delta;
+			collisionCorrection(before, delta, gameEntityList, input);
 		}
 		if (input.isKeyDown(Input.KEY_S)){
 			position.y += speed / delta;
-			Vector2f testPosition = position.copy();
-			for (GameObstacle obstacle : obstacleList) {
-				this.setShape(new Circle(position.x, position.y, radius));
-			if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-				position = before.copy();				
-				position.x += correctionSpeed / delta;
-				testPosition = position.copy();
-				this.setShape(new Circle(position.x, position.y, radius));
-				if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-					position = before.copy();				
-					position.x -= correctionSpeed / delta;
-					testPosition = position.copy();
-					this.setShape(new Circle(position.x, position.y, radius));
-					if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-						position = before.copy();
-						return;
-					}
-					return;
-				}
-			}
-			}
+			collisionCorrection(before, delta, gameEntityList, input);
 		}
 		if (input.isKeyDown(Input.KEY_A)){
 			position.x -= speed / delta;
-			Vector2f testPosition = position.copy();
-			this.setShape(new Circle(position.x, position.y, radius));
-			for (GameObstacle obstacle : obstacleList) {
-			if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-				position = before.copy();				
-				position.y += correctionSpeed / delta;
-				testPosition = position.copy();
-				this.setShape(new Circle(position.x, position.y, radius));
-				if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-					position = before.copy();				
-					position.y -= correctionSpeed / delta;
-					testPosition = position.copy();
-					this.setShape(new Circle(position.x, position.y, radius));
-					if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-						position = before.copy();
-						return;
-					}
-					return;
-				}
-			}
-			}
+			collisionCorrection(before, delta, gameEntityList, input);
 		}
 		if (input.isKeyDown(Input.KEY_D)){
 			position.x += speed / delta;
-			Vector2f testPosition = position.copy();
-			this.setShape(new Circle(position.x, position.y, radius));
-			for (GameObstacle obstacle : obstacleList) {
-			if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-				position = before.copy();				
-				position.y += correctionSpeed / delta;
-				testPosition = position.copy();
-				this.setShape(new Circle(position.x, position.y, radius));
-				if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
-					position = before.copy();				
-					position.y -= correctionSpeed / delta;
-					testPosition = position.copy();
-					this.setShape(new Circle(position.x, position.y, radius));
-					if (checkGameEntityCollision(testPosition,radius, other)|| checkObstacleEntityCollision(testPosition, radius, obstacle)){
+			collisionCorrection(before, delta, gameEntityList, input);
+		}	
+	}
+
+	public void collisionCorrection(Vector2f before, int delta, List <GameObject> gameEntityList, Input input) {
+		//setting shape to the new position
+		this.setShape(new Circle(position.x, position.y, radius));
+		
+		if (input != null) { //this is a movement	
+			//entity is moving up or down -> try to slide left or right	
+			if (input.isKeyDown(Input.KEY_S) || input.isKeyDown(Input.KEY_W)){
+				System.out.println("UP or DOWN");
+				for (GameObject otherEntity1 : gameEntityList) {
+					if (this.detectCollision(otherEntity1)) {				
 						position = before.copy();
+						position.x += correctionSpeed / delta;
+						this.setShape(new Circle(position.x, position.y, radius));
+						if (this.detectCollision(otherEntity1)) {
+							position = before.copy();				
+							position.x -= correctionSpeed/delta;	
+							this.setShape(new Circle(position.x, position.y, radius));
+							if (this.detectCollision(otherEntity1)) {
+								position = before.copy();
+								return;
+							}
+							return;
+						}
+					}
+				}				
+			}
+			
+			if (input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_D)){
+				System.out.println("LEFT or RIGHT");
+				//entity is moving left or right -> try to slide up or down
+				for (GameObject otherEntity1 : gameEntityList) {
+					if (this.detectCollision(otherEntity1)) {				
+						position = before.copy();
+						position.y += correctionSpeed / delta;
+						this.setShape(new Circle(position.x, position.y, radius));
+						if (this.detectCollision(otherEntity1)) {
+							position = before.copy();				
+							position.y -= correctionSpeed / delta;	
+							this.setShape(new Circle(position.x, position.y, radius));
+							if (this.detectCollision(otherEntity1)) {
+								position = before.copy();
+								return;
+							}
+							return;
+						}
+					}
+				}				
+			}		
+		} else { //entity is not moving actively - >try to slide in any direction
+			for (GameObject otherEntity : gameEntityList) {
+				if (this.detectCollision(otherEntity)) {				
+					position = before.copy();
+					position.y += correctionSpeed / delta;
+					this.setShape(new Circle(position.x, position.y, radius));
+					if (this.detectCollision(otherEntity)) {
+						position = before.copy();				
+						position.y -= correctionSpeed / delta;	
+						this.setShape(new Circle(position.x, position.y, radius));
+						if (this.detectCollision(otherEntity)) {
+							position = before.copy();
+							position.x += correctionSpeed / delta;
+							this.setShape(new Circle(position.x, position.y, radius));
+							if (this.detectCollision(otherEntity)) {
+								position = before.copy();				
+								position.x -= correctionSpeed / delta;	
+								this.setShape(new Circle(position.x, position.y, radius));
+								if (this.detectCollision(otherEntity)) {
+									position = before.copy();
+									return;
+								}
+								return;
+							}
+						}
 						return;
 					}
-					return;
 				}
 			}
-		}
-			}
-		
-		
-		
-		
-	}
-	
-	private boolean checkGameEntityCollision(Vector2f position, float myRadius, GameEntity other){
-		// Checks collision between two gameEntities with one boundingsphere
-		float deltaX = position.x - other.position.x;
-		float deltaY = position.y - other.position.y;
-		float minimumDistance = myRadius + other.radius;
-		if (deltaX*deltaX + deltaY*deltaY < minimumDistance * minimumDistance){
-			return true;
 		}		
-		return false;
-	}
-	
-	private boolean checkObstacleEntityCollision (Vector2f position, float myRadius, GameObstacle obstacle){
-		Polygon polygon = (Polygon)obstacle.getShape();
-		if (this.getShape().intersects(polygon)) {
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public void move(Input input, List <GameObject> gameEntityList){
-		
-		Vector2f before = position.copy();
-		if (jumpVector.y < 0) {
-			jumpVector.y += gravity.y;
-		}
-		position.add(jumpVector);
-		position.add(gravity);
-		Vector2f testGravity = position.copy();
-		
-		if (input.isKeyDown(Input.KEY_SPACE)){
-			if (jumpVector.y >= 0)
-			jumpVector = new Vector2f(0.0f, jumpSpeed);
-		}
-		
-		// TODO . fix this method and make it better then the old one...
-		boolean collision = false;
-		do {
-			for (GameObject otherEntity : gameEntityList){
-				collision = detectCollision(otherEntity);
-				
-			}
-			
-			collisionCorrection();
-			
-		}while(collision); // 
-	}
-
-
-	public void collisionCorrection(){
-		
-	}
-
-	@Override
-	public boolean detectCollision(GameObject collidingWith) {
-		// TODO Auto-generated method stub
-		Shape other = collidingWith.getShape();
-		if (this.getShape().intersects(other)){
-			return true;
-		}
-		
-		
-		return false;
-	}
-	
-	
-	
+	}	
 }

@@ -20,9 +20,8 @@ public class PlatformGame extends BasicGame {
 	private GameEntity man = null;
 	private GameEntity brick = null;
 	private List<GameObstacle> obstacleList = null;
+	private List<GameObject> objectList = null;
 
-	
-	
 	public PlatformGame(String title) {
 		super(title);
 		
@@ -86,7 +85,12 @@ public class PlatformGame extends BasicGame {
 			points4[7] = 390.0f;
 			
 			GameObstacle obstacle4 = new GameObstacle(points4, pos);
-			
+			objectList = new ArrayList<GameObject>();
+			objectList.add(obstacle1);
+			objectList.add(obstacle2);
+			objectList.add(obstacle3);
+			objectList.add(obstacle4);
+			objectList.add(brick);
 			obstacleList = new ArrayList<GameObstacle> ();
 			obstacleList.add(obstacle1);
 			obstacleList.add(obstacle2);
@@ -102,7 +106,7 @@ public class PlatformGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		man.update(gc, delta,brick, obstacleList);
+		man.update(gc, delta,brick, obstacleList, objectList);
 		//System.out.println("Delta : "+delta);
 		
 	}

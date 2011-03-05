@@ -5,7 +5,16 @@ import org.newdawn.slick.geom.Shape;
 public abstract class GameObject {
 
 	private Shape shape;
-	public abstract boolean detectCollision(GameObject collidingWith);
+	
+	public boolean detectCollision(GameObject collidingWith) {
+		Shape other = collidingWith.getShape();
+		if (this.getShape().intersects(other)) {
+			//System.out.println("collition with " + other.toString());
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public Shape getShape() {
 		return shape;
