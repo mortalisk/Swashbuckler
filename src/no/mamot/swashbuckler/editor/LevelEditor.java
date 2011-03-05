@@ -13,6 +13,7 @@ public class LevelEditor extends BasicGame {
 
 	private Pointer pointer;
 	private PolygonCreator creator;
+	private LevelSaver levelSaver ;
 	public LevelEditor(String title) {
 		super(title);
 		// TODO Auto-generated constructor stub
@@ -23,6 +24,7 @@ public class LevelEditor extends BasicGame {
 		// TODO Auto-generated method stub
 		pointer = new Pointer();
 		creator = new PolygonCreator();
+		levelSaver = new LevelSaver(creator);
 	}
 
 	@Override
@@ -34,6 +36,7 @@ public class LevelEditor extends BasicGame {
 		float y = input.getMouseY();
 		pointer.update(x, y);
 		creator.getInput(input);
+		levelSaver.checkInput(input);
 	}
 
 	@Override

@@ -59,4 +59,9 @@ public class Obstacle {
 	public boolean isSelected (){
 		return selected;
 	}
+	
+	public void move(float x , float y){
+		polygon.setLocation((x - (polygon.getWidth()/2)), (y - (polygon.getHeight()/2)));
+	
+	}
 }

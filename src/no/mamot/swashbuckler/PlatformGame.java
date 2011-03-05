@@ -56,7 +56,7 @@ public class PlatformGame extends BasicGame {
 		try {
 
 			level = unmarshal(LevelType.class, new FileInputStream(
-					"data/level1.xml"));
+					"data/testlevel.xml"));
 			man = new GameEntity("/data/WWFSoldierUzi.png", 18.0f, 492.0f,
 					271.0f);
 			brick = new GameEntity("/data/brick.png", 40.0f, 150.0f, 200.0f);

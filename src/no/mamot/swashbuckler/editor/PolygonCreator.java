@@ -13,6 +13,10 @@ public class PolygonCreator {
 	private List <Dott> dotts;
 	private List <Obstacle> obstacles;
 	
+	public List<Obstacle> getObstacles() {
+		return obstacles;
+	}
+
 	private ShapeRenderer renderer;
 	
 	public PolygonCreator(){
@@ -122,6 +126,16 @@ public class PolygonCreator {
 				}
 			}
 		}
+		if (input.isKeyDown(Input.KEY_LSHIFT)){ // Move
+			for (int i = 0 ; i < obstacles.size();++i){
+				if (obstacles.get(i).isSelected()){
+					Obstacle obstacle = obstacles.get(i);
+					// move to mouse position..
+					obstacle.move(input.getMouseX(), input.getMouseY());
+				}
+			}
+		}
+		
 	}
 
 	private boolean noDottsSelected() {
