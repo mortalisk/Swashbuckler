@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/level" xmlns:tns="http://www.example.org/level" elementFormDefault="qualified">
+
+    <include schemaLocation=""></include>
+    <include schemaLocation=""></include>
+    <element name="level" type="tns:levelType"></element>
+    
+    <complexType name="levelType"></complexType>
+
+    <complexType name="obstacleType">
+    	<complexContent>
+    		<extension base="tns:objectType"></extension>
+    	</complexContent>
+    </complexType>
+    
+    <complexType name="objectType">
+    	<sequence>
+    		<element ref="tns:shape"></element>
+    	</sequence>
+    </complexType>
+    
+
+
+    <complexType name="entityType">
+    	<complexContent>
+    		<extension base="tns:objectType"></extension>
+    	</complexContent>
+    </complexType>
+
+
+    <complexType name="circleType"></complexType>
+
+    <complexType name="polygonType"></complexType>
+
+    <complexType name="shapeType"></complexType>
+
+    <element name="shape" type="tns:shapeType"></element>
+</schema>
