@@ -8,13 +8,15 @@
 
 	<complexType name="levelType">
 		<sequence>
-			<element ref="tns:object"></element>
+			<element ref="tns:object" minOccurs="1" maxOccurs="unbounded"></element>
 		</sequence>
 	</complexType>
 
 	<element name="object" type="tns:objectType"></element>
 	<complexType name="objectType">
 		<sequence>
+    		<element name="x" type="float" />
+    		<element name="y" type="float" />
 			<element ref="tns:shape"></element>
 		</sequence>
 	</complexType>
@@ -25,7 +27,7 @@
     		<element name="points">
     			<complexType>
     				<sequence>
-    					<element name="point" type="tns:pointType" />
+    					<element name="point" type="tns:pointType" minOccurs="3" maxOccurs="unbounded"/>
     				</sequence>
     			</complexType>
     		</element>
@@ -34,14 +36,14 @@
     
     <complexType name="pointType">
     	<sequence>
-    		<element name="x"></element>
-    		<element name="y"></element>
+    		<element name="x" type="float"></element>
+    		<element name="y" type="float"></element>
     	</sequence>
     </complexType>
 
     <simpleType name="shapeEnum">
 	    	<restriction base="string">
-	    		<enumeration value="cirle"></enumeration>
+	    		<enumeration value="circle"></enumeration>
 	    		<enumeration value="polygon"></enumeration>
 	    	</restriction>
     </simpleType>

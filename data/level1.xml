@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level xmlns="http://www.example.org/level" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/level level.xsd ">
-<object>
-	
-</object>
+<level xmlns="http://www.example.org/level" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/level level.xsd ">
+	<object><x>200</x><y>200</y>
+		<shape>
+			<type>polygon</type>
+			<points>
+				<point>
+					<x>200.0</x>
+					<y>200.0</y>
+				</point>
+				<point>
+					<x>400.0</x>
+					<y>200.0</y>
+				</point>
+				<point>
+					<x>300.0</x>
+					<y>400.0</y>
+				</point>
+			</points>
+		</shape>
+	</object>
 </level>
+
