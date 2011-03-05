@@ -1,51 +1,42 @@
 package no.mamot.swashbuckler;
 
 import java.util.List;
-import java.util.Random;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.particles.ConfigurableEmitter.RandomValue;
 
 public class GameEntity extends GameObject{
 
 	private Vector2f position = null;
-	private Vector2f gravity = new Vector2f(0.0f, 0.5f);
+	private Vector2f gravity = new Vector2f(0.0f, 1.0f);
 	private Vector2f jumpVector = new Vector2f(0.0f , 0.0f);
 	
 	private Image image = null;
 	// bounding spheres for collision
 	private float radius = 0.0f;
-	private float speed = 2.0f;
-	private float jumpSpeed = -4.0f;
-	private float correctionSpeed = 2.3f; // should be greater then speed ??
-
-	private ShapeRenderer renderer = null;
-
+	private float speed = 3.0f;
+	private float jumpSpeed = -8.0f;
+	private float correctionSpeed = 4.0f; // should be greater then speed ??
 	
 	public GameEntity(String file,float radius, float x, float y) throws SlickException {
-		// TODO Auto-generated constructor stub
 		image = new Image(file);
 		position = new Vector2f (x,y);
 		this.radius = radius;
-		renderer = new ShapeRenderer();
 		this.setShape(new Circle(position.x, position.y, radius));	
 	}
 
-
 	public void draw(){
-		image.draw(position.x, position.y);
+		int imagePosX = (int) (position.x - (image.getWidth() / 2) + 2);
+		int imagePosY = (int) (position.y - (image.getHeight() / 2));
+		image.draw(imagePosX, imagePosY);
 		this.setShape(new Circle(position.x, position.y, radius));
 		
-		renderer.draw(this.getShape());
+		ShapeRenderer.draw(this.getShape());
 	}
 	
 	public void update (GameContainer gc, int delta, GameEntity other, List <GameObstacle> obstacle , List<GameObject> list){
@@ -55,131 +46,112 @@ public class GameEntity extends GameObject{
 	public void move(int delta, Input input, List <GameObject> gameEntityList){
 		
 		Vector2f before = position.copy();
-		/*if (jumpVector.y < 0) {
+		
+		//set jumpvector
+		if (jumpVector.y < 0) {
 			jumpVector.y += gravity.y;
-		}*/
+		}
+		position.add(jumpVector);
 		
 		//set new gravity
 		Vector2f thisGravity = gravity.copy();
 		thisGravity.x = thisGravity.x / delta;
-		thisGravity.y = thisGravity.y / delta;		
-		
-		//position.add(jumpVector);
-		position.add(thisGravity);
+		thisGravity.y = thisGravity.y / delta;			
+		position.add(thisGravity);				
 		
 		//setting shape to the new position
 		this.setShape(new Circle(position.x, position.y, radius));
 		
-		//Doing first check to ensure we don't jump into anything
+		//Doing first check to ensure we don't drop or jump into anything
 		for (GameObject otherEntity : gameEntityList) {
 			if (this.detectCollision(otherEntity)) {
-				//collisionCorrection(before, delta, gameEntityList, null);
 				position = before.copy();
 				break;
 			}
 		}
-		
-		//jump
-		/*if (input.isKeyDown(Input.KEY_SPACE)){
+
+		//movement
+		if (input.isKeyPressed(Input.KEY_SPACE)){
 			if (jumpVector.y >= 0) {
 				jumpVector = new Vector2f(0.0f, jumpSpeed);
 			}			
-		}*/
-		
-		//move
+		}
 		if (input.isKeyDown(Input.KEY_W)){
-			position.y -= speed / delta;
-			collisionCorrection(before, delta, gameEntityList, input);
+			//position.y -= speed / delta;			
 		}
 		if (input.isKeyDown(Input.KEY_S)){
 			position.y += speed / delta;
-			collisionCorrection(before, delta, gameEntityList, input);
 		}
 		if (input.isKeyDown(Input.KEY_A)){
 			position.x -= speed / delta;
-			collisionCorrection(before, delta, gameEntityList, input);
 		}
 		if (input.isKeyDown(Input.KEY_D)){
 			position.x += speed / delta;
-			collisionCorrection(before, delta, gameEntityList, input);
-		}	
+		}
+		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			System.out.println();
+			position.x = input.getMouseX();
+			position.y = input.getMouseY();
+		}
+		
+		//check for collisions after jump or movement
+		collisionCorrection(before, delta, gameEntityList, input);
+		
+		System.out.println("position: " + position.x + " | " + position.y);
 	}
 
 	public void collisionCorrection(Vector2f before, int delta, List <GameObject> gameEntityList, Input input) {
-		//setting shape to the new position
+		//setting shape to the new position in case it has changed
 		this.setShape(new Circle(position.x, position.y, radius));
-		
-		if (input != null) { //this is a movement	
-			//entity is moving up or down -> try to slide left or right	
-			if (input.isKeyDown(Input.KEY_S) || input.isKeyDown(Input.KEY_W)){
-				System.out.println("UP or DOWN");
-				for (GameObject otherEntity1 : gameEntityList) {
-					if (this.detectCollision(otherEntity1)) {				
-						position = before.copy();
-						position.x += correctionSpeed / delta;
-						this.setShape(new Circle(position.x, position.y, radius));
-						if (this.detectCollision(otherEntity1)) {
-							position = before.copy();				
-							position.x -= correctionSpeed/delta;	
-							this.setShape(new Circle(position.x, position.y, radius));
-							if (this.detectCollision(otherEntity1)) {
-								position = before.copy();
-								return;
-							}
-							return;
-						}
-					}
-				}				
-			}
-			
-			if (input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_D)){
-				System.out.println("LEFT or RIGHT");
-				//entity is moving left or right -> try to slide up or down
-				for (GameObject otherEntity1 : gameEntityList) {
-					if (this.detectCollision(otherEntity1)) {				
-						position = before.copy();
-						position.y += correctionSpeed / delta;
-						this.setShape(new Circle(position.x, position.y, radius));
-						if (this.detectCollision(otherEntity1)) {
-							position = before.copy();				
-							position.y -= correctionSpeed / delta;	
-							this.setShape(new Circle(position.x, position.y, radius));
-							if (this.detectCollision(otherEntity1)) {
-								position = before.copy();
-								return;
-							}
-							return;
-						}
-					}
-				}				
-			}		
-		} else { //entity is not moving actively - >try to slide in any direction
-			for (GameObject otherEntity : gameEntityList) {
-				if (this.detectCollision(otherEntity)) {				
-					position = before.copy();
+	
+		//loop game objects to check for any collisions
+		for (GameObject otherEntity1 : gameEntityList) {
+			if (this.detectCollision(otherEntity1)) {				
+				position = before.copy();
+				
+				//slide to avoid collision
+				if (input.isKeyDown(Input.KEY_S) || input.isKeyDown(Input.KEY_W)){
+					position.x += correctionSpeed / delta;
+				} else if (input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_D)){
 					position.y += correctionSpeed / delta;
+				}
+				
+				//setting shape to the new position
+				this.setShape(new Circle(position.x, position.y, radius));
+				
+				if (this.detectCollision(otherEntity1)) {
+					position = before.copy();	
+					
+					//slide to avoid collision						
+					if (input.isKeyDown(Input.KEY_S) || input.isKeyDown(Input.KEY_W)){
+						position.x -= correctionSpeed / delta;
+					} else if (input.isKeyDown(Input.KEY_A) || input.isKeyDown(Input.KEY_D)){
+						position.y -= correctionSpeed / delta;
+					}	
+					
+					//setting shape to the new position
 					this.setShape(new Circle(position.x, position.y, radius));
-					if (this.detectCollision(otherEntity)) {
-						position = before.copy();				
-						position.y -= correctionSpeed / delta;	
-						this.setShape(new Circle(position.x, position.y, radius));
-						if (this.detectCollision(otherEntity)) {
-							position = before.copy();
-							position.x += correctionSpeed / delta;
-							this.setShape(new Circle(position.x, position.y, radius));
-							if (this.detectCollision(otherEntity)) {
-								position = before.copy();				
-								position.x -= correctionSpeed / delta;	
-								this.setShape(new Circle(position.x, position.y, radius));
-								if (this.detectCollision(otherEntity)) {
-									position = before.copy();
-									return;
-								}
+					
+					if (this.detectCollision(otherEntity1)) {
+						position = before.copy();
+						return;
+					} else {
+						//check against all other if the slide is ok
+						for (GameObject otherEntity2 : gameEntityList) {
+							if (this.detectCollision(otherEntity2)) {				
+								position = before.copy();
 								return;
 							}
-						}
-						return;
+						}	
 					}
+				} else {
+					//check against all other if the slide is ok
+					for (GameObject otherEntity2 : gameEntityList) {
+						if (this.detectCollision(otherEntity2)) {				
+							position = before.copy();
+							return;
+						}
+					}						
 				}
 			}
 		}		

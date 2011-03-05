@@ -33,7 +33,7 @@ public class PlatformGame extends BasicGame {
 		// TODO Auto-generated method stub
 		try {
 			
-			man = new GameEntity ("/data/WWFSoldierUzi.png",40.0f,0.0f,0.0f);
+			man = new GameEntity ("/data/WWFSoldierUzi.png",18.0f,492.0f,271.0f);
 			brick = new GameEntity ("/data/brick.png", 40.0f ,150.0f, 200.0f);
 			
 			Vector2f pos = new Vector2f(400, 400);
