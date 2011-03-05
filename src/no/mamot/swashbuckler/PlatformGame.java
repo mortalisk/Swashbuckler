@@ -21,6 +21,8 @@ public class PlatformGame extends BasicGame {
 	private GameEntity brick = null;
 	private List<GameObstacle> obstacleList = null;
 
+	
+	
 	public PlatformGame(String title) {
 		super(title);
 		
