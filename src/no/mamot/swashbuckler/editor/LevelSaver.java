@@ -27,7 +27,7 @@ public class LevelSaver {
 		this.polygonCreator = polygonCreator;
 	}
 
-	public void checkInput(Input input) {
+	public void handleInput(Input input) {
 		if (input.isKeyPressed(Input.KEY_S)	&& input.isKeyPressed(Input.KEY_LCONTROL)) {
 			ObjectFactory obF = new ObjectFactory();
 			

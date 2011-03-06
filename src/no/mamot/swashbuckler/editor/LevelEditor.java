@@ -1,5 +1,6 @@
 package no.mamot.swashbuckler.editor;
 
+import no.mamot.swashbuckler.Camera;
 import no.mamot.swashbuckler.PlatformGame;
 
 import org.newdawn.slick.AppGameContainer;
@@ -14,6 +15,8 @@ public class LevelEditor extends BasicGame {
 	private Pointer pointer;
 	private PolygonCreator creator;
 	private LevelSaver levelSaver ;
+	private Camera camera;
+	
 	public LevelEditor(String title) {
 		super(title);
 		// TODO Auto-generated constructor stub
@@ -22,9 +25,12 @@ public class LevelEditor extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		// TODO Auto-generated method stub
-		pointer = new Pointer();
-		creator = new PolygonCreator();
+		
+		
 		levelSaver = new LevelSaver(creator);
+		camera = new Camera(Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT);
+		pointer = new Pointer(camera);
+		creator = new PolygonCreator(pointer);
 	}
 
 	@Override
@@ -32,17 +38,18 @@ public class LevelEditor extends BasicGame {
 			throws SlickException {
 		// TODO Auto-generated method stub
 		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
-		pointer.update(x, y);
-		creator.getInput(input);
-		levelSaver.checkInput(input);
+		
+		pointer.handleInput(input);
+		creator.handleInput(input);
+		levelSaver.handleInput(input);
+		camera.handleInput(input);
 	}
 
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		// TODO Auto-generated method stub
+		g.translate(camera.getTopLeftCorner().x, camera.getTopLeftCorner().y);
 		pointer.draw();
 		creator.draw();
 	}

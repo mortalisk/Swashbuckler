@@ -12,6 +12,7 @@ public class PolygonCreator {
 
 	private List <Dott> dotts;
 	private List <Obstacle> obstacles;
+	private Pointer pointer;
 	
 	public List<Obstacle> getObstacles() {
 		return obstacles;
@@ -19,10 +20,11 @@ public class PolygonCreator {
 
 	private ShapeRenderer renderer;
 	
-	public PolygonCreator(){
+	public PolygonCreator(Pointer pointer){
 		dotts = new ArrayList<Dott>();
 		obstacles = new ArrayList<Obstacle>();
 		renderer = new ShapeRenderer();
+		this.pointer = pointer;
 	}
 	
 	public void createNewDott(float x, float y){
@@ -55,11 +57,11 @@ public class PolygonCreator {
 	}
 	
 	
-	public void getInput(Input input){
+	public void handleInput(Input input){
 		
 		// Check mouse position
-		float mouseX = input.getMouseX();
-		float mouseY = input.getAbsoluteMouseY();
+		float mouseX = pointer.getPosition().x;
+		float mouseY = pointer.getPosition().y;
 		if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)){
 			
 			if (noObstaclesSelected()){
@@ -84,9 +86,8 @@ public class PolygonCreator {
 		
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
 			// create new dott in this point...
-			float x = input.getMouseX();
-			float y = input.getMouseY();
-			createNewDott(x, y);
+			
+			createNewDott(mouseX, mouseY);
 		}
 		if (input.isKeyPressed(Input.KEY_P)){
 			
@@ -131,7 +132,7 @@ public class PolygonCreator {
 				if (obstacles.get(i).isSelected()){
 					Obstacle obstacle = obstacles.get(i);
 					// move to mouse position..
-					obstacle.move(input.getMouseX(), input.getMouseY());
+					obstacle.move(mouseX, mouseY);
 				}
 			}
 		}
