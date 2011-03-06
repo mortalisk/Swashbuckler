@@ -54,6 +54,7 @@ public class LevelSaver {
 			try {
 				System.out.println("Saving...");
 				writeDocument(doc, "data/testlevel.xml");
+				System.out.println("Saving complete!");
 			} catch (JAXBException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

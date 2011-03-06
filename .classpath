@@ -13,6 +13,5 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Swashbuckler/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/phys2d-060408.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
