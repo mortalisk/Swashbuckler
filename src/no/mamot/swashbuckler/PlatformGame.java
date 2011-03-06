@@ -14,14 +14,12 @@ import javax.xml.bind.Unmarshaller;
 import no.mamot.swashbuckler.xml.LevelType;
 import no.mamot.swashbuckler.xml.ObjectType;
 import no.mamot.swashbuckler.xml.PointType;
-import no.mamot.swashbuckler.xml.ShapeType.Points;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
 
 public class PlatformGame extends BasicGame {
 
@@ -80,7 +78,7 @@ public class PlatformGame extends BasicGame {
 				obstacleList.add(obstacle1);
 			}
 
-			
+			arg0.setTargetFrameRate(60);
 			
 			objectList.add(brick);
 		} catch (SlickException e) {

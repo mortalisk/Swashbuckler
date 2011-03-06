@@ -32,9 +32,9 @@ public final class GameEntity extends GameObject {
 		return circle;
 	}
 
-	@Override
-	public void setPosition(float x, float y) {
-		circle.setX(x);
-		circle.setY(y);
-	}
+//	@Override
+//	public void setPosition(float x, float y) {
+//		circle.setX(x);
+//		circle.setY(y);
+//	}
 }

@@ -23,11 +23,4 @@ public final class GameObstacle extends GameObject {
 		return polygon;
 	}
 
-	@Override
-	public void setPosition(float x, float y) {
-		polygon.setX(x);
-		polygon.setY(y);
-
-	}
-
 }

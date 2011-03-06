@@ -12,23 +12,25 @@ import org.newdawn.slick.geom.Vector2f;
 
 public abstract class GameObject {
 	private Vector2f before = new Vector2f();
-	private float slideAngle = 45;
+	private float slideAngle = 35;
 	private Line line = null;
 	private Vector2f position = null;
-	private Vector2f gravity = new Vector2f(0.0f, 0.8f);
-	private Vector2f jumpVector = new Vector2f(0.0f, 0.0f);
+	private Vector2f gravity = new Vector2f(0.0f, 10.0f);
+	private Vector2f velocityVector = new Vector2f(0.0f, 0.0f);
 	private Image image = null;
-	private float speed = 1.0f;
-	private float jumpSpeed = -4.0f;
-	private float correctionSpeed = 2.0f;
-	
+	private float acceleration = 10.0f;
+	private float maxSpeed = 10.0f;
+	private float breakSpeed = 1.0f;
+	private float jumpSpeed = -14.0f;
+	private float correctionSpeed = 5.0f;
+
 	GameObject(String file, float x, float y) throws SlickException {
 
 		if (file != null)
 			image = new Image(file);
 		position = new Vector2f(x, y);
 	}
-	
+
 	public final boolean detectCollision(GameObject collidingWith) {
 		Shape other = collidingWith.getShape();
 		if (this.getShape().intersects(other)) {
@@ -37,8 +39,9 @@ public abstract class GameObject {
 
 		return false;
 	}
-	
+
 	private Vector2f intersectionPointResult = new Vector2f();
+
 	public final Vector2f GetIntersectionPoint(Shape other) {
 		float[] thisPoints = this.getShape().getPoints();
 
@@ -56,20 +59,21 @@ public abstract class GameObject {
 
 		return intersectionPointResult;
 	}
-	
+
 	private Vector2f intersectionVector = new Vector2f();
+
 	public final boolean shouldSlide(Vector2f intersectionPoint) {
 		boolean Result = false;
 
 		if (intersectionPoint != null) {
-			
+
 			intersectionVector.set(intersectionPoint);
-			intersectionVector.x -= position.x + getShape().getWidth()/2.0;
-			intersectionVector.y -= position.y + getShape().getHeight()/2.0;
+			intersectionVector.x -= position.x + getShape().getWidth() / 2.0;
+			intersectionVector.y -= position.y + getShape().getHeight() / 2.0;
 
 			float angle = (float) intersectionVector.getTheta();
 
-			//line = new Line(center, intersectionPoint);
+			// line = new Line(center, intersectionPoint);
 
 			Result = (angle > 90 + slideAngle || angle < 90 - slideAngle);
 		}
@@ -89,28 +93,16 @@ public abstract class GameObject {
 
 		before.set(position);
 
-		// set jumpvector
-		if (jumpVector.y < 0) {
-			jumpVector.y += gravity.y;
-		}
-		position.add(jumpVector);
-
-		position.add(gravity);
+		// set velocityVector
+		position.add(velocityVector);
 
 		// setting shape to the new position
-		this.getShape().setLocation(position.x, position.y);
-
-		// Doing first check to ensure we don't drop or jump into anything
-		/*
-		 * for (GameObject otherEntity : gameEntityList) { if
-		 * (this.detectCollision(otherEntity)) { position = before.copy();
-		 * break; } }
-		 */
+		setPosition(position.x, position.y);
 
 		// movement
 		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			if (jumpVector.y >= 0) {
-				jumpVector.set(0.0f, jumpSpeed);
+			if (velocityVector.y >= 0) {
+				velocityVector.set(0.0f, jumpSpeed);
 			}
 		}
 		if (input.isKeyDown(Input.KEY_W)) {
@@ -120,13 +112,18 @@ public abstract class GameObject {
 			// position.y += speed / delta;
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
-			position.x -= speed / delta;
+			velocityVector.x -= acceleration / delta;
+			if (velocityVector.x < -maxSpeed) {
+				velocityVector.x = -maxSpeed;
+			}
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
-			position.x += speed / delta;
+			velocityVector.x += acceleration / delta;
+			if (velocityVector.x > maxSpeed) {
+				velocityVector.x = maxSpeed;
+			}
 		}
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			System.out.println();
 			position.x = input.getMouseX();
 			position.y = input.getMouseY();
 		}
@@ -134,7 +131,13 @@ public abstract class GameObject {
 		// check for collisions after jump or movement
 		collisionCorrection(before, delta, gameEntityList, input);
 
-		// System.out.println("position: " + position.x + " | " + position.y);
+		// adding gravity
+		velocityVector.y += gravity.y / delta;
+		if (velocityVector.x > 1.0) {
+			velocityVector.x -= breakSpeed / delta;
+		} else if (velocityVector.x < -1.0) {
+			velocityVector.x += breakSpeed / delta;
+		}
 	}
 
 	public final void collisionCorrection(Vector2f before, int delta,
@@ -146,7 +149,10 @@ public abstract class GameObject {
 		for (GameObject otherEntity1 : gameEntityList) {
 			if (this.detectCollision(otherEntity1)) {
 
-				position.set(before);
+				if (velocityVector.y > 0)
+					velocityVector.y = 0;
+
+				//position.set(before);
 				boolean shouldSlide = shouldSlide(this
 						.GetIntersectionPoint(otherEntity1.getShape()));
 				// slide to avoid collision
@@ -199,15 +205,15 @@ public abstract class GameObject {
 			}
 		}
 	}
-	
+
 	public Line getLine() {
 		return line;
 	}
-	
+
 	public void setLine(Line line) {
 		this.line = line;
 	}
-	
+
 	public final void setPosition(Vector2f position) {
 		this.position = position;
 	}
@@ -222,6 +228,8 @@ public abstract class GameObject {
 
 	public abstract Shape getShape();
 
-	public abstract void setPosition(float x, float y);
-
+	public final void setPosition(float x, float y) {
+		getShape().setX(x);
+		getShape().setY(y);
+	}
 }
