@@ -53,6 +53,8 @@ public class Camera {
 	public Vector2f getTopLeftCorner() {
 		return topLeftCorner;
 	}
-	
+	public void setTopLeftCorner(Vector2f topLeftCorner){
+		this.topLeftCorner = topLeftCorner;
+	}
 	
 }
