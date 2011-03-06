@@ -7,70 +7,40 @@
             <type>polygon</type>
             <points>
                 <point>
-                    <x>555.0</x>
-                    <y>145.0</y>
+                    <x>349.0</x>
+                    <y>465.0</y>
                 </point>
                 <point>
-                    <x>738.0</x>
-                    <y>124.0</y>
+                    <x>436.0</x>
+                    <y>306.0</y>
                 </point>
                 <point>
-                    <x>866.0</x>
-                    <y>169.0</y>
+                    <x>479.0</x>
+                    <y>403.0</y>
                 </point>
                 <point>
-                    <x>824.0</x>
-                    <y>293.0</y>
-                </point>
-            </points>
-        </shape>
-    </object>
-    <object>
-        <x>0.0</x>
-        <y>0.0</y>
-        <shape>
-            <type>polygon</type>
-            <points>
-                <point>
-                    <x>166.0</x>
-                    <y>234.0</y>
+                    <x>556.0</x>
+                    <y>275.0</y>
                 </point>
                 <point>
-                    <x>104.0</x>
-                    <y>300.0</y>
+                    <x>696.0</x>
+                    <y>344.0</y>
                 </point>
                 <point>
-                    <x>191.0</x>
-                    <y>366.0</y>
+                    <x>612.0</x>
+                    <y>377.0</y>
                 </point>
                 <point>
-                    <x>366.0</x>
-                    <y>309.0</y>
-                </point>
-            </points>
-        </shape>
-    </object>
-    <object>
-        <x>0.0</x>
-        <y>0.0</y>
-        <shape>
-            <type>polygon</type>
-            <points>
-                <point>
-                    <x>704.0</x>
-                    <y>425.0</y>
+                    <x>586.0</x>
+                    <y>535.0</y>
                 </point>
                 <point>
-                    <x>565.0</x>
+                    <x>479.0</x>
                     <y>482.0</y>
                 </point>
                 <point>
-                    <x>960.0</x>
-                    <y>614.0</y>
-                </point>
-                <point>
-                    <x>940.0</x>
-                    <y>497.0</y>
+                    <x>377.0</x>
+                    <y>532.0</y>
                 </point>
             </points>
         </shape>
@@ -82,28 +52,66 @@
             <type>polygon</type>
             <points>
                 <point>
-                    <x>213.0</x>
-                    <y>584.0</y>
+                    <x>205.0</x>
+                    <y>109.0</y>
                 </point>
                 <point>
-                    <x>520.0</x>
-                    <y>579.0</y>
+                    <x>567.0</x>
+                    <y>107.0</y>
                 </point>
                 <point>
-                    <x>631.0</x>
-                    <y>584.0</y>
+                    <x>468.0</x>
+                    <y>201.0</y>
                 </point>
                 <point>
-                    <x>647.0</x>
-                    <y>653.0</y>
+                    <x>268.0</x>
+                    <y>192.0</y>
+                </point>
+            </points>
+        </shape>
+    </object>
+    <object>
+        <x>0.0</x>
+        <y>0.0</y>
+        <shape>
+            <type>polygon</type>
+            <points>
+                <point>
+                    <x>721.0</x>
+                    <y>196.0</y>
                 </point>
                 <point>
-                    <x>390.0</x>
-                    <y>664.0</y>
+                    <x>835.0</x>
+                    <y>174.0</y>
                 </point>
                 <point>
-                    <x>163.0</x>
+                    <x>932.0</x>
+                    <y>83.0</y>
+                </point>
+                <point>
+                    <x>887.0</x>
+                    <y>284.0</y>
+                </point>
+            </points>
+        </shape>
+    </object>
+    <object>
+        <x>0.0</x>
+        <y>0.0</y>
+        <shape>
+            <type>polygon</type>
+            <points>
+                <point>
+                    <x>517.0</x>
                     <y>670.0</y>
+                </point>
+                <point>
+                    <x>792.0</x>
+                    <y>519.0</y>
+                </point>
+                <point>
+                    <x>781.0</x>
+                    <y>671.0</y>
                 </point>
             </points>
         </shape>

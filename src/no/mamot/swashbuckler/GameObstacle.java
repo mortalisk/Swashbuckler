@@ -1,30 +1,33 @@
 package no.mamot.swashbuckler;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.ShapeFill;
-import org.newdawn.slick.fills.GradientFill;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
-import org.newdawn.slick.geom.Vector2f;
 
-public class GameObstacle extends GameObject{
+public final class GameObstacle extends GameObject {
 
-	private Vector2f position;
-	//private Polygon shape;
-	private ShapeRenderer renderer;
-	
-	public GameObstacle (float [] arg0, Vector2f position){
-		this.setShape(new Polygon(arg0));
-		this.position = position;
-		renderer = new ShapeRenderer();		
-	}
-	
-	public void draw(){		
-		renderer.draw(this.getShape());		
+	private Shape polygon;
+
+	public GameObstacle(float[] arg0) throws SlickException {
+		super(null, 0, 0);
+		polygon = new Polygon(arg0);
 	}
 
-	public Vector2f getPosition() {
-		return position;
+	public void draw() {
+		ShapeRenderer.draw(this.getShape());
 	}
+
+	@Override
+	public Shape getShape() {
+		return polygon;
+	}
+
+	@Override
+	public void setPosition(float x, float y) {
+		polygon.setX(x);
+		polygon.setY(y);
+
+	}
+
 }

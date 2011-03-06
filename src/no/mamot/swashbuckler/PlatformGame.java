@@ -73,8 +73,7 @@ public class PlatformGame extends BasicGame {
 					array[i*2] = points.get(i).getX();
 					array[i*2+1] = points.get(i).getY();
 				}
-				GameObstacle obstacle1 = new GameObstacle(array,
-						new Vector2f(object.getX(), object.getY()));
+				GameObstacle obstacle1 = new GameObstacle(array);
 				
 				objectList.add(obstacle1);
 
