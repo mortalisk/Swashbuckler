@@ -97,7 +97,7 @@ public abstract class GameObject {
 		position.add(velocityVector);
 
 		// setting shape to the new position
-		setPosition(position.x, position.y);
+		setShapePosition(position.x, position.y);
 
 		// movement
 		if (input.isKeyPressed(Input.KEY_SPACE)) {
@@ -143,7 +143,7 @@ public abstract class GameObject {
 	public final void collisionCorrection(Vector2f before, int delta,
 			List<GameObject> gameEntityList, Input input) {
 		// setting shape to the new position in case it has changed
-		this.setPosition(position.x, position.y);
+		this.setShapePosition(position.x, position.y);
 
 		// loop game objects to check for any collisions
 		for (GameObject otherEntity1 : gameEntityList) {
@@ -164,7 +164,7 @@ public abstract class GameObject {
 				}
 
 				// setting shape to the new position
-				this.setPosition(position.x, position.y);
+				this.setShapePosition(position.x, position.y);
 
 				if (this.detectCollision(otherEntity1)) {
 
@@ -179,7 +179,7 @@ public abstract class GameObject {
 					}
 
 					// setting shape to the new position
-					this.setPosition(position.x, position.y);
+					this.setShapePosition(position.x, position.y);
 
 					if (this.detectCollision(otherEntity1)) {
 						position.set(before);
@@ -228,7 +228,7 @@ public abstract class GameObject {
 
 	public abstract Shape getShape();
 
-	public final void setPosition(float x, float y) {
+	public final void setShapePosition(float x, float y) {
 		getShape().setX(x);
 		getShape().setY(y);
 	}
