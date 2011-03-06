@@ -20,16 +20,16 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 public class PlatformGame extends BasicGame {
 
 	static AppGameContainer app = null;
 
 	private GameEntity man = null;
-	private GameEntity brick = null;
 	private List<GameObstacle> obstacleList = null;
 	private List<GameObject> objectList = null;
-
+	private Camera camera = null;
 	private LevelType level = null;
 
 	public PlatformGame(String title) {
@@ -52,13 +52,17 @@ public class PlatformGame extends BasicGame {
 	public void init(GameContainer arg0) throws SlickException {
 		// TODO Auto-generated method stub
 		try {
-
+			camera = new Camera();
+			
+			camera.setScreenHeight(arg0.getHeight());
+			camera.setScreenWidth(arg0.getWidth());
+			
 			level = unmarshal(LevelType.class, new FileInputStream(
 					"data/testlevel.xml"));
-			man = new GameEntity("/data/WWFSoldierUzi.png", 18.0f, 492.0f,
-					271.0f);
-			brick = new GameEntity("/data/brick.png", 40.0f, 150.0f, 200.0f);
-
+			man = new GameEntity("/data/WWFSoldierUzi.png", 18.0f, 350.0f,
+					200.0f);
+			camera.setCenter(man.getPosition());
+			
 			objectList = new ArrayList<GameObject>();
 
 			obstacleList = new ArrayList<GameObstacle>();
@@ -80,7 +84,6 @@ public class PlatformGame extends BasicGame {
 
 			arg0.setTargetFrameRate(60);
 			
-			objectList.add(brick);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,17 +99,17 @@ public class PlatformGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		man.update(gc, delta, brick, obstacleList, objectList);
-		// System.out.println("Delta : "+delta);
-
+		man.update(gc, delta, obstacleList, objectList);
+		
+		camera.setCenter(man.getPosition());
+		//camera.setTopLeftCorner(man.getPosition());
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
-
-		man.draw();
-		brick.draw();
+		g.translate(-camera.getTopLeftCorner().x, -camera.getTopLeftCorner().y);
+		man.draw();		
 		drawObstacles();
 	}
 

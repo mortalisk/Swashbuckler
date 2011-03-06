@@ -27,10 +27,11 @@ public class LevelEditor extends BasicGame {
 		// TODO Auto-generated method stub
 		
 		
-		levelSaver = new LevelSaver(creator);
+		
 		camera = new Camera(Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT);
 		pointer = new Pointer(camera);
 		creator = new PolygonCreator(pointer);
+		levelSaver = new LevelSaver(creator);
 	}
 
 	@Override

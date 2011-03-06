@@ -83,7 +83,7 @@ public abstract class GameObject {
 
 	public abstract void draw();
 
-	public final void update(GameContainer gc, int delta, GameEntity other,
+	public final void update(GameContainer gc, int delta,
 			List<GameObstacle> obstacle, List<GameObject> list) {
 		move(delta, gc.getInput(), list);
 	}
@@ -216,6 +216,10 @@ public abstract class GameObject {
 
 	public final void setPosition(Vector2f position) {
 		this.position = position;
+	}
+	
+	public final Vector2f getPosition() {
+		return position;
 	}
 
 	public final Image getImage() {

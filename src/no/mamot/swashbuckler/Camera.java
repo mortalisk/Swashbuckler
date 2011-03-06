@@ -10,10 +10,15 @@ public class Camera {
 	private int keyDown;
 	private int keyLeft;
 	private int keyRight;
+	private int screenWidth;
+	private int screenHeight;
 	
 	private float speed = 2.0f;
 	
-	
+	public Camera() {
+		
+	}
+
 	public Camera(int keyUp, int keyDown, int keyLeft, int keyRight){
 		this.keyUp = keyUp;
 		this.keyDown = keyDown;
@@ -54,7 +59,29 @@ public class Camera {
 		return topLeftCorner;
 	}
 	public void setTopLeftCorner(Vector2f topLeftCorner){
-		this.topLeftCorner = topLeftCorner;
+		this.topLeftCorner.set(topLeftCorner);
+	}
+	
+	public void setCenter(Vector2f playerPosition) {		
+		topLeftCorner.set(playerPosition);
+		topLeftCorner.x -= (screenWidth / 2.0);
+		topLeftCorner.y -= (screenHeight / 2.0);
+	}
+	
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	public void setScreenWidth(int screenWidth) {
+		this.screenWidth = screenWidth;
+	}
+
+	public int getScreenHeight() {
+		return screenHeight;
+	}
+
+	public void setScreenHeight(int screenHeight) {
+		this.screenHeight = screenHeight;
 	}
 	
 }

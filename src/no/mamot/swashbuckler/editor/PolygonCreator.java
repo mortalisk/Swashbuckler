@@ -17,13 +17,10 @@ public class PolygonCreator {
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
-
-	private ShapeRenderer renderer;
 	
 	public PolygonCreator(Pointer pointer){
 		dotts = new ArrayList<Dott>();
 		obstacles = new ArrayList<Obstacle>();
-		renderer = new ShapeRenderer();
 		this.pointer = pointer;
 	}
 	
@@ -33,7 +30,7 @@ public class PolygonCreator {
 	}
 	
 	private void removeDotts(){
-		dotts = new ArrayList<Dott>();
+		dotts.clear();
 	}
 	
 	public Polygon createNewPolygon(float [] points){
@@ -51,7 +48,7 @@ public class PolygonCreator {
 			Polygon polygon = (Polygon)obstacle.getShape();
 			float[] points = polygon.getPoints();
 			for (int i = 0; i<points.length;i+=2) {
-				renderer.draw(new Dott(points[i], points[i+1]).getShape());
+				ShapeRenderer.draw(new Dott(points[i], points[i+1]).getShape());
 			}
 		}
 	}
