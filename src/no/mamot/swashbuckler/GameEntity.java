@@ -19,6 +19,18 @@ import org.newdawn.slick.geom.Vector2f;
 public final class GameEntity implements GameObject {
 
 	private Circle circle;
+	private Vector2f before = new Vector2f();
+	private float slideAngle = 35;
+	private Line line = null;
+	private Vector2f position = null;
+	private Vector2f gravity = new Vector2f(0.0f, 10.0f);
+	private Vector2f velocityVector = new Vector2f(0.0f, 0.0f);
+	private Image image = null;
+	private float acceleration = 10.0f;
+	private float maxSpeed = 10.0f;
+	private float breakSpeed = 1.0f;
+	private float jumpSpeed = -14.0f;
+	private float correctionSpeed = 5.0f;
 
 	GameEntity(String imageFile, float radius, float x, float y)
 			throws SlickException {
@@ -46,18 +58,6 @@ public final class GameEntity implements GameObject {
 	}
 	
 
-	private Vector2f before = new Vector2f();
-	private float slideAngle = 35;
-	private Line line = null;
-	private Vector2f position = null;
-	private Vector2f gravity = new Vector2f(0.0f, 10.0f);
-	private Vector2f velocityVector = new Vector2f(0.0f, 0.0f);
-	private Image image = null;
-	private float acceleration = 10.0f;
-	private float maxSpeed = 10.0f;
-	private float breakSpeed = 1.0f;
-	private float jumpSpeed = -14.0f;
-	private float correctionSpeed = 5.0f;
 
 	
 
@@ -102,8 +102,6 @@ public final class GameEntity implements GameObject {
 			intersectionVector.y -= position.y + getShape().getHeight() / 2.0;
 
 			float angle = (float) intersectionVector.getTheta();
-
-			// line = new Line(center, intersectionPoint);
 
 			Result = (angle > 90 + slideAngle || angle < 90 - slideAngle);
 		}
