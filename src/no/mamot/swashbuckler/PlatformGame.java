@@ -27,7 +27,6 @@ public class PlatformGame extends BasicGame {
 	static AppGameContainer app = null;
 
 	private GameEntity man = null;
-	private List<GameObstacle> obstacleList = null;
 	private List<GameObject> objectList = null;
 	private Camera camera = null;
 	private LevelType level = null;
@@ -111,7 +110,7 @@ public class PlatformGame extends BasicGame {
 	}
 
 	private void drawObstacles() {
-		for (GameObstacle obstacle : obstacleList) {
+		for (GameObject obstacle : objectList) {
 			obstacle.draw();
 		}
 	}
