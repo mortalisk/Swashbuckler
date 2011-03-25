@@ -13,7 +13,8 @@ import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
- * Interactive objects in the level. (the player or an enemy)
+ * Interactive objects in the level. I.e. objects that move.
+ *  (the player or an enemy)
  */
 public final class GameEntity implements GameObject {
 
