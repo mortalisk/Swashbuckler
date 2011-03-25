@@ -13,8 +13,8 @@ import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
- * Interactive objects in the level. I.e. objects that move.
- *  (the player or an enemy)
+ * Interactive objects in the level. I.e. objects that move. (the player or an
+ * enemy)
  */
 public final class GameEntity implements GameObject {
 
@@ -22,14 +22,14 @@ public final class GameEntity implements GameObject {
 	private Vector2f before = new Vector2f();
 	private float slideAngle = 35;
 	private Line line = null;
-	private Vector2f position = null;
+	Vector2f position = null;
 	private Vector2f gravity = new Vector2f(0.0f, 10.0f);
-	private Vector2f velocityVector = new Vector2f(0.0f, 0.0f);
+	Vector2f velocityVector = new Vector2f(0.0f, 0.0f);
 	private Image image = null;
-	private float acceleration = 10.0f;
-	private float maxSpeed = 10.0f;
+	float acceleration = 10.0f;
+	float maxSpeed = 10.0f;
 	private float breakSpeed = 1.0f;
-	private float jumpSpeed = -14.0f;
+	float jumpSpeed = -14.0f;
 	private float correctionSpeed = 5.0f;
 
 	GameEntity(String imageFile, float radius, float x, float y)
@@ -56,10 +56,6 @@ public final class GameEntity implements GameObject {
 	public Shape getShape() {
 		return circle;
 	}
-	
-
-
-	
 
 	public final boolean detectCollision(GameObject collidingWith) {
 		Shape other = collidingWith.getShape();
@@ -109,8 +105,6 @@ public final class GameEntity implements GameObject {
 		return Result;
 	}
 
-	
-
 	public final void update(GameContainer gc, int delta, List<GameObject> list) {
 		move(delta, gc.getInput(), list);
 	}
@@ -125,35 +119,6 @@ public final class GameEntity implements GameObject {
 
 		// setting shape to the new position
 		setShapePosition(position.x, position.y);
-
-		// movement
-		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			if (velocityVector.y >= 0) {
-				velocityVector.set(0.0f, jumpSpeed);
-			}
-		}
-		if (input.isKeyDown(Input.KEY_W)) {
-			// position.y -= speed / delta;
-		}
-		if (input.isKeyDown(Input.KEY_S)) {
-			// position.y += speed / delta;
-		}
-		if (input.isKeyDown(Input.KEY_A)) {
-			velocityVector.x -= acceleration / delta;
-			if (velocityVector.x < -maxSpeed) {
-				velocityVector.x = -maxSpeed;
-			}
-		}
-		if (input.isKeyDown(Input.KEY_D)) {
-			velocityVector.x += acceleration / delta;
-			if (velocityVector.x > maxSpeed) {
-				velocityVector.x = maxSpeed;
-			}
-		}
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			position.x = input.getMouseX();
-			position.y = input.getMouseY();
-		}
 
 		// check for collisions after jump or movement
 		collisionCorrection(before, delta, gameEntityList, input);
@@ -179,7 +144,7 @@ public final class GameEntity implements GameObject {
 				if (velocityVector.y > 0)
 					velocityVector.y = 0;
 
-				//position.set(before);
+				// position.set(before);
 				boolean shouldSlide = shouldSlide(this
 						.GetIntersectionPoint(otherEntity1.getShape()));
 				// slide to avoid collision
@@ -242,9 +207,9 @@ public final class GameEntity implements GameObject {
 	}
 
 	public final void setPosition(Vector2f position) {
-		this.position = position;
+		setPosition(position.x, position.y);
 	}
-	
+
 	public final Vector2f getPosition() {
 		return position;
 	}
@@ -257,10 +222,14 @@ public final class GameEntity implements GameObject {
 		this.image = image;
 	}
 
-	
-
 	public final void setShapePosition(float x, float y) {
 		getShape().setX(x);
 		getShape().setY(y);
+	}
+
+	public void setPosition(float x, float y) {
+		position.x = x;
+		position.y = y;
+		setShapePosition(position.x, position.y);
 	}
 }
