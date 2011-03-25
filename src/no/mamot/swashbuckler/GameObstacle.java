@@ -5,6 +5,9 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
 
+/**
+ * Non-interactive objects. I.e. a object that does not move.
+ */
 public final class GameObstacle implements GameObject {
 
 	private Shape polygon;

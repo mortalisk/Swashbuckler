@@ -12,6 +12,9 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * Interactive objects in the level. (the player or an enemy)
+ */
 public final class GameEntity implements GameObject {
 
 	private Circle circle;
