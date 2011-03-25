@@ -1,5 +1,7 @@
 package no.mamot.swashbuckler.editor;
 
+import javax.swing.SwingUtilities;
+
 import no.mamot.swashbuckler.Camera;
 import no.mamot.swashbuckler.PlatformGame;
 
@@ -57,9 +59,22 @@ public class LevelEditor extends BasicGame {
 	
 	public static void main(String[] args) {
 		try {
+			
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					ControlPanel inst = new ControlPanel();
+					inst.setLocationRelativeTo(null);
+					inst.setVisible(true);
+				}
+			});
+			
+			
+			
 			AppGameContainer app = new AppGameContainer(new LevelEditor("Title"));
 			app.setDisplayMode(1024, 768, false);
 			app.start();
+			
+			
 			
 		} catch (SlickException e) {
 			e.printStackTrace();
