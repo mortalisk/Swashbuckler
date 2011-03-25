@@ -83,8 +83,7 @@ public abstract class GameObject {
 
 	public abstract void draw();
 
-	public final void update(GameContainer gc, int delta,
-			List<GameObstacle> obstacle, List<GameObject> list) {
+	public final void update(GameContainer gc, int delta, List<GameObject> list) {
 		move(delta, gc.getInput(), list);
 	}
 

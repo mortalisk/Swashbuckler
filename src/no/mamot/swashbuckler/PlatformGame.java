@@ -64,8 +64,6 @@ public class PlatformGame extends BasicGame {
 			camera.setCenter(man.getPosition());
 			
 			objectList = new ArrayList<GameObject>();
-
-			obstacleList = new ArrayList<GameObstacle>();
 			
 			for (ObjectType object : level.getObject()) {
 				List<PointType> points = object.getShape().getPoints()
@@ -79,7 +77,6 @@ public class PlatformGame extends BasicGame {
 				
 				objectList.add(obstacle1);
 
-				obstacleList.add(obstacle1);
 			}
 
 			arg0.setTargetFrameRate(60);
@@ -99,7 +96,7 @@ public class PlatformGame extends BasicGame {
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		man.update(gc, delta, obstacleList, objectList);
+		man.update(gc, delta, objectList);
 		
 		camera.setCenter(man.getPosition());
 		//camera.setTopLeftCorner(man.getPosition());
