@@ -20,10 +20,10 @@ public final class GameEntity implements GameObject {
 
 	private Circle circle;
 
-	GameEntity(String file, float radius, float x, float y)
+	GameEntity(String imageFile, float radius, float x, float y)
 			throws SlickException {
-		if (file != null)
-			image = new Image(file);
+		if (imageFile != null)
+			image = new Image(imageFile);
 		position = new Vector2f(x, y);
 		circle = new Circle(x, y, radius);
 	}
