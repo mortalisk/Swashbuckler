@@ -22,7 +22,7 @@ import org.newdawn.slick.Input;
 public class LevelSaver {
 
 	private PolygonCreator polygonCreator;
-	private String fileName;
+	private String fileName = "/data/temp.xml";
 
 	public LevelSaver(PolygonCreator polygonCreator) {
 		this.polygonCreator = polygonCreator;
@@ -53,7 +53,7 @@ public class LevelSaver {
 		}
 		try {
 			System.out.println("Saving...");
-			writeDocument(doc, "data/testlevel.xml");
+			writeDocument(doc, fileName);
 			System.out.println("Saving complete!");
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
