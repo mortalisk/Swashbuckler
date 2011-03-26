@@ -1,4 +1,4 @@
-package no.mamot.swashbuckler.editor;
+package no.mamot.swashbuckler.editor.state;
 
 public interface LevelEditorState {
 

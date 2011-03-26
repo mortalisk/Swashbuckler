@@ -1,4 +1,6 @@
-package no.mamot.swashbuckler.editor;
+package no.mamot.swashbuckler.editor.state;
+
+import no.mamot.swashbuckler.editor.PolygonCreator;
 
 public class PolygonState implements LevelEditorState {
 

@@ -5,11 +5,14 @@ import java.io.File;
 import java.net.URI;
 
 import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
@@ -27,7 +30,17 @@ import javax.swing.SwingUtilities;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class ControlPanel extends javax.swing.JFrame {
+public class ControlPanel extends javax.swing.JFrame implements Runnable {
+	
+	private LevelEditor levelEditor;
+
+	
+	
+	
+	
+	
+	
+	
 	private JMenuBar jMenuBar1;
 	private JMenu jMenu3;
 	private JMenuItem jMenuItem2;
@@ -36,14 +49,21 @@ public class ControlPanel extends javax.swing.JFrame {
 	private JMenuItem jMenuItem1;
 	private JMenu jMenu1;
 	private ControlPanelActionListener controlPanelActionListener;
-	private JMenuItem jMenuItem4;
+	private ButtonGroup buttonGroup1;
+	private JRadioButtonMenuItem jRadioButtonMenuItem2;
+	private JRadioButtonMenuItem jRadioButtonMenuItem1;
 
+	
+	
+	
+	
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
 	
-	public ControlPanel() {
+	public ControlPanel(LevelEditor levelEditor) {
 		super();
+		this.levelEditor = levelEditor;
 		controlPanelActionListener = new ControlPanelActionListener();		
 		initGUI();
 	}
@@ -87,14 +107,25 @@ public class ControlPanel extends javax.swing.JFrame {
 					jMenuBar1.add(jMenu3);
 					jMenu3.setText("Tools");
 					{
-						jMenuItem4 = new JMenuItem();
-						jMenu3.add(jMenuItem4);
-						jMenuItem4.setText("Draw Polgyon");
+						jRadioButtonMenuItem1 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem1);
+						jRadioButtonMenuItem1.setText("Draw Polygon");
+						getButtonGroup1().add(jRadioButtonMenuItem1);
+						jRadioButtonMenuItem1.addActionListener(controlPanelActionListener);
+					}
+					{
+						jRadioButtonMenuItem2 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem2);
+						jRadioButtonMenuItem2.setText("Draw Particle");
+						getButtonGroup1().add(jRadioButtonMenuItem2);
+						jRadioButtonMenuItem2.addActionListener(controlPanelActionListener);
+						
 					}
 				}
 			}
 			pack();
 			setSize(400, 300);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,8 +148,7 @@ public class ControlPanel extends javax.swing.JFrame {
 				
 				if (returnVal == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile(); // might just be a string??
-					System.out.println("Selected file " + file);		
-					
+					System.out.println("Selected file " + file);					
 				}
 				else {
 					System.out.println("Canceled");
@@ -134,13 +164,42 @@ public class ControlPanel extends javax.swing.JFrame {
 			else if (event.getSource().equals(jMenuItem3)){ // Exit
 				System.out.println("Exit");
 			}
-			
+			else if (event.getSource().equals(jRadioButtonMenuItem1)){ // Toggle Draw Polygon
+				System.out.println("Draw polygon");
+				if (jRadioButtonMenuItem1.isSelected()){
+					levelEditor.setState("Draw_Polygon");
+				}
+			}
+			else if (event.getSource().equals(jRadioButtonMenuItem2)){ // Toggle Draw Particle
+				System.out.println("Draw particle");
+				if (jRadioButtonMenuItem2.isSelected()){
+					levelEditor.setState("Draw_Particle");					
+				}
+			}
 			
 			
 		}
 			
 	 }
+
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		ControlPanel inst = new ControlPanel(levelEditor);
+		inst.setLocationRelativeTo(null);
+		inst.setVisible(true);
+		
+	}
 	
+	private ButtonGroup getButtonGroup1() {
+		if(buttonGroup1 == null) {
+			buttonGroup1 = new ButtonGroup();
+		}
+		return buttonGroup1;
+	}
+
 }
 
 

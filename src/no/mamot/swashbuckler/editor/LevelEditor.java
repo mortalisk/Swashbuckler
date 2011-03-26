@@ -10,6 +10,9 @@ import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
+import no.mamot.swashbuckler.editor.state.LevelEditorState;
+import no.mamot.swashbuckler.editor.state.PolygonState;
+import no.mamot.swashbuckler.editor.state.StateFactory;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -30,6 +33,7 @@ public class LevelEditor implements Engine{
 	private GameProxy gameProxy;
 	private LevelEditorState state;
 	private Level level;
+	private StateFactory stateFactory;
 
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
@@ -38,6 +42,8 @@ public class LevelEditor implements Engine{
 		camera = view.getCamera();
 		creator = new PolygonCreator(pointer, level);
 		state = new PolygonState(creator);
+		stateFactory = new StateFactory();
+		stateFactory.setLevelEditor(this);
 		InputHandler inputHandler = new InputHandlerEditor(this,camera);
 		gameProxy = new GameProxy("Swashbuckler Editor", view, inputHandler, this,
 				screenWidth, screenHeight);
@@ -46,15 +52,8 @@ public class LevelEditor implements Engine{
 
 	public static void main(String[] args) {
 		try {
-			
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					ControlPanel inst = new ControlPanel();
-					inst.setLocationRelativeTo(null);
-					inst.setVisible(true);
-				}
-			});
-			LevelEditor levelEditor = new LevelEditor();
+			LevelEditor levelEditor = new LevelEditor();			
+			SwingUtilities.invokeLater(new ControlPanel(levelEditor));			
 			levelEditor.start();
 			
 			
@@ -90,6 +89,21 @@ public class LevelEditor implements Engine{
 	}
 	public void setState(LevelEditorState state) {
 		this.state = state;
+	}
+
+
+	public PolygonCreator getPolygonCreator() {
+		// TODO Auto-generated method stub
+		return creator;
+	}
+	
+	public void setState(String changeto){
+		if (changeto.equals("Draw_Polygon")){
+			state = stateFactory.getPolygonState();
+		}
+		if (changeto.equals("Draw_Particle")){
+			state = stateFactory.getParticleState();
+		}
 	}
 
 
