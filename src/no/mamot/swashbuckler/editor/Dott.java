@@ -1,5 +1,7 @@
 package no.mamot.swashbuckler.editor;
 
+import no.mamot.engine.Drawable;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.fills.GradientFill;
@@ -8,7 +10,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Dott {
+public class Dott implements Drawable{
 
 	private Shape dott;
 	private Vector2f position;

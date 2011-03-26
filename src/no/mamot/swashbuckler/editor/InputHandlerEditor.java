@@ -72,7 +72,18 @@ public class InputHandlerEditor implements InputHandler {
 		// Not state specific commands
 		// Move camera
 		
-		
+		if (input.isKeyDown(Input.KEY_UP)){
+			camera.moveCameraVertical(-3);
+		}
+		if (input.isKeyDown(Input.KEY_DOWN)){
+			camera.moveCameraVertical(3);			
+		}
+		if (input.isKeyDown(Input.KEY_LEFT)){
+			camera.moveCameraHorizontal(-3);			
+		}
+		if (input.isKeyDown(Input.KEY_RIGHT)){
+			camera.moveCameraHorizontal(3);			
+		}
 		
 		
 		

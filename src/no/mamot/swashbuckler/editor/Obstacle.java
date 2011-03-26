@@ -1,5 +1,7 @@
 package no.mamot.swashbuckler.editor;
 
+import no.mamot.engine.Drawable;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.fills.GradientFill;
@@ -7,7 +9,7 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Obstacle {
+public class Obstacle implements Drawable{
 	
 	private Shape polygon;
 

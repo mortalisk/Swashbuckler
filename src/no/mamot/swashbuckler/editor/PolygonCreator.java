@@ -3,6 +3,8 @@ package no.mamot.swashbuckler.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.mamot.engine.Level;
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Polygon;
@@ -10,6 +12,7 @@ import org.newdawn.slick.geom.ShapeRenderer;
 
 public class PolygonCreator {
 
+	private Level level;
 	private List <Dott> dotts;
 	private List <Obstacle> obstacles;
 	private Pointer pointer;
@@ -18,19 +21,24 @@ public class PolygonCreator {
 		return obstacles;
 	}
 	
-	public PolygonCreator(Pointer pointer){
+	public PolygonCreator(Pointer pointer, Level level){
 		dotts = new ArrayList<Dott>();
 		obstacles = new ArrayList<Obstacle>();
 		this.pointer = pointer;
+		this.level = level;
 	}
 	
 	public void createNewDott(float x, float y){
 		Dott newDott = new Dott(x,y);
 		dotts.add(newDott);
+		level.getDrawableList().add(newDott);
 	}
 	
 	private void removeDotts(){
-		dotts.clear();
+		for (Dott dott : dotts){
+			level.getDrawableList().remove(dott);
+		}		
+		dotts.clear();		
 	}
 	
 	public void createNewPolygon(){
@@ -51,6 +59,7 @@ public class PolygonCreator {
 			Polygon newPolygon = new Polygon(points);
 			Obstacle newObstacle = new Obstacle(newPolygon);
 			obstacles.add(newObstacle);
+			level.getDrawableList().add(newObstacle);
 			removeDotts();
 		}
 
@@ -91,6 +100,7 @@ public class PolygonCreator {
 	public void deleteSelected(){
 		for (int i = 0 ; i < dotts.size(); ++i){
 			if (dotts.get(i).isSelected()){
+				level.getDrawableList().remove(dotts.get(i));
 				dotts.remove(i);
 				i--;
 			}
@@ -98,6 +108,7 @@ public class PolygonCreator {
 		
 		for (int i = 0 ; i < obstacles.size(); ++i){
 			if (obstacles.get(i).isSelected()){
+				level.getDrawableList().remove(obstacles.get(i));
 				obstacles.remove(i);
 				i--;
 			}

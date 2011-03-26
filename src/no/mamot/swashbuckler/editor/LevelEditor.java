@@ -6,6 +6,8 @@ import no.mamot.engine.Camera;
 import no.mamot.engine.Engine;
 import no.mamot.engine.GameProxy;
 import no.mamot.engine.InputHandler;
+import no.mamot.engine.Level;
+import no.mamot.engine.LevelImpl;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
 
@@ -27,39 +29,23 @@ public class LevelEditor implements Engine{
 	private int screenHeight = 768;
 	private GameProxy gameProxy;
 	private LevelEditorState state;
+	private Level level;
 
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
+		level = new LevelImpl();
+		// Test
+		level.getDrawableList().add(new Dott(100, 100));
+		view.setLevel(level);
 		camera = view.getCamera();
-		creator = new PolygonCreator(pointer);
+		creator = new PolygonCreator(pointer, level);
 		state = new PolygonState(creator);
 		InputHandler inputHandler = new InputHandlerEditor(this,camera);
 		gameProxy = new GameProxy("Swashbuckler Editor", view, inputHandler, this,
 				screenWidth, screenHeight);
 	}
 
-/*
-	public void update(GameContainer container, int delta)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		Input input = container.getInput();
-		
-		pointer.handleInput(input);
-		creator.handleInput(input);
-		levelSaver.handleInput(input);
-		camera.handleInput(input);
-	}
 
-
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		g.translate(camera.getTopLeftCorner().x, camera.getTopLeftCorner().y);
-	
-		creator.draw();
-	}
-	
-	*/
 	public static void main(String[] args) {
 		try {
 			
@@ -84,8 +70,6 @@ public class LevelEditor implements Engine{
 
 	@Override
 	public void init() throws SlickException {
-		// TODO Auto-generated method stub
-		
 		pointer = new Pointer(camera);		
 		levelSaver = new LevelSaver(creator);
 	}
@@ -93,7 +77,6 @@ public class LevelEditor implements Engine{
 
 	@Override
 	public void start() throws SlickException {
-		// TODO Auto-generated method stub
 		gameProxy.start();
 	}
 
