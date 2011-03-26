@@ -19,7 +19,7 @@ public class StateFactory {
 	}
 	public LevelEditorState getParticleState(){
 		if (particleState == null){
-			particleState = new ParticleState();
+			particleState = new ParticleState(levelEditor.getParticleCreator());
 		}
 		return particleState;		
 	}

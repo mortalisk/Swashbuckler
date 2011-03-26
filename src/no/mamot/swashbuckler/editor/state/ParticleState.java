@@ -1,6 +1,17 @@
 package no.mamot.swashbuckler.editor.state;
 
+import no.mamot.engine.Level;
+import no.mamot.swashbuckler.editor.ParticleCreator;
+
 public class ParticleState implements LevelEditorState {
+	
+	private ParticleCreator particleCreator;
+
+	
+	public ParticleState(ParticleCreator particleCreator){
+		this.particleCreator = particleCreator;
+		
+	}
 
 	@Override
 	public void delete() {
@@ -14,8 +25,8 @@ public class ParticleState implements LevelEditorState {
 
 	@Override
 	public void place(float x, float y) {
-		// TODO Auto-generated method stub	
-		System.out.println("Particle place..");
+		particleCreator.createNewParticle(x, y);
+		
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import no.mamot.engine.GameProxy;
 import no.mamot.engine.InputHandler;
 import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
+import no.mamot.engine.Updateable;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
 import no.mamot.swashbuckler.editor.state.LevelEditorState;
@@ -35,6 +36,7 @@ public class LevelEditor implements Engine{
 	private Level level;
 	private StateFactory stateFactory;
 	private ParticleObject particleTest;
+	private ParticleCreator particleCreator;
 
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
@@ -42,6 +44,7 @@ public class LevelEditor implements Engine{
 		view.setLevel(level);
 		camera = view.getCamera();
 		polygonCreator = new PolygonCreator(level);
+		particleCreator = new ParticleCreator(level);
 		state = new PolygonState(polygonCreator);
 		stateFactory = new StateFactory();
 		stateFactory.setLevelEditor(this);
@@ -72,10 +75,7 @@ public class LevelEditor implements Engine{
 	public void init() throws SlickException {
 		pointer = new Pointer(camera);		
 		levelSaver = new LevelSaver(polygonCreator);
-		
-		particleTest = new ParticleObject(100,200);
-		particleTest.load();
-		level.getDrawableList().add(particleTest);
+
 	}
 
 
@@ -88,7 +88,9 @@ public class LevelEditor implements Engine{
 
 	@Override
 	public void updateWorld(int delta) {
-		particleTest.update(delta);
+		for (Updateable updateable : level.getUpdatableList()){
+			updateable.update(delta);
+		}
 		
 	}
 	
@@ -112,6 +114,11 @@ public class LevelEditor implements Engine{
 		if (changeto.equals("Draw_Particle")){
 			state = stateFactory.getParticleState();
 		}
+	}
+
+
+	public ParticleCreator getParticleCreator() {
+		return particleCreator;
 	}
 
 
