@@ -15,16 +15,15 @@ public class PolygonCreator {
 	private Level level;
 	private List <Dott> dotts;
 	private List <Obstacle> obstacles;
-	private Pointer pointer;
+
 	
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
 	
-	public PolygonCreator(Pointer pointer, Level level){
+	public PolygonCreator(Level level){
 		dotts = new ArrayList<Dott>();
 		obstacles = new ArrayList<Obstacle>();
-		this.pointer = pointer;
 		this.level = level;
 	}
 	
@@ -66,19 +65,6 @@ public class PolygonCreator {
 		
 	}
 	
-	public void draw(){
-		for (Dott dott : dotts){
-			dott.draw();
-		}
-		for (Obstacle obstacle : obstacles){
-			obstacle.draw();
-			Polygon polygon = (Polygon)obstacle.getShape();
-			float[] points = polygon.getPoints();
-			for (int i = 0; i<points.length;i+=2) {
-				ShapeRenderer.draw(new Dott(points[i], points[i+1]).getShape());
-			}
-		}
-	}
 	public void selectDot(float x , float y){
 		for (Dott dott : dotts){
 			if (dott.getShape().contains(x, y)){					

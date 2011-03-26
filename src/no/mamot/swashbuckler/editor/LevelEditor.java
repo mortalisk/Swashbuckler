@@ -24,7 +24,7 @@ import org.newdawn.slick.SlickException;
 public class LevelEditor implements Engine{
 
 	private Pointer pointer;
-	private PolygonCreator creator;
+	private PolygonCreator polygonCreator;
 	private LevelSaver levelSaver ;
 	private Camera camera;
 	private View view;
@@ -34,16 +34,19 @@ public class LevelEditor implements Engine{
 	private LevelEditorState state;
 	private Level level;
 	private StateFactory stateFactory;
+	private ParticleObject particleTest;
 
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
 		level = new LevelImpl();
 		view.setLevel(level);
 		camera = view.getCamera();
-		creator = new PolygonCreator(pointer, level);
-		state = new PolygonState(creator);
+		polygonCreator = new PolygonCreator(level);
+		state = new PolygonState(polygonCreator);
 		stateFactory = new StateFactory();
 		stateFactory.setLevelEditor(this);
+
+		
 		InputHandler inputHandler = new InputHandlerEditor(this,camera);
 		gameProxy = new GameProxy("Swashbuckler Editor", view, inputHandler, this,
 				screenWidth, screenHeight);
@@ -68,19 +71,24 @@ public class LevelEditor implements Engine{
 	@Override
 	public void init() throws SlickException {
 		pointer = new Pointer(camera);		
-		levelSaver = new LevelSaver(creator);
+		levelSaver = new LevelSaver(polygonCreator);
+		
+		particleTest = new ParticleObject(100,200);
+		particleTest.load();
+		level.getDrawableList().add(particleTest);
 	}
 
 
 	@Override
 	public void start() throws SlickException {
 		gameProxy.start();
+		
 	}
 
 
 	@Override
 	public void updateWorld(int delta) {
-		// TODO Auto-generated method stub
+		particleTest.update(delta);
 		
 	}
 	
@@ -94,7 +102,7 @@ public class LevelEditor implements Engine{
 
 	public PolygonCreator getPolygonCreator() {
 		// TODO Auto-generated method stub
-		return creator;
+		return polygonCreator;
 	}
 	
 	public void setState(String changeto){
