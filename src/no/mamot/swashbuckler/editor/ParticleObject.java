@@ -22,7 +22,6 @@ public class ParticleObject implements Drawable, Updateable{
 	public void load() throws SlickException{
 	       
 		Image image = new Image("data/particles/poisoncloud.tga", true); 
-		System.out.println("Load image test..");
 	    system = new ParticleSystem(image);  	   
 	    // x y might just be relative to the position of the system....
 		system.addEmitter(new FireEmitter(x, y, 10.0f));		
