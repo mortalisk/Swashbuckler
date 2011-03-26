@@ -1,5 +1,12 @@
 package no.mamot.swashbuckler;
 
+import no.mamot.engine.Camera;
+import no.mamot.engine.Engine;
+import no.mamot.engine.GameProxy;
+import no.mamot.engine.InputHandler;
+import no.mamot.engine.Level;
+import no.mamot.engine.View;
+import no.mamot.engine.ViewImpl;
 import no.mamot.swashbuckler.editor.LevelSaver;
 
 import org.newdawn.slick.Input;

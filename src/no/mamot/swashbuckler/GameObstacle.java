@@ -1,5 +1,7 @@
 package no.mamot.swashbuckler;
 
+import no.mamot.engine.GameObject;
+
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;

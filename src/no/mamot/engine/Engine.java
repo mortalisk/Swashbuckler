@@ -1,4 +1,4 @@
-package no.mamot.swashbuckler;
+package no.mamot.engine;
 
 import org.newdawn.slick.SlickException;
 

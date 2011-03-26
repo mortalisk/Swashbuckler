@@ -2,8 +2,8 @@ package no.mamot.swashbuckler.editor;
 
 import javax.swing.SwingUtilities;
 
-import no.mamot.swashbuckler.Camera;
-import no.mamot.swashbuckler.GameProxy;
+import no.mamot.engine.Camera;
+import no.mamot.engine.GameProxy;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;

@@ -1,6 +1,6 @@
 package no.mamot.swashbuckler.editor;
 
-import no.mamot.swashbuckler.Camera;
+import no.mamot.engine.Camera;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Line;

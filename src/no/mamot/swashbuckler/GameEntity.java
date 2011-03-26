@@ -2,6 +2,8 @@ package no.mamot.swashbuckler;
 
 import java.util.List;
 
+import no.mamot.engine.GameObject;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
