@@ -75,12 +75,12 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 	@Override
 	public void init() throws SlickException {
-
 		level = levelLoader.loadLevel();
 
-		man = new GameEntity("/data/WWFSoldierUzi.png", 18.0f, 350.0f, 200.0f);
+		man = new GameEntity("/data/WWFSoldierUzi.png", "Hero", 18.0f, 350.0f, 200.0f);
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
+		level.getDrawableList().add(man);
 		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
 
 		view.setLevel(level);

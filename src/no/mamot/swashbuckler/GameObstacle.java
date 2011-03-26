@@ -26,7 +26,7 @@ public final class GameObstacle implements GameObject, Drawable {
 			physPoints[i] = new Vector2f(arg0[i*2], arg0[i*2+1]);
 		}
 		net.phys2d.raw.shapes.Polygon physPolygon = new net.phys2d.raw.shapes.Polygon(physPoints);
-		body = new StaticBody(physPolygon);
+		body = new StaticBody("WorldObstacle",physPolygon);
 		body.setFriction(0.01f);
 	}
 

@@ -35,6 +35,8 @@ public class Physics implements CollisionListener{
 
 	@Override
 	public void collisionOccured(CollisionEvent event) {
+		//the acting object is now resting
+		event.getBodyB().setIsResting(true);
 		System.out.println(event);
 	}
 
