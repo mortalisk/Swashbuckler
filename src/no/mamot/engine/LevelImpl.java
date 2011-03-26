@@ -9,6 +9,7 @@ public class LevelImpl implements Level {
 	List<GameObject> gameObjects = new ArrayList<GameObject>();
 	List<GameEntity> gameEntities = new ArrayList<GameEntity>();
 	List<Drawable> drawables = new ArrayList<Drawable>();
+	List<Updateable> updateables = new ArrayList<Updateable>();
 
 	@Override
 	public List<GameObject> getGameObjectList() {
@@ -22,8 +23,13 @@ public class LevelImpl implements Level {
 
 	@Override
 	public List<Drawable> getDrawableList() {
-		// TODO Auto-generated method stub
 		return drawables;
+	}
+
+	@Override
+	public List<Updateable> getUpdatableList() {
+		// TODO Auto-generated method stub
+		return updateables;
 	}
 
 }

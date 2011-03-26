@@ -12,4 +12,5 @@ public interface Level {
 	List<GameObject> getGameObjectList();
 	List<GameEntity> getEntityList();
 	List<Drawable> getDrawableList();
+	List<Updateable> getUpdatableList();
 }
