@@ -3,7 +3,11 @@ package no.mamot.swashbuckler.editor;
 import javax.swing.SwingUtilities;
 
 import no.mamot.engine.Camera;
+import no.mamot.engine.Engine;
 import no.mamot.engine.GameProxy;
+import no.mamot.engine.InputHandler;
+import no.mamot.engine.View;
+import no.mamot.engine.ViewImpl;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -12,31 +16,29 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-public class LevelEditor extends BasicGame {
+public class LevelEditor implements Engine{
 
 	private Pointer pointer;
 	private PolygonCreator creator;
 	private LevelSaver levelSaver ;
 	private Camera camera;
-	
-	public LevelEditor(String title) {
-		super(title);
-		// TODO Auto-generated constructor stub
-	}
+	private View view;
+	private int screenWidth = 1024;
+	private int screenHeight = 768;
+	private GameProxy gameProxy;
+	private LevelEditorState state;
 
-	@Override
-	public void init(GameContainer container) throws SlickException {
-		// TODO Auto-generated method stub
-		
-		
-		
-		camera = new Camera(Input.KEY_UP, Input.KEY_DOWN, Input.KEY_LEFT, Input.KEY_RIGHT);
-		pointer = new Pointer(camera);
+	public LevelEditor() throws SlickException {
+		view = new ViewImpl(screenWidth, screenHeight);
+		camera = view.getCamera();
 		creator = new PolygonCreator(pointer);
-		levelSaver = new LevelSaver(creator);
+		state = new PolygonState(creator);
+		InputHandler inputHandler = new InputHandlerEditor(this,camera);
+		gameProxy = new GameProxy("Swashbuckler Editor", view, inputHandler, this,
+				screenWidth, screenHeight);
 	}
 
-	@Override
+/*
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		// TODO Auto-generated method stub
@@ -48,15 +50,16 @@ public class LevelEditor extends BasicGame {
 		camera.handleInput(input);
 	}
 
-	@Override
+
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		// TODO Auto-generated method stub
 		g.translate(camera.getTopLeftCorner().x, camera.getTopLeftCorner().y);
-		pointer.draw();
+	
 		creator.draw();
 	}
 	
+	*/
 	public static void main(String[] args) {
 		try {
 			
@@ -67,18 +70,46 @@ public class LevelEditor extends BasicGame {
 					inst.setVisible(true);
 				}
 			});
-			
-			
-			
-			AppGameContainer app = new AppGameContainer(new LevelEditor("Title"));
-			app.setDisplayMode(1024, 768, false);
-			app.start();
-			
+			LevelEditor levelEditor = new LevelEditor();
+			levelEditor.start();
 			
 			
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 	}
+
+
+
+
+	@Override
+	public void init() throws SlickException {
+		// TODO Auto-generated method stub
+		
+		pointer = new Pointer(camera);		
+		levelSaver = new LevelSaver(creator);
+	}
+
+
+	@Override
+	public void start() throws SlickException {
+		// TODO Auto-generated method stub
+		gameProxy.start();
+	}
+
+
+	@Override
+	public void updateWorld(int delta) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public LevelEditorState getState() {
+		return state;
+	}
+	public void setState(LevelEditorState state) {
+		this.state = state;
+	}
+
 
 }

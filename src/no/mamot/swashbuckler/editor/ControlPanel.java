@@ -36,6 +36,7 @@ public class ControlPanel extends javax.swing.JFrame {
 	private JMenuItem jMenuItem1;
 	private JMenu jMenu1;
 	private ControlPanelActionListener controlPanelActionListener;
+	private JMenuItem jMenuItem4;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -85,6 +86,11 @@ public class ControlPanel extends javax.swing.JFrame {
 					jMenu3 = new JMenu();
 					jMenuBar1.add(jMenu3);
 					jMenu3.setText("Tools");
+					{
+						jMenuItem4 = new JMenuItem();
+						jMenu3.add(jMenuItem4);
+						jMenuItem4.setText("Draw Polgyon");
+					}
 				}
 			}
 			pack();
