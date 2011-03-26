@@ -1,5 +1,6 @@
 package no.mamot.swashbuckler;
 
+import net.phys2d.math.Vector2f;
 import no.mamot.engine.Camera;
 import no.mamot.engine.Engine;
 import no.mamot.engine.GameProxy;
@@ -22,18 +23,21 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	private GameEntity man;
 	int screenHeight = 768;
 	int screenWidth = 1024;
+	private Physics physics;
 
 	public SwashbucklerEngine() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
 		camera = view.getCamera();
 		gameProxy = new GameProxy("Swashbuckler", view, this, this,
 				screenWidth, screenHeight);
+		physics = new Physics();
 
 	}
 
 	@Override
 	public void updateWorld(int delta) {
-		camera.setCenter(man.getPosition());
+		physics.doPhysics(delta);
+		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
 	}
 
 	@Override
@@ -45,14 +49,12 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		Engine swashbuckler = new SwashbucklerEngine();
 		swashbuckler.start();
 	}
-
+	
 	@Override
 	public void handleInput(Input input, int delta) {
 		// movement
 		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			if (man.velocityVector.y >= 0) {
-				man.velocityVector.set(0.0f, man.jumpSpeed);
-			}
+			man.jump();
 		}
 		if (input.isKeyDown(Input.KEY_W)) {
 			// position.y -= speed / delta;
@@ -61,19 +63,13 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 			// position.y += speed / delta;
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
-			man.velocityVector.x -= man.acceleration / delta;
-			if (man.velocityVector.x < -man.maxSpeed) {
-				man.velocityVector.x = -man.maxSpeed;
-			}
+			man.left(delta);
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
-			man.velocityVector.x += man.acceleration / delta;
-			if (man.velocityVector.x > man.maxSpeed) {
-				man.velocityVector.x = man.maxSpeed;
-			}
+			man.right(delta);
 		}
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			man.setPosition(input.getMouseX() + camera.getTopLeftCorner().x,input.getMouseY() + camera.getTopLeftCorner().y);
+			man.goTo(input.getMouseX() + camera.getTopLeftCorner().x,input.getMouseY() + camera.getTopLeftCorner().y);
 		}
 	}
 
@@ -84,9 +80,12 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 		man = new GameEntity("/data/WWFSoldierUzi.png", 18.0f, 350.0f, 200.0f);
 		level.getGameObjectList().add(man);
-		camera.setCenter(man.getPosition());
+		level.getEntityList().add(man);
+		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
 
 		view.setLevel(level);
+		physics.setLevel(level);
+		physics.init();
 	}
 
 }

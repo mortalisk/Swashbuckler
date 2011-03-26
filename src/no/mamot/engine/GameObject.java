@@ -1,5 +1,8 @@
 package no.mamot.engine;
 
+import net.phys2d.raw.Body;
+import net.phys2d.raw.forcesource.ForceSource;
+
 import org.newdawn.slick.geom.Shape;
 
 /**
@@ -9,5 +12,6 @@ public interface GameObject{
 
 	Shape getShape();
 	
+	Body getBody();
 	
 }

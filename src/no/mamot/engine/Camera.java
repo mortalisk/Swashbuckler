@@ -35,8 +35,9 @@ public class Camera {
 		return returnVector;
 	}
 
-	public void setCenter(Vector2f playerPosition) {
-		center = playerPosition;
+	public void setCenter(float x, float y) {
+		center.x = x;
+		center.y = y;
 	}
 
 	public int getScreenWidth() {
