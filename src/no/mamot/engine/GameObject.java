@@ -5,9 +5,9 @@ import org.newdawn.slick.geom.Shape;
 /**
  * Represents all objects in a level.
  */
-public interface GameObject {
+public interface GameObject{
 
 	Shape getShape();
-	void draw();
+	
 	
 }

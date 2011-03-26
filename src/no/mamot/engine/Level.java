@@ -8,4 +8,6 @@ public interface Level {
 
 	List<GameObject> getGameObjectList();
 
+	List<Drawable> getDrawableList();
+
 }

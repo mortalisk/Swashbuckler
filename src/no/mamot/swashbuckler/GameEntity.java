@@ -2,6 +2,7 @@ package no.mamot.swashbuckler;
 
 import java.util.List;
 
+import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
 import org.newdawn.slick.GameContainer;
@@ -18,7 +19,7 @@ import org.newdawn.slick.geom.Vector2f;
  * Interactive objects in the level. I.e. objects that move. (the player or an
  * enemy)
  */
-public final class GameEntity implements GameObject {
+public final class GameEntity implements GameObject, Drawable {
 
 	private Circle circle;
 	private Vector2f before = new Vector2f();

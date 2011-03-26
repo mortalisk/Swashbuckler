@@ -113,7 +113,8 @@ public class LevelSaver {
 					array[i*2+1] = points.get(i).getY();
 				}
 				GameObstacle obstacle1 = new GameObstacle(array);
-				
+				// obstacle is both drawable and a game object
+				level.getDrawableList().add(obstacle1);
 				level.getGameObjectList().add(obstacle1);
 
 			}

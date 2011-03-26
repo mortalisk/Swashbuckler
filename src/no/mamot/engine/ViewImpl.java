@@ -14,8 +14,8 @@ public class ViewImpl implements View {
 	@Override
 	public void draw(Graphics g) {
 		g.translate(-camera.getTopLeftCorner().x, -camera.getTopLeftCorner().y);
-		for (GameObject gameObject : level.getGameObjectList()) {
-			gameObject.draw();
+		for (Drawable drawable : level.getDrawableList()) {
+			drawable.draw();
 		}
 	}
 
