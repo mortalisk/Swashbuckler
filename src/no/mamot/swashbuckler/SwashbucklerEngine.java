@@ -30,7 +30,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		camera = view.getCamera();
 		gameProxy = new GameProxy("Swashbuckler", view, this, this,
 				screenWidth, screenHeight);
-		physics = new Physics();
+		physics = new Physics(500);
 
 	}
 
@@ -77,10 +77,12 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	public void init() throws SlickException {
 		level = levelLoader.loadLevel();
 
-		man = new GameEntity("/data/WWFSoldierUzi.png", "Hero", 18.0f, 350.0f, 200.0f);
+		man = new GameEntity("/data/WWFSoldierUzi.png", "Hero", 19.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
+		
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
 		level.getDrawableList().add(man);
+		
 		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
 
 		view.setLevel(level);

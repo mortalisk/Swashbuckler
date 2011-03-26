@@ -13,8 +13,16 @@ import no.mamot.engine.Level;
 
 public class Physics implements CollisionListener{
 	private Level level;
-	World world = new World(new net.phys2d.math.Vector2f(0,500), 5, new QuadSpaceStrategy(20,5));
+	World world = null;
 
+	public Physics() {
+		world = new World(new net.phys2d.math.Vector2f(0,500), 5, new QuadSpaceStrategy(20,5));
+	}
+	
+	public Physics(float gravity) {
+		world = new World(new net.phys2d.math.Vector2f(0,gravity), 5, new QuadSpaceStrategy(20,5));
+	}
+	
 	public void setLevel(Level level) {
 		this.level = level;
 	}

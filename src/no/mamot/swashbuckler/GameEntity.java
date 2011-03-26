@@ -1,6 +1,7 @@
 package no.mamot.swashbuckler;
 
 import net.phys2d.raw.Body;
+import net.phys2d.raw.shapes.Box;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
@@ -20,38 +21,46 @@ public final class GameEntity implements GameObject, Drawable {
 	private boolean goingLeft = false;
 	private Circle circle;
 	private Body body;
+	private float bodyRadius = 0;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
 	private Image imageRight = null;
 	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -1500000);
-	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-20000, 0);
-	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(20000, 0);
+	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
+	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	GameEntity(String imageFile, String entityName, float radius, float x, float y)
+	GameEntity(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
 			imageRight = imageLeft.getFlippedCopy(true, false);		
 		}			
 		circle = new Circle(x, y, radius);
+		bodyRadius = radius;
+		
+		//Box physBox = new Box(radius, radius*2);
+		//body = new Body(entityName,physBox, 100);
+		
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(radius);
-		body = new Body(entityName,physCircle, 100);
+		body = new Body(entityName,physCircle, 100);		
+		
 		body.setRotatable(false);
 		body.setFriction(0.5f);
 		body.setPosition(x, y);
 		body.setIsResting(false);
+		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 	}
 	
 	public final void draw() {
-		getImage().draw(body.getPosition().getX(), body.getPosition().getY());
+		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
 		ShapeRenderer.draw(this.getShape());
 	}
 
 	@Override
 	public Shape getShape() {
-		circle.setX(body.getPosition().getX());
-		circle.setY(body.getPosition().getY());
+		circle.setX(body.getPosition().getX() - 16);
+		circle.setY(body.getPosition().getY() - bodyRadius);
 		return circle;
 	}
 
@@ -83,6 +92,7 @@ public final class GameEntity implements GameObject, Drawable {
 	}
 	
 	public void jump() {
+		//only allow jumping if the body is currently touching something		
 		if (body.isResting()) {
 			body.addForce(jumpForce );
 			body.setIsResting(false);
