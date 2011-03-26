@@ -31,8 +31,8 @@ public class InputHandlerEditor implements InputHandler {
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)){
 			float x = input.getMouseX();
 			float y = input.getMouseY();
-			x -= camera.getTopLeftCorner().x;
-			y -= camera.getTopLeftCorner().y;	
+			x += camera.getTopLeftCorner().x;
+			y += camera.getTopLeftCorner().y;	
 			
 			levelEditor.getState().place(x,y);
 		}
@@ -47,23 +47,23 @@ public class InputHandlerEditor implements InputHandler {
 		if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)){
 			float x = input.getMouseX();
 			float y = input.getMouseY();
-			x -= camera.getTopLeftCorner().x;
-			y -= camera.getTopLeftCorner().y;
-			
+			x += camera.getTopLeftCorner().x;
+			y += camera.getTopLeftCorner().y;
 			levelEditor.getState().select(x,y);
 		}
 		
 		// Delete selected
+		
 		if (input.isKeyPressed(Input.KEY_DELETE)){
 			levelEditor.getState().delete();
 		}
 		
 		// Move selected
-		if (input.isKeyPressed(Input.KEY_LSHIFT)){
+		if (input.isKeyDown(Input.KEY_LSHIFT)){
 			float x = input.getMouseX();
 			float y = input.getMouseY();
-			x -= camera.getTopLeftCorner().x;
-			y -= camera.getTopLeftCorner().y;
+			x += camera.getTopLeftCorner().x;
+			y += camera.getTopLeftCorner().y;
 			
 			levelEditor.getState().move(x, y);
 		}

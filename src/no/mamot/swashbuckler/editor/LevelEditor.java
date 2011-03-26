@@ -34,8 +34,6 @@ public class LevelEditor implements Engine{
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
 		level = new LevelImpl();
-		// Test
-		level.getDrawableList().add(new Dott(100, 100));
 		view.setLevel(level);
 		camera = view.getCamera();
 		creator = new PolygonCreator(pointer, level);
