@@ -34,8 +34,7 @@ public final class GameObstacle implements GameObject, Drawable {
 		ShapeRenderer.draw(this.getShape());
 	}
 
-	@Override
-	public Shape getShape() {
+	private Shape getShape() {
 		return polygon;
 	}
 

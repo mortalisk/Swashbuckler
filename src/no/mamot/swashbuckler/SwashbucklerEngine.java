@@ -82,7 +82,6 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
 		level.getDrawableList().add(man);
-		
 		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
 
 		view.setLevel(level);

@@ -43,8 +43,7 @@ public final class GameEntity implements GameObject, Drawable {
 		//body = new Body(entityName,physBox, 100);
 		
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(radius);
-		body = new Body(entityName,physCircle, 100);		
-		
+		body = new Body(entityName,physCircle, 1);		
 		body.setRotatable(false);
 		body.setFriction(0.5f);
 		body.setPosition(x, y);
@@ -53,12 +52,11 @@ public final class GameEntity implements GameObject, Drawable {
 	}
 	
 	public final void draw() {
-		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
+		//getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
 		ShapeRenderer.draw(this.getShape());
 	}
 
-	@Override
-	public Shape getShape() {
+	private Shape getShape() {
 		circle.setX(body.getPosition().getX() - 16);
 		circle.setY(body.getPosition().getY() - bodyRadius);
 		return circle;
