@@ -7,7 +7,9 @@ import no.mamot.engine.Drawable;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.ShapeFill;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
@@ -24,6 +26,7 @@ public class Obstacle implements Drawable{
 	private ShapeFill fill;
 	private ShapeRenderer renderer;
 	private List <ParticleObject> particles = new ArrayList<ParticleObject>();
+	private Image texture;
 	
 	public Obstacle(Shape polygon){
 		this.polygon = polygon;
@@ -31,6 +34,13 @@ public class Obstacle implements Drawable{
 		startCol = new Color(1.0f, 1.0f, 1.0f);
 		endCol = new Color(1.0f, 1.0f, 1.0f);
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f ,endCol);
+		
+		try {
+			texture = new Image("data/textures/texture1.png", true);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	public Shape getShape(){
@@ -62,6 +72,7 @@ public class Obstacle implements Drawable{
 	
 	public void draw(Graphics g){
 		renderer.draw(polygon, fill);
+		renderer.textureFit(polygon, texture);
 		for (ParticleObject particle : particles){
 			particle.update(1000/60);
 			particle.draw(null);
@@ -73,13 +84,17 @@ public class Obstacle implements Drawable{
 	}
 	
 	public void move(float x , float y){
-		polygon.setLocation((x - (polygon.getWidth()/2)), (y - (polygon.getHeight()/2)));
-		ParticleSystem system;
+		
+		float xMove = x-polygon.getX();
+		float yMove = y-polygon.getY();
+		//polygon.setLocation((x - (polygon.getWidth()/2)), (y - (polygon.getHeight()/2)));
+		polygon.setLocation(x, y);
+		ParticleSystem particleSystem;
 		for (ParticleObject particle : particles){
-			system = particle.getParticleSystem();
-			float oldx = system.getPositionX();
-			float oldy = system.getPositionY();
-			system.setPosition(x-oldx, y-oldy);
+			particleSystem = particle.getParticleSystem();
+			float oldx = particleSystem.getPositionX();
+			float oldy = particleSystem.getPositionY();
+			particleSystem.setPosition(xMove+oldx, yMove+oldy);
 		}	
 	}
 

@@ -34,16 +34,27 @@ public class PlaceOnObstacleState implements LevelEditorState{
 	}
 	@Override
 	public void select(float x, float y) {
-		// select obstacle
 		
+		// Deselect obstacles..
+		for (Obstacle obstacle : levelEditor.getLevel().getObstacleList()){
+			if (obstacle.isSelected()){
+				obstacle.select();
+			}			
+		}		
+		// select obstacle
+		boolean hasSelected = false;
 		for (Obstacle obstacle : levelEditor.getLevel().getObstacleList()){
 			if (obstacle.getShape().contains(x, y)){					
-				obstacle.select();					
+				obstacle.select();	
+				hasSelected = true;
+				break;
 			}
 		}
-		if (transitionTo.equals("Draw_Particle"))	{
-			// then transition
-			levelEditor.setState(levelEditor.getStateFactory().getParticleState());
+		if (hasSelected){	
+			if (transitionTo.equals("Draw_Particle"))	{
+				// then transition
+				levelEditor.setState(levelEditor.getStateFactory().getParticleState());
+			}
 		}
 	}
 	@Override

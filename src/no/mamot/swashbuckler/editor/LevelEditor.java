@@ -34,7 +34,7 @@ public class LevelEditor implements Engine{
 	private int screenHeight = 768;
 	private GameProxy gameProxy;
 	private LevelEditorState state;
-	private Level level;
+	private LevelImplEditor level;
 	private StateFactory stateFactory;
 	private ParticleObject particleTest;
 	private ParticleCreator particleCreator;

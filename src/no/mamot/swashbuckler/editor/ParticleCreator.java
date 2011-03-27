@@ -9,14 +9,14 @@ import no.mamot.engine.Level;
 
 public class ParticleCreator {
 
-	private Level level;
+	private LevelImplEditor level;
 	private List <ParticleObject> particleObjects = new ArrayList<ParticleObject>();
 	
-	public ParticleCreator(Level level){
+	public ParticleCreator(LevelImplEditor level){
 		this.level = level;
 	}
 	
-	public void createNewParticle(float x , float y){
+	public void createNewParticle(float x , float y){		
 		ParticleObject newParticleObject = new ParticleObject(x, y);
 		try {
 			newParticleObject.load();			
@@ -24,9 +24,18 @@ public class ParticleCreator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		particleObjects.add(newParticleObject);
-		level.getDrawableList().add(newParticleObject);
-		level.getUpdatableList().add(newParticleObject);		
+		findCurrentSelectedObstacle().getParticles().add(newParticleObject);	
 	}
 	
+	
+	
+	private Obstacle findCurrentSelectedObstacle(){
+		
+		for (Obstacle obstacle : level.getObstacleList()){
+			if (obstacle.isSelected()){
+				return obstacle;
+			}			
+		}	
+		return null;
+	}
 }
