@@ -16,7 +16,7 @@ public class Physics implements CollisionListener{
 	World world = null;
 
 	public Physics() {
-		world = new World(new net.phys2d.math.Vector2f(0,500), 5, new QuadSpaceStrategy(20,5));
+		world = new World(new net.phys2d.math.Vector2f(0,500), 1, new QuadSpaceStrategy(20,5));
 	}
 	
 	public Physics(float gravity) {
@@ -46,6 +46,7 @@ public class Physics implements CollisionListener{
 	public void collisionOccured(CollisionEvent event) {
 		//the acting object is now resting
 		event.getBodyB().setIsResting(true);
+		event.getBodyA().setIsResting(true);
 		System.out.println(event);
 	}
 

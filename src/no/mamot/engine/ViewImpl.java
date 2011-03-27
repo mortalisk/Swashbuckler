@@ -15,7 +15,7 @@ public class ViewImpl implements View {
 	public void draw(Graphics g) {
 		g.translate(-camera.getTopLeftCorner().x, -camera.getTopLeftCorner().y);
 		for (Drawable drawable : level.getDrawableList()) {
-			drawable.draw(null);
+			drawable.draw(g);
 		}
 	}
 
