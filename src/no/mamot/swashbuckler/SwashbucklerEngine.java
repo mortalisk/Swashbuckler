@@ -37,7 +37,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	@Override
 	public void updateWorld(int delta) {
 		physics.doPhysics(delta);
-		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
+		camera.setCenter(man.getPosition().getX(),man.getPosition().getY());
 	}
 
 	@Override
@@ -78,11 +78,13 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level = levelLoader.loadLevel();
 
 		man = new GameEntity("/data/WWFSoldierUzi.png", "Hero", 19.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
-		
+		Elevator elevator = new Elevator(200, 50);
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
 		level.getDrawableList().add(man);
-		camera.setCenter(man.getBody().getPosition().getX(),man.getBody().getPosition().getY());
+		level.getGameObjectList().add(elevator);
+		level.getDrawableList().add(elevator);
+		camera.setCenter(man.getPosition().getX(),man.getPosition().getY());
 
 		view.setLevel(level);
 		physics.setLevel(level);

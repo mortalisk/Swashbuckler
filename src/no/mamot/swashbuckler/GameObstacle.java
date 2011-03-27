@@ -4,6 +4,7 @@ import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.StaticBody;
+import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
@@ -39,8 +40,15 @@ public final class GameObstacle implements GameObject, Drawable {
 	}
 
 	@Override
-	public Body getBody() {
-		return body;
+	public void addPhysics(World world) {
+		world.add(body);
 	}
+	
+	@Override
+	public ROVector2f getPosition() {
+		throw new UnsupportedOperationException("GameObstacle has no posisiton per today");
+	}
+
+
 
 }

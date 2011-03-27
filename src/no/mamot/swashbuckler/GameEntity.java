@@ -1,7 +1,8 @@
 package no.mamot.swashbuckler;
 
+import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
-import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
@@ -35,7 +36,7 @@ public final class GameEntity implements GameObject, Drawable {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
 			imageRight = imageLeft.getFlippedCopy(true, false);		
-		}			
+		}
 		circle = new Circle(x, y, radius);
 		bodyRadius = radius;
 		
@@ -43,7 +44,7 @@ public final class GameEntity implements GameObject, Drawable {
 		//body = new Body(entityName,physBox, 100);
 		
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(radius);
-		body = new Body(entityName,physCircle, 1);		
+		body = new Body(entityName,physCircle, 100);		
 		body.setRotatable(false);
 		body.setFriction(0.5f);
 		body.setPosition(x, y);
@@ -75,9 +76,7 @@ public final class GameEntity implements GameObject, Drawable {
 		this.imageRight = image.getFlippedCopy(true, false);
 	}
 
-	public Body getBody() {
-		return body;
-	}
+
 
 	public void left(int delta) {
 		goingLeft = true;
@@ -99,5 +98,15 @@ public final class GameEntity implements GameObject, Drawable {
 
 	public void goTo(float x, float y) {
 		body.setPosition(x, y);
+	}
+	
+	@Override
+	public ROVector2f getPosition() {
+		return body.getPosition();
+	}
+
+	@Override
+	public void addPhysics(World world) {
+		world.add(body);
 	}
 }
