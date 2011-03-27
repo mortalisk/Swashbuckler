@@ -1,5 +1,8 @@
 package no.mamot.swashbuckler.editor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import no.mamot.engine.Drawable;
 
 import org.newdawn.slick.Color;
@@ -8,6 +11,7 @@ import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
+import org.newdawn.slick.particles.ParticleSystem;
 
 public class Obstacle implements Drawable{
 	
@@ -18,6 +22,7 @@ public class Obstacle implements Drawable{
 	private Color endCol;
 	private ShapeFill fill;
 	private ShapeRenderer renderer;
+	private List <ParticleObject> particles = new ArrayList<ParticleObject>();
 	
 	public Obstacle(Shape polygon){
 		this.polygon = polygon;
@@ -56,6 +61,10 @@ public class Obstacle implements Drawable{
 	
 	public void draw(){
 		renderer.draw(polygon, fill);
+		for (ParticleObject particle : particles){
+			particle.update(1000/60);
+			particle.draw();
+		}
 	}
 	
 	public boolean isSelected (){
@@ -64,6 +73,17 @@ public class Obstacle implements Drawable{
 	
 	public void move(float x , float y){
 		polygon.setLocation((x - (polygon.getWidth()/2)), (y - (polygon.getHeight()/2)));
-	
+		ParticleSystem system;
+		for (ParticleObject particle : particles){
+			system = particle.getParticleSystem();
+			float oldx = system.getPositionX();
+			float oldy = system.getPositionY();
+			system.setPosition(x-oldx, y-oldy);
+		}	
 	}
+
+	public List<ParticleObject> getParticles() {
+		return particles;
+	}
+	
 }

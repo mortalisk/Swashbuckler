@@ -1,15 +1,18 @@
 package no.mamot.swashbuckler.editor.state;
 
 import no.mamot.engine.Level;
+import no.mamot.swashbuckler.editor.LevelEditor;
 import no.mamot.swashbuckler.editor.ParticleCreator;
 
 public class ParticleState implements LevelEditorState {
 	
 	private ParticleCreator particleCreator;
+	private LevelEditor levelEditor;
 
 	
-	public ParticleState(ParticleCreator particleCreator){
-		this.particleCreator = particleCreator;
+	public ParticleState(LevelEditor levelEditor){
+		this.particleCreator = levelEditor.getParticleCreator();
+		this.levelEditor = levelEditor;
 		
 	}
 
@@ -31,12 +34,20 @@ public class ParticleState implements LevelEditorState {
 
 	@Override
 	public void placeFinished() {
-		// TODO Auto-generated method stub		
+		LevelEditorState state = levelEditor.getStateFactory().getPlaceOnObstacleState();
+		state.setTransition("Draw_Polygon");
+		levelEditor.setState(state);	
 	}
 
 	@Override
 	public void select(float x, float y) {
 		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void setTransition(String transitionTo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

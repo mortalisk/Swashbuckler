@@ -8,6 +8,8 @@ public interface LevelEditorState {
 	public void placeFinished();
 	public void select(float x, float y);
 	public void delete();
-	public void move(float x , float y);	
+	public void move(float x , float y);
+	
+	public void setTransition(String transitionTo);
 	
 }

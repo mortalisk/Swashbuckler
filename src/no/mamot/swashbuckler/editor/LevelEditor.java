@@ -12,6 +12,7 @@ import no.mamot.engine.Updateable;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
 import no.mamot.swashbuckler.editor.state.LevelEditorState;
+import no.mamot.swashbuckler.editor.state.PlaceOnObstacleState;
 import no.mamot.swashbuckler.editor.state.PolygonState;
 import no.mamot.swashbuckler.editor.state.StateFactory;
 
@@ -40,7 +41,7 @@ public class LevelEditor implements Engine{
 
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
-		level = new LevelImpl();
+		level = new LevelImplEditor();
 		view.setLevel(level);
 		camera = view.getCamera();
 		polygonCreator = new PolygonCreator(level);
@@ -100,22 +101,30 @@ public class LevelEditor implements Engine{
 	public void setState(LevelEditorState state) {
 		this.state = state;
 	}
-
+	// String based
+	public void setState(String changeto){
+		if (changeto.equals("Draw_Polygon")){
+			state = stateFactory.getPolygonState();
+		}
+		if (changeto.equals("Draw_Particle")){			
+			state = stateFactory.getPlaceOnObstacleState();
+			state.setTransition(changeto);
+		}
+	}
+	public StateFactory getStateFactory(){
+		return stateFactory;
+	}
+	
 
 	public PolygonCreator getPolygonCreator() {
 		// TODO Auto-generated method stub
 		return polygonCreator;
 	}
 	
-	public void setState(String changeto){
-		if (changeto.equals("Draw_Polygon")){
-			state = stateFactory.getPolygonState();
-		}
-		if (changeto.equals("Draw_Particle")){
-			state = stateFactory.getParticleState();
-		}
-	}
 
+	public LevelImplEditor getLevel(){
+		return (LevelImplEditor)level;
+	}
 
 	public ParticleCreator getParticleCreator() {
 		return particleCreator;

@@ -17,6 +17,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import no.mamot.swashbuckler.editor.state.LevelEditorState;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo

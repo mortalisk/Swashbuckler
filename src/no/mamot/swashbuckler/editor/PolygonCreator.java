@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.ShapeRenderer;
 
 public class PolygonCreator {
 
-	private Level level;
+	private LevelImplEditor level;
 	private List <Dott> dotts;
 	private List <Obstacle> obstacles;
 
@@ -23,8 +23,10 @@ public class PolygonCreator {
 	
 	public PolygonCreator(Level level){
 		dotts = new ArrayList<Dott>();
-		obstacles = new ArrayList<Obstacle>();
-		this.level = level;
+		this.level = (LevelImplEditor) level;
+		
+		obstacles = this.level.getObstacleList();
+		
 	}
 	
 	public void createNewDott(float x, float y){

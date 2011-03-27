@@ -38,4 +38,8 @@ public class ParticleObject implements Drawable, Updateable{
 		system.update(delta);
 	}
 	
+	public ParticleSystem getParticleSystem(){
+		return system;
+	}
+	
 }

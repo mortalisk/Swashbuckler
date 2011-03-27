@@ -43,4 +43,11 @@ public class PolygonState implements LevelEditorState {
 		
 	}
 
+
+	@Override
+	public void setTransition(String transitionTo) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

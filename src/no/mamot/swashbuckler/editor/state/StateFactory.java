@@ -8,8 +8,10 @@ public class StateFactory {
 	private LevelEditor levelEditor;
 	
 
-	private PolygonState polygonState = null;
-	private ParticleState particleState = null;
+	private LevelEditorState polygonState = null;
+	private LevelEditorState particleState = null;
+	private LevelEditorState placeOnObstacleState = null;
+	
 	
 	public LevelEditorState getPolygonState(){
 		if (polygonState == null){
@@ -19,9 +21,16 @@ public class StateFactory {
 	}
 	public LevelEditorState getParticleState(){
 		if (particleState == null){
-			particleState = new ParticleState(levelEditor.getParticleCreator());
+			particleState = new ParticleState(levelEditor);
 		}
 		return particleState;		
+	}
+	
+	public LevelEditorState getPlaceOnObstacleState() {
+		if (placeOnObstacleState == null){
+			placeOnObstacleState = new PlaceOnObstacleState(levelEditor);
+		}		
+		return placeOnObstacleState;
 	}
 	
 	
