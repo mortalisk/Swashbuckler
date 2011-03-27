@@ -3,6 +3,7 @@ package no.mamot.swashbuckler.editor;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.Updateable;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ParticleSystem;
@@ -30,7 +31,7 @@ public class ParticleObject implements Drawable, Updateable{
 	}
 
 	@Override
-	public void draw() {
+	public void draw(Graphics g) {
 		system.render();
 	}
 	@Override

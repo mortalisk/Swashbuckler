@@ -8,6 +8,7 @@ import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
@@ -31,7 +32,7 @@ public final class GameObstacle implements GameObject, Drawable {
 		body.setFriction(0.1f);
 	}
 
-	public void draw() {
+	public void draw(Graphics g) {
 		ShapeRenderer.draw(this.getShape());
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 import no.mamot.engine.Drawable;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Shape;
@@ -59,11 +60,11 @@ public class Obstacle implements Drawable{
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f ,endCol);
 	}
 	
-	public void draw(){
+	public void draw(Graphics g){
 		renderer.draw(polygon, fill);
 		for (ParticleObject particle : particles){
 			particle.update(1000/60);
-			particle.draw();
+			particle.draw(null);
 		}
 	}
 	

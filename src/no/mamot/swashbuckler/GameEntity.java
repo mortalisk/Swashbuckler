@@ -6,6 +6,7 @@ import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
@@ -52,7 +53,7 @@ public final class GameEntity implements GameObject, Drawable {
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 	}
 	
-	public final void draw() {
+	public final void draw(Graphics g) {
 		//getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
 		ShapeRenderer.draw(this.getShape());
 	}

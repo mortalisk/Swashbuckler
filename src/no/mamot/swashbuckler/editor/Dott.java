@@ -3,6 +3,7 @@ package no.mamot.swashbuckler.editor;
 import no.mamot.engine.Drawable;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.fills.GradientFill;
 import org.newdawn.slick.geom.Circle;
@@ -61,7 +62,7 @@ public class Dott implements Drawable{
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f ,endCol);
 	}
 	
-	public void draw(){
+	public void draw(Graphics g){
 		renderer.draw(dott, fill);
 	}
 	

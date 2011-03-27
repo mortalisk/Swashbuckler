@@ -14,6 +14,7 @@ import net.phys2d.raw.shapes.Polygon;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -71,7 +72,7 @@ public class Elevator implements GameObject, Drawable {
 	}
 	
 	@Override
-	public void draw() {
+	public void draw(Graphics g) {
 		ROVector2f pos = engine.getPosition();
 		engineShape.setLocation(pos.getX(), pos.getY());
 		ShapeRenderer.draw(engineShape);
