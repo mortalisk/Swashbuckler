@@ -150,7 +150,9 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				
 				if (returnVal == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile(); // might just be a string??
-					System.out.println("Selected file " + file);					
+					System.out.println("Selected file " + file);
+					//TODO 
+					// save to this file
 				}
 				else {
 					System.out.println("Canceled");
