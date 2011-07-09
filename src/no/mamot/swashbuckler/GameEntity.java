@@ -54,7 +54,7 @@ public final class GameEntity implements GameObject, Drawable {
 	}
 	
 	public final void draw(Graphics g) {
-		//getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
+		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
 		ShapeRenderer.draw(this.getShape());
 	}
 
