@@ -20,7 +20,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	private Level level;
 	private View view;
 	private LevelSaver levelLoader = new LevelSaver(null);
-	private GameEntity man;
+	private Swashbuckler man;
 	int screenHeight = 768;
 	int screenWidth = 1024;
 	private Physics physics;
@@ -77,7 +77,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	public void init() throws SlickException {
 		level = levelLoader.loadLevel();
 
-		man = new GameEntity("/data/Swashbuckler/Swashbuckler.png", "Hero", 18.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
+		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero", 18.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
 		Elevator elevator = new Elevator(10, 50);
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);

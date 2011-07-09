@@ -3,11 +3,11 @@ package no.mamot.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.mamot.swashbuckler.GameEntity;
+import no.mamot.swashbuckler.Swashbuckler;
 
 public class LevelImpl implements Level {
 	List<GameObject> gameObjects = new ArrayList<GameObject>();
-	List<GameEntity> gameEntities = new ArrayList<GameEntity>();
+	List<Swashbuckler> gameEntities = new ArrayList<Swashbuckler>();
 	List<Drawable> drawables = new ArrayList<Drawable>();
 	List<Updateable> updateables = new ArrayList<Updateable>();
 
@@ -17,7 +17,7 @@ public class LevelImpl implements Level {
 	}
 
 	@Override
-	public List<GameEntity> getEntityList() {
+	public List<Swashbuckler> getEntityList() {
 		return gameEntities;
 	}
 

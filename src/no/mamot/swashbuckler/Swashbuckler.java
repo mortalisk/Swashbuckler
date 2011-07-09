@@ -18,7 +18,7 @@ import org.newdawn.slick.geom.Vector2f;
  * Interactive objects in the level. I.e. objects that move. (the player or an
  * enemy)
  */
-public final class GameEntity implements GameObject, Drawable {
+public final class Swashbuckler implements GameObject, Drawable {
 
 	private boolean goingLeft = false;
 	private Circle circle;
@@ -32,7 +32,7 @@ public final class GameEntity implements GameObject, Drawable {
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	GameEntity(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity)
+	Swashbuckler(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -55,11 +55,11 @@ public final class GameEntity implements GameObject, Drawable {
 	
 	public final void draw(Graphics g) {
 		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius);
-		ShapeRenderer.draw(this.getShape());
+		//ShapeRenderer.draw(this.getShape());
 	}
 
 	private Shape getShape() {
-		circle.setX(body.getPosition().getX() - 16);
+		circle.setX(body.getPosition().getX() - bodyRadius);
 		circle.setY(body.getPosition().getY() - bodyRadius);
 		return circle;
 	}
@@ -76,8 +76,6 @@ public final class GameEntity implements GameObject, Drawable {
 		this.imageLeft = image;
 		this.imageRight = image.getFlippedCopy(true, false);
 	}
-
-
 
 	public void left(int delta) {
 		goingLeft = true;
