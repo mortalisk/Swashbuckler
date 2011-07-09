@@ -65,7 +65,7 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 	public void draw(Graphics g) {
 		try {
 			getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius * 1.5f);
-			ShapeRenderer.draw(this.getShape());
+			//ShapeRenderer.draw(this.getShape());
 		} catch (Exception ex) {} finally {}
 	}
 

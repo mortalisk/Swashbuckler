@@ -24,6 +24,8 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private Body body;
 	private float bodyRadius = 0;
 	private float strength = 0;
+	private float attackSpeed = 0;
+	private float attackTimer = 0;
 	
 	private Swashbuckler player = null;
 
@@ -36,7 +38,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	
 	Random randomGenerator = new Random( 19580427 );
 
-	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength)
+	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength, float attackSpeed)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -55,6 +57,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 		
 		this.player = player;
 		this.strength = strength;
+		this.attackSpeed = attackSpeed;
 	}
 	
 	public void left(int delta) {
@@ -84,7 +87,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	@Override
 	public void draw(Graphics g) {
 		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius * 1.5f);
-		ShapeRenderer.draw(this.getShape());
+		//ShapeRenderer.draw(this.getShape());
 	}
 
 	@Override
@@ -121,8 +124,14 @@ public final class Robot implements GameObject, Drawable, Updateable {
 				right(delta);
 			} else {
 				//TODO: attack
-				if(randomGenerator.nextInt() > 0) {
-					player.removeHP(strength);
+				if (attackTimer <= 0) {
+					if(randomGenerator.nextInt() > 0) {
+						player.removeHP(strength);
+					}
+					
+					attackTimer = attackSpeed * delta;
+				} else {
+					attackTimer--;
 				}
 			}
 			

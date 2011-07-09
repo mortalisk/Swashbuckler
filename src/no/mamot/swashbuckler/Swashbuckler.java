@@ -58,7 +58,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	
 	public final void draw(Graphics g) {
 		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius* 1.5f);
-		ShapeRenderer.draw(this.getShape());
+		//ShapeRenderer.draw(this.getShape());
 
 		g.drawString("Score: " + getScore(), getPosition().getX()-(1024/2) + 90.0f, getPosition().getY()-(768/2) + 9.0f);
 		g.drawString("HP: " + getHP(), getPosition().getX()-(1024/2) + 225.0f, getPosition().getY()-(768/2) + 9.0f);
