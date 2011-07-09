@@ -13,6 +13,7 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
+import no.mamot.engine.Level;
 import no.mamot.engine.Updateable;
 
 public class Tourmaline implements GameObject, Drawable, Updateable {
@@ -21,12 +22,13 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 	private Body body;
 	private float bodyRadius = 0;
 	private float value = 0;
+	private Level playerLevel;
 	
 	private Swashbuckler player = null;
 	
 	private Image image = null;
 	
-	public Tourmaline(String imageFile, String entityName, float radius, float x, float y, float value, Swashbuckler player)
+	public Tourmaline(String imageFile, String entityName, float radius, float x, float y, float value, Swashbuckler player, Level playerLevel)
 			throws SlickException {
 		
 		if (imageFile != null) {
@@ -43,7 +45,7 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 		body.setIsResting(false);
 		
 		this.player = player;
-		
+		this.playerLevel = playerLevel;
 		this.value = value;
 	}
 	
@@ -51,9 +53,11 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 	@Override
 	public void update(int delta) {
 		if ((body.getPosition().distance(player.getPosition())) <= bodyRadius) {		
-			//add tourmaline to player and remove tourmaline from the world
-			image = null;
+			//add tourmaline to player and remove tourmaline from the level
+			playerLevel.RemoveObject(this);
 			player.addScore(value);
+			
+			//TODO: play tourmaline sound
 		}	
 	}
 
@@ -71,7 +75,7 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 	}
 
 	@Override
-	public ROVector2f getPosition() {
+	public ROVector2f getPosition() {		
 		return body.getPosition();
 	}
 	
@@ -84,5 +88,6 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 		circle.setY(body.getPosition().getY() - bodyRadius);
 		return circle;
 	}
+	
 
 }

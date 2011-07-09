@@ -26,6 +26,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private float bodyRadius = 0;
 	private float viewRadius = 0;
 	private float playerScore = 0;
+	private float playerHP = 0;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
@@ -34,7 +35,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	Swashbuckler(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity)
+	Swashbuckler(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, float playerHP)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -52,11 +53,15 @@ public final class Swashbuckler implements GameObject, Drawable {
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 		
 		this.viewRadius = viewRadius;
+		this.playerHP = playerHP;
 	}
 	
 	public final void draw(Graphics g) {
 		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius* 1.5f);
 		ShapeRenderer.draw(this.getShape());
+
+		g.drawString("Score: " + getScore(), getPosition().getX()-(1024/2) + 90.0f, getPosition().getY()-(768/2) + 9.0f);
+		g.drawString("HP: " + getHP(), getPosition().getX()-(1024/2) + 225.0f, getPosition().getY()-(768/2) + 9.0f);
 	}
 
 	private Shape getShape() {
@@ -81,11 +86,15 @@ public final class Swashbuckler implements GameObject, Drawable {
 	public void left(int delta) {
 		goingLeft = true;
 		body.addForce(leftForce);
+		
+		//TODO: play walking sound???
 	}
 
 	public void right(int delta) {
 		goingLeft = false;
 		body.addForce(rightForce);
+		
+		//TODO: play walking sound???
 	}
 	
 	public void jump() {
@@ -93,6 +102,8 @@ public final class Swashbuckler implements GameObject, Drawable {
 		if (body.isResting()) {
 			body.addForce(jumpForce);
 			body.setIsResting(false);
+			
+			//TODO: play jump sound
 		}		
 	}
 
@@ -102,6 +113,10 @@ public final class Swashbuckler implements GameObject, Drawable {
 	
 	public float getViewRadius() {
 		return this.viewRadius;
+	}
+	
+	public float getPlayerRadius() {
+		return this.bodyRadius;
 	}
 	
 	@Override
@@ -120,5 +135,21 @@ public final class Swashbuckler implements GameObject, Drawable {
 	
 	public void addScore(float score) {
 		playerScore += score;
+	}
+	
+	public float getHP() {
+		return playerHP;
+	}
+	
+	public void addHP(float hp) {
+		playerHP += hp;
+	}
+	
+	public void removeHP(float hp) {
+		playerHP -= hp;
+
+		if (playerHP <= 0) {
+			//TODO: DEAD!
+		}
 	}
 }

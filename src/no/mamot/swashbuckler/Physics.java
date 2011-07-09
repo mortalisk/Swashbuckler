@@ -29,9 +29,8 @@ public class Physics implements CollisionListener{
 	
 	public void init() {
 		if (level!= null) {
-			for (GameObject object :level.getGameObjectList()) {
-				object.addPhysics(world);
-				//world.add(object.getBody());
+			for (int i = level.getGameObjectList().size()-1; i >= 0; i--) {
+				level.getGameObjectList().get(i).addPhysics(world);
 			}
 		}
 		world.addListener(this);

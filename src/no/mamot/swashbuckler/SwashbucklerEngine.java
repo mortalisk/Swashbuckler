@@ -40,11 +40,9 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.doPhysics(delta);
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
-		for (Updateable object : level.getUpdatableList()) {
-			//if (object.inRange(man.getPosition(), 120.0f)) {
-				object.update(delta);
-			//}
-		}
+		for (int i = level.getUpdatableList().size()-1; i >= 0; i--) {
+			level.getUpdatableList().get(i).update(delta);
+		}		
 	}
 
 	@Override
@@ -87,34 +85,36 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero",
 				15.5f, 200.0f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
-						500));
+						500), 100.0f);
 		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f,
-				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man);
+				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man, 1.0f);
 		
-		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man);
+		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);
 		
 		//Elevator elevator = new Elevator(10, 50);
 		
-		level.getGameObjectList().add(man);
-		level.getEntityList().add(man);
-		level.getDrawableList().add(man);
+		level.AddToObjectList(man);
+		level.AddToEntityList(man);
+		level.AddToDrawableList(man);
 		
-		//level.getGameObjectList().add(elevator);
-		//level.getDrawableList().add(elevator);
+		//level.AddToObjectList(elevator);
+		//level.AddToDrawableList(elevator);
 		
-		//level.getGameObjectList().add(robot);
-		//level.getDrawableList().add(robot);
-		//level.getUpdatableList().add(robot);
+		level.AddToObjectList(robot);
+		level.AddToDrawableList(robot);
+		level.AddToUpdatableList(robot);
 		
-		level.getGameObjectList().add(crystal);
-		level.getDrawableList().add(crystal);
-		level.getUpdatableList().add(crystal);
+		level.AddToObjectList(crystal);
+		level.AddToDrawableList(crystal);
+		level.AddToUpdatableList(crystal);
 		
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
 		view.setLevel(level);
 		physics.setLevel(level);
 		physics.init();
+		
+		//TODO: play game music
 	}
 
 }

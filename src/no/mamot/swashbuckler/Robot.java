@@ -1,5 +1,7 @@
 package no.mamot.swashbuckler;
 
+import java.util.Random;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -21,6 +23,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private Circle circle;
 	private Body body;
 	private float bodyRadius = 0;
+	private float strength = 0;
 	
 	private Swashbuckler player = null;
 
@@ -30,8 +33,10 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -1500000);
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
+	
+	Random randomGenerator = new Random( 19580427 );
 
-	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player)
+	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -49,16 +54,21 @@ public final class Robot implements GameObject, Drawable, Updateable {
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 		
 		this.player = player;
+		this.strength = strength;
 	}
 	
 	public void left(int delta) {
 		goingLeft = true;
 		body.addForce(leftForce);
+		
+		//TODO: play walking sound???
 	}
 
 	public void right(int delta) {
 		goingLeft = false;
 		body.addForce(rightForce);
+		
+		//TODO: play walking sound???
 	}
 	
 	public void jump() {
@@ -66,6 +76,8 @@ public final class Robot implements GameObject, Drawable, Updateable {
 		if (body.isResting()) {
 			body.addForce(jumpForce);
 			body.setIsResting(false);
+			
+			//TODO: play jump sound
 		}		
 	}
 	
@@ -103,16 +115,21 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	public void update(int delta) {
 		//TODO: initiate AI stuff here???
 		if (body.getPosition().distance(player.getPosition()) <= player.getViewRadius()) {		
-			if (player.getPosition().getX() <= this.getPosition().getX()) {
+			if (player.getPosition().getX() <= (this.getPosition().getX() - (bodyRadius + player.getPlayerRadius()) )) {
 				left(delta);			
-			} else {
+			} else if (player.getPosition().getX() >= (this.getPosition().getX() + (bodyRadius + player.getPlayerRadius()) )) {
 				right(delta);
+			} else {
+				//TODO: attack
+				if(randomGenerator.nextInt() > 0) {
+					player.removeHP(strength);
+				}
 			}
 			
 			if (player.getPosition().getY() <= this.getPosition().getY()) {
 				jump();			
 			}
-		}					
+		}
 	}
 	
 }
