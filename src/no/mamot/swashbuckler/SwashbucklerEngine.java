@@ -77,7 +77,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	public void init() throws SlickException {
 		level = levelLoader.loadLevel();
 
-		man = new GameEntity("/data/WWFSoldierUzi.png", "Hero", 19.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
+		man = new GameEntity("/data/Swashbuckler/Swashbuckler.png", "Hero", 19.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
 		Elevator elevator = new Elevator(10, 50);
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
