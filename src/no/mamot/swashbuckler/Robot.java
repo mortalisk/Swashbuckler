@@ -21,14 +21,17 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private Circle circle;
 	private Body body;
 	private float bodyRadius = 0;
+	
+	private Swashbuckler player = null;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
 	private Image imageRight = null;
+	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -1500000);
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity)
+	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -44,6 +47,8 @@ public final class Robot implements GameObject, Drawable, Updateable {
 		body.setPosition(x, y);
 		body.setIsResting(false);
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
+		
+		this.player = player;
 	}
 	
 	public void left(int delta) {
@@ -54,6 +59,14 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	public void right(int delta) {
 		goingLeft = false;
 		body.addForce(rightForce);
+	}
+	
+	public void jump() {
+		//only allow jumping if the body is currently touching something		
+		if (body.isResting()) {
+			body.addForce(jumpForce);
+			body.setIsResting(false);
+		}		
 	}
 	
 	@Override
@@ -89,15 +102,17 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	@Override
 	public void update(int delta) {
 		//TODO: initiate AI stuff here???
-		right(delta);			
-	}
-
-	@Override
-	public boolean inRange(ROVector2f playerPosition, float radius) {
-		if (body.getPosition().distance(playerPosition) <= radius) {
-			return true;
-		}
-		else return false;
+		if (body.getPosition().distance(player.getPosition()) <= player.getViewRadius()) {		
+			if (player.getPosition().getX() <= this.getPosition().getX()) {
+				left(delta);			
+			} else {
+				right(delta);
+			}
+			
+			if (player.getPosition().getY() <= this.getPosition().getY()) {
+				jump();			
+			}
+		}					
 	}
 	
 }

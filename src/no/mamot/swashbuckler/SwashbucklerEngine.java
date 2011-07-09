@@ -41,9 +41,9 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
 		for (Updateable object : level.getUpdatableList()) {
-			if (object.inRange(man.getPosition(), 120.0f)) {
+			//if (object.inRange(man.getPosition(), 120.0f)) {
 				object.update(delta);
-			}
+			//}
 		}
 	}
 
@@ -86,19 +86,30 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level = levelLoader.loadLevel();
 
 		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero",
-				15.5f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
+				15.5f, 200.0f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
 						500));
 		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f,
-				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250, 500));
+				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man);
+		
+		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man);
+		
 		//Elevator elevator = new Elevator(10, 50);
+		
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
 		level.getDrawableList().add(man);
+		
 		//level.getGameObjectList().add(elevator);
 		//level.getDrawableList().add(elevator);
-		level.getGameObjectList().add(robot);
-		level.getDrawableList().add(robot);
-		level.getUpdatableList().add(robot);
+		
+		//level.getGameObjectList().add(robot);
+		//level.getDrawableList().add(robot);
+		//level.getUpdatableList().add(robot);
+		
+		level.getGameObjectList().add(crystal);
+		level.getDrawableList().add(crystal);
+		level.getUpdatableList().add(crystal);
+		
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
 		view.setLevel(level);

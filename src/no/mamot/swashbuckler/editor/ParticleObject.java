@@ -44,11 +44,5 @@ public class ParticleObject implements Drawable, Updateable{
 	public ParticleSystem getParticleSystem(){
 		return system;
 	}
-
-	@Override
-	public boolean inRange(ROVector2f playerPosition, float radius) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 }

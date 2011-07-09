@@ -24,6 +24,8 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private Circle circle;
 	private Body body;
 	private float bodyRadius = 0;
+	private float viewRadius = 0;
+	private float playerScore = 0;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
@@ -32,7 +34,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	Swashbuckler(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity)
+	Swashbuckler(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -48,6 +50,8 @@ public final class Swashbuckler implements GameObject, Drawable {
 		body.setPosition(x, y);
 		body.setIsResting(false);
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
+		
+		this.viewRadius = viewRadius;
 	}
 	
 	public final void draw(Graphics g) {
@@ -87,13 +91,17 @@ public final class Swashbuckler implements GameObject, Drawable {
 	public void jump() {
 		//only allow jumping if the body is currently touching something		
 		if (body.isResting()) {
-			body.addForce(jumpForce );
+			body.addForce(jumpForce);
 			body.setIsResting(false);
 		}		
 	}
 
 	public void goTo(float x, float y) {
 		body.setPosition(x, y);
+	}
+	
+	public float getViewRadius() {
+		return this.viewRadius;
 	}
 	
 	@Override
@@ -104,5 +112,13 @@ public final class Swashbuckler implements GameObject, Drawable {
 	@Override
 	public void addPhysics(World world) {
 		world.add(body);
+	}
+	
+	public float getScore() {
+		return playerScore;
+	}
+	
+	public void addScore(float score) {
+		playerScore += score;
 	}
 }
