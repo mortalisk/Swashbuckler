@@ -1,5 +1,6 @@
 package no.mamot.swashbuckler.editor;
 
+import net.phys2d.math.ROVector2f;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.Updateable;
 
@@ -42,6 +43,12 @@ public class ParticleObject implements Drawable, Updateable{
 	
 	public ParticleSystem getParticleSystem(){
 		return system;
+	}
+
+	@Override
+	public boolean inRange(ROVector2f playerPosition, float radius) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

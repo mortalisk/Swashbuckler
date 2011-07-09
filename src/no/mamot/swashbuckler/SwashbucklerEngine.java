@@ -6,6 +6,7 @@ import no.mamot.engine.Engine;
 import no.mamot.engine.GameProxy;
 import no.mamot.engine.InputHandler;
 import no.mamot.engine.Level;
+import no.mamot.engine.Updateable;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
 import no.mamot.swashbuckler.editor.LevelSaver;
@@ -37,7 +38,13 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	@Override
 	public void updateWorld(int delta) {
 		physics.doPhysics(delta);
-		camera.setCenter(man.getPosition().getX(),man.getPosition().getY());
+		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
+
+		for (Updateable object : level.getUpdatableList()) {
+			if (object.inRange(man.getPosition(), 120.0f)) {
+				object.update(delta);
+			}
+		}
 	}
 
 	@Override
@@ -49,7 +56,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		Engine swashbuckler = new SwashbucklerEngine();
 		swashbuckler.start();
 	}
-	
+
 	@Override
 	public void handleInput(Input input, int delta) {
 		// movement
@@ -69,7 +76,8 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 			man.right(delta);
 		}
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			man.goTo(input.getMouseX() + camera.getTopLeftCorner().x,input.getMouseY() + camera.getTopLeftCorner().y);
+			man.goTo(input.getMouseX() + camera.getTopLeftCorner().x,
+					input.getMouseY() + camera.getTopLeftCorner().y);
 		}
 	}
 
@@ -77,14 +85,21 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	public void init() throws SlickException {
 		level = levelLoader.loadLevel();
 
-		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero", 18.0f, 350.0f, 200.0f, new org.newdawn.slick.geom.Vector2f(250,500));
-		Elevator elevator = new Elevator(10, 50);
+		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero",
+				15.5f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
+						500));
+		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f,
+				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250, 500));
+		//Elevator elevator = new Elevator(10, 50);
 		level.getGameObjectList().add(man);
 		level.getEntityList().add(man);
 		level.getDrawableList().add(man);
-		level.getGameObjectList().add(elevator);
-		level.getDrawableList().add(elevator);
-		camera.setCenter(man.getPosition().getX(),man.getPosition().getY());
+		//level.getGameObjectList().add(elevator);
+		//level.getDrawableList().add(elevator);
+		level.getGameObjectList().add(robot);
+		level.getDrawableList().add(robot);
+		level.getUpdatableList().add(robot);
+		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
 		view.setLevel(level);
 		physics.setLevel(level);

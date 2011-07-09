@@ -28,7 +28,6 @@ public class LevelImpl implements Level {
 
 	@Override
 	public List<Updateable> getUpdatableList() {
-		// TODO Auto-generated method stub
 		return updateables;
 	}
 
