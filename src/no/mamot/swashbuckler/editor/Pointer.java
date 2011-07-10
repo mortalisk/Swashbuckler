@@ -3,11 +3,7 @@ package no.mamot.swashbuckler.editor;
 import no.mamot.engine.Camera;
 
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Line;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.opengl.renderer.Renderer;
 
 public class Pointer {
 	private Camera camera;

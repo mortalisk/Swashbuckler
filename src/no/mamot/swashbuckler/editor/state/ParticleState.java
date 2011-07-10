@@ -1,6 +1,5 @@
 package no.mamot.swashbuckler.editor.state;
 
-import no.mamot.engine.Level;
 import no.mamot.swashbuckler.editor.LevelEditor;
 import no.mamot.swashbuckler.editor.Obstacle;
 import no.mamot.swashbuckler.editor.ParticleCreator;

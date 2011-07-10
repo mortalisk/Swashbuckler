@@ -23,16 +23,12 @@ import no.mamot.swashbuckler.xml.EntityEnum;
 import no.mamot.swashbuckler.xml.EntityType;
 import no.mamot.swashbuckler.xml.LevelType;
 import no.mamot.swashbuckler.xml.ObjectFactory;
-import no.mamot.swashbuckler.xml.ObjectType;
 import no.mamot.swashbuckler.xml.ObstacleType;
 import no.mamot.swashbuckler.xml.ParticleType;
 import no.mamot.swashbuckler.xml.PlayerType;
 import no.mamot.swashbuckler.xml.PointType;
-import no.mamot.swashbuckler.xml.ShapeEnum;
 import no.mamot.swashbuckler.xml.ShapeType;
-import no.mamot.swashbuckler.xml.ShapeType.Points;
 
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class LevelSaver {

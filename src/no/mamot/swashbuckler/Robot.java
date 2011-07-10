@@ -2,21 +2,20 @@ package no.mamot.swashbuckler;
 
 import java.util.Random;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.ShapeRenderer;
-import org.newdawn.slick.geom.Vector2f;
-
 import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 import no.mamot.engine.Updateable;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
+import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 
 public final class Robot extends GameEntity implements GameObject, Drawable, Updateable {
 

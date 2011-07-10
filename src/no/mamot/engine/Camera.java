@@ -1,6 +1,5 @@
 package no.mamot.engine;
 
-import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Camera {

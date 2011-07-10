@@ -1,18 +1,12 @@
 package no.mamot.swashbuckler;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.ShapeRenderer;
-import org.newdawn.slick.geom.Vector2f;
-
 import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
-import no.mamot.engine.Drawable;
-import no.mamot.engine.GameObject;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Spaceship extends GameEntity{
 

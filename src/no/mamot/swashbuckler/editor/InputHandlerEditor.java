@@ -1,9 +1,9 @@
 package no.mamot.swashbuckler.editor;
 
-import org.newdawn.slick.Input;
-
 import no.mamot.engine.Camera;
 import no.mamot.engine.InputHandler;
+
+import org.newdawn.slick.Input;
 
 public class InputHandlerEditor implements InputHandler {
 

@@ -1,8 +1,5 @@
 package no.mamot.swashbuckler;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import net.phys2d.math.MathUtil;
 import net.phys2d.math.Matrix2f;
 import net.phys2d.math.ROVector2f;
@@ -25,9 +22,6 @@ import no.mamot.engine.GameObject;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Line;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.ShapeRenderer;
 
 public class Elevator implements GameObject, Drawable {
 	private Body engine;

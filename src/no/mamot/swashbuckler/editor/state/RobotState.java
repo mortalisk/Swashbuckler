@@ -1,9 +1,9 @@
 package no.mamot.swashbuckler.editor.state;
 
-import org.newdawn.slick.SlickException;
-
 import no.mamot.swashbuckler.editor.EntityCreator;
 import no.mamot.swashbuckler.editor.TypeEnum;
+
+import org.newdawn.slick.SlickException;
 
 public class RobotState implements LevelEditorState {
 

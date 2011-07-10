@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.newdawn.slick.SlickException;
 
-import no.mamot.engine.Level;
-
 public class ParticleCreator {
 
 	private LevelImplEditor level;

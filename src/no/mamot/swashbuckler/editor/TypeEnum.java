@@ -1,13 +1,13 @@
 package no.mamot.swashbuckler.editor;
 
 
-import org.newdawn.slick.SlickException;
-
 import no.mamot.swashbuckler.GameEntity;
 import no.mamot.swashbuckler.Robat;
 import no.mamot.swashbuckler.Robot;
 import no.mamot.swashbuckler.Swashbuckler;
 import no.mamot.swashbuckler.Tourmaline;
+
+import org.newdawn.slick.SlickException;
 
 public enum TypeEnum {
 	SWASHBUCKLER(Swashbuckler.class), TOURMALINE(Tourmaline.class), ROBOT(Robot.class), ROBAT(Robat.class);

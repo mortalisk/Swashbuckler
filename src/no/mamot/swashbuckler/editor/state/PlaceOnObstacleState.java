@@ -1,10 +1,6 @@
 package no.mamot.swashbuckler.editor.state;
 
-import java.util.List;
-
-import no.mamot.engine.GameObject;
 import no.mamot.swashbuckler.editor.LevelEditor;
-import no.mamot.swashbuckler.editor.LevelImplEditor;
 import no.mamot.swashbuckler.editor.Obstacle;
 
 public class PlaceOnObstacleState implements LevelEditorState{
