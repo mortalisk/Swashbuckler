@@ -13,6 +13,7 @@ import no.mamot.swashbuckler.editor.LevelSaver;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class SwashbucklerEngine implements Engine, InputHandler {
 
@@ -118,6 +119,8 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.init();
 		
 		//TODO: play game music
+		Sound music = new Sound("data/music/backgroundSound.wav");
+		music.loop();
 	}
 
 	public Swashbuckler getMan() {

@@ -49,7 +49,7 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable, Upda
 	
 		this.value = value;
 		
-		pickUp = new Sound("data/Sound/Tourmaline.wav");
+		pickUp = new Sound("data/Sound/Crystal_pickup1.wav");
 	}
 	
 	
