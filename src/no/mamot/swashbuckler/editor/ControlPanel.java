@@ -1,17 +1,22 @@
 package no.mamot.swashbuckler.editor;
+import java.awt.Canvas;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URI;
 
 import javax.swing.AbstractAction;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 
 import javax.swing.WindowConstants;
@@ -126,8 +131,11 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				}
 			}
 			pack();
-			setSize(400, 300);
-			
+			setSize(200, 800);
+			BoxLayout thisLayout = new BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS);
+			getContentPane().setLayout(thisLayout);
+			setAlwaysOnTop(true);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

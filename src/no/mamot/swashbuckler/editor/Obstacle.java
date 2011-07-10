@@ -37,7 +37,7 @@ public class Obstacle implements Drawable{
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f ,endCol);
 		
 		try {
-			texture = new Image("data/textures/GroundTexture2.png");
+			texture = new Image("data/textures/GroundTexture1.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,7 +72,7 @@ public class Obstacle implements Drawable{
 	}
 	
 	public void draw(Graphics g){
-		//renderer.draw(polygon, fill);
+		renderer.draw(polygon, fill);
 		renderer.texture(polygon, texture);
 		
 		
