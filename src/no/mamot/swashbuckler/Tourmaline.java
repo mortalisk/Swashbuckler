@@ -28,7 +28,7 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable, Upda
 	private Sound pickUp = null;
 	
 	public Tourmaline() throws SlickException{
-		this("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f);
+		this("/data/Items/Tourmaline1.png", "Tourmaline1", 20.0f, 175.0f, 270.0f, 100.0f);
 	}
 	
 	public Tourmaline(String imageFile, String entityName, float radius, float x, float y, float value)
