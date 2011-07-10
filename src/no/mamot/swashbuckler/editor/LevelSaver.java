@@ -83,6 +83,7 @@ public class LevelSaver {
 
 	private void saveObstacles(ObjectFactory obF, LevelType level) {
 		List<Obstacle> obstacles = polygonCreator.getObstacles();
+		level.setObstacles(obF.createLevelTypeObstacles());
 		for (int i = 0; i < obstacles.size(); ++i) {
 			ObstacleType obstacleT = obF.createObstacleType();
 			ShapeType shapeT = obF.createShapeType();
@@ -110,7 +111,7 @@ public class LevelSaver {
 				particleT.setRadius(p.getRadius());
 				obstacleT.getParticles().getParticle().add(particleT);
 			}
-			level.setObstacles(obF.createLevelTypeObstacles());
+			
 			level.getObstacles().getObstacle().add(obstacleT);
 		}
 	}

@@ -1,28 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <level xmlns="http://www.example.org/level">
     <player>
-        <x>-62.0</x>
-        <y>-295.0</y>
+        <x>-88.0</x>
+        <y>-137.0</y>
     </player>
     <obstacles>
         <obstacle>
             <shape>
                 <points>
                     <point>
-                        <x>-394.0</x>
-                        <y>243.0</y>
+                        <x>-220.0</x>
+                        <y>-101.0</y>
                     </point>
                     <point>
-                        <x>281.0</x>
-                        <y>247.0</y>
+                        <x>35.0</x>
+                        <y>-78.0</y>
                     </point>
                     <point>
-                        <x>285.0</x>
-                        <y>320.0</y>
+                        <x>45.0</x>
+                        <y>51.0</y>
+                    </point>
+                    <point>
+                        <x>-130.0</x>
+                        <y>97.0</y>
+                    </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+        <obstacle>
+            <shape>
+                <points>
+                    <point>
+                        <x>249.0</x>
+                        <y>-8.0</y>
+                    </point>
+                    <point>
+                        <x>159.0</x>
+                        <y>154.0</y>
+                    </point>
+                    <point>
+                        <x>-15.0</x>
+                        <y>261.0</y>
+                    </point>
+                    <point>
+                        <x>-397.0</x>
+                        <y>120.0</y>
+                    </point>
+                    <point>
+                        <x>-371.0</x>
+                        <y>287.0</y>
+                    </point>
+                    <point>
+                        <x>232.0</x>
+                        <y>298.0</y>
+                    </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+        <obstacle>
+            <shape>
+                <points>
+                    <point>
+                        <x>-448.0</x>
+                        <y>-29.0</y>
                     </point>
                     <point>
                         <x>-369.0</x>
-                        <y>312.0</y>
+                        <y>-24.0</y>
+                    </point>
+                    <point>
+                        <x>-362.0</x>
+                        <y>-110.0</y>
+                    </point>
+                    <point>
+                        <x>-442.0</x>
+                        <y>-108.0</y>
                     </point>
                 </points>
             </shape>
