@@ -44,7 +44,7 @@ public final class GameObstacle implements GameObject, Drawable {
 	}
 
 	public void draw(Graphics g) {
-		ShapeRenderer.draw(this.getShape());
+		//ShapeRenderer.draw(this.getShape());
 		ShapeRenderer.texture(this.getShape(), texture);
 	}
 
