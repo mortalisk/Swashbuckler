@@ -1,19 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <level xmlns="http://www.example.org/level">
     <player>
-        <x>186.0</x>
-        <y>21.0</y>
+        <x>1208.0</x>
+        <y>-126.0</y>
     </player>
     <entities>
         <entities>
-            <x>315.0</x>
-            <y>-6.0</y>
+            <x>66.0</x>
+            <y>-19.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>-238.0</x>
+            <y>-24.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>19.0</x>
+            <y>-118.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>174.0</x>
+            <y>-7.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>-51.0</x>
+            <y>63.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>-364.0</x>
+            <y>52.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>-300.0</x>
+            <y>-126.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>-126.0</x>
+            <y>-156.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>289.0</x>
+            <y>-8.0</y>
+            <type>ROBAT</type>
+        </entities>
+        <entities>
+            <x>120.0</x>
+            <y>93.0</y>
+            <type>TOURMALINE</type>
+        </entities>
+        <entities>
+            <x>-177.0</x>
+            <y>127.0</y>
+            <type>TOURMALINE</type>
+        </entities>
+        <entities>
+            <x>-194.0</x>
+            <y>114.0</y>
+            <type>TOURMALINE</type>
+        </entities>
+        <entities>
+            <x>644.0</x>
+            <y>47.0</y>
             <type>ROBOT</type>
         </entities>
         <entities>
-            <x>23.0</x>
-            <y>45.0</y>
-            <type>TOURMALINE</type>
+            <x>644.0</x>
+            <y>47.0</y>
+            <type>ROBOT</type>
         </entities>
     </entities>
     <obstacles>
@@ -21,36 +81,120 @@
             <shape>
                 <points>
                     <point>
-                        <x>-439.0</x>
-                        <y>230.0</y>
+                        <x>-330.0</x>
+                        <y>209.0</y>
                     </point>
                     <point>
-                        <x>-87.0</x>
-                        <y>247.0</y>
+                        <x>45.0</x>
+                        <y>262.0</y>
                     </point>
                     <point>
-                        <x>256.0</x>
-                        <y>249.0</y>
+                        <x>196.0</x>
+                        <y>236.0</y>
                     </point>
                     <point>
-                        <x>454.0</x>
+                        <x>216.0</x>
+                        <y>135.0</y>
+                    </point>
+                    <point>
+                        <x>-228.0</x>
+                        <y>156.0</y>
+                    </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+        <obstacle>
+            <shape>
+                <points>
+                    <point>
+                        <x>404.0</x>
+                        <y>75.0</y>
+                    </point>
+                    <point>
+                        <x>410.0</x>
+                        <y>174.0</y>
+                    </point>
+                    <point>
+                        <x>631.0</x>
+                        <y>198.0</y>
+                    </point>
+                    <point>
+                        <x>745.0</x>
+                        <y>104.0</y>
+                    </point>
+                    <point>
+                        <x>532.0</x>
+                        <y>87.0</y>
+                    </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+        <obstacle>
+            <shape>
+                <points>
+                    <point>
+                        <x>1110.0</x>
+                        <y>-59.0</y>
+                    </point>
+                    <point>
+                        <x>1070.0</x>
+                        <y>142.0</y>
+                    </point>
+                    <point>
+                        <x>1223.0</x>
+                        <y>169.0</y>
+                    </point>
+                    <point>
+                        <x>1309.0</x>
+                        <y>62.0</y>
+                    </point>
+                    <point>
+                        <x>1297.0</x>
+                        <y>-79.0</y>
+                    </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+        <obstacle>
+            <shape>
+                <points>
+                    <point>
+                        <x>1054.0</x>
+                        <y>22.0</y>
+                    </point>
+                    <point>
+                        <x>815.0</x>
+                        <y>101.0</y>
+                    </point>
+                    <point>
+                        <x>816.0</x>
                         <y>195.0</y>
                     </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+        <obstacle>
+            <shape>
+                <points>
                     <point>
-                        <x>447.0</x>
-                        <y>57.0</y>
+                        <x>249.0</x>
+                        <y>172.0</y>
                     </point>
                     <point>
-                        <x>128.0</x>
-                        <y>79.0</y>
+                        <x>331.0</x>
+                        <y>165.0</y>
                     </point>
                     <point>
-                        <x>-160.0</x>
-                        <y>111.0</y>
-                    </point>
-                    <point>
-                        <x>-373.0</x>
-                        <y>137.0</y>
+                        <x>340.0</x>
+                        <y>232.0</y>
                     </point>
                 </points>
             </shape>

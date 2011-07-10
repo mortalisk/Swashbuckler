@@ -44,7 +44,7 @@ public final class Robat extends GameEntity implements GameObject, Drawable, Upd
 	
 	public Robat() throws SlickException{
 		this("/data/Robots/Robat1.png", "Robat1", 15.5f, 300.0f,
-				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), 1.0f, 25.0f, 75.0f);
+				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), 10.0f, 25.0f, 75.0f);
 	}
 
 	Robat(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, float strength, float attackSpeed, float attackSkill)
