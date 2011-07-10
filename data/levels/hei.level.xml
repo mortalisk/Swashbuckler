@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <level xmlns="http://www.example.org/level">
     <player>
-        <x>-67.0</x>
-        <y>-122.0</y>
+        <x>-62.0</x>
+        <y>-295.0</y>
     </player>
     <obstacles>
         <obstacle>
             <shape>
                 <points>
                     <point>
-                        <x>-207.0</x>
-                        <y>-98.0</y>
+                        <x>-394.0</x>
+                        <y>243.0</y>
                     </point>
                     <point>
-                        <x>-207.0</x>
-                        <y>-98.0</y>
+                        <x>281.0</x>
+                        <y>247.0</y>
                     </point>
                     <point>
-                        <x>-207.0</x>
-                        <y>-98.0</y>
+                        <x>285.0</x>
+                        <y>320.0</y>
                     </point>
                     <point>
-                        <x>-207.0</x>
-                        <y>-98.0</y>
+                        <x>-369.0</x>
+                        <y>312.0</y>
                     </point>
                 </points>
             </shape>

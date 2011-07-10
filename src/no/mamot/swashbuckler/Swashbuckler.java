@@ -37,7 +37,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	Swashbuckler(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, float playerHP)
+	public Swashbuckler(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, float playerHP)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);

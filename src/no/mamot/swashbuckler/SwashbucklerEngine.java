@@ -81,11 +81,9 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 	@Override
 	public void init() throws SlickException {
-		level = levelLoader.loadLevel();
+		level = levelLoader.loadLevel(this);
 
-		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero",
-				15.5f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
-						500), 100.0f);
+		
 		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f, 200.0f,
 				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man, 1.0f, 25.0f, 75.0f);
 		
@@ -94,14 +92,9 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		
 		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);
 		
-		//Elevator elevator = new Elevator(10, 50);
-		
 		level.AddToObjectList(man);
 		level.AddToEntityList(man);
 		level.AddToDrawableList(man);
-		
-		//level.AddToObjectList(elevator);
-		//level.AddToDrawableList(elevator);
 		
 		level.AddToObjectList(robot);
 		level.AddToDrawableList(robot);
@@ -122,6 +115,14 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.init();
 		
 		//TODO: play game music
+	}
+
+	public Swashbuckler getMan() {
+		return man;
+	}
+
+	public void setMan(Swashbuckler man) {
+		this.man = man;
 	}
 
 }

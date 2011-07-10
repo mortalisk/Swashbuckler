@@ -16,6 +16,8 @@ import javax.xml.bind.Unmarshaller;
 import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
 import no.mamot.swashbuckler.GameObstacle;
+import no.mamot.swashbuckler.Swashbuckler;
+import no.mamot.swashbuckler.SwashbucklerEngine;
 import no.mamot.swashbuckler.xml.EntityEnum;
 import no.mamot.swashbuckler.xml.EntityType;
 import no.mamot.swashbuckler.xml.LevelType;
@@ -30,6 +32,7 @@ import no.mamot.swashbuckler.xml.ShapeType;
 import no.mamot.swashbuckler.xml.ShapeType.Points;
 
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
 public class LevelSaver {
 
@@ -93,8 +96,8 @@ public class LevelSaver {
 			float[] points = o.getShape().getPoints();
 			for (int j = 0; j<points.length; j+=2) {
 				PointType pointT = obF.createPointType();
-				pointT.setX(points[i]);
-				pointT.setY(points[i+1]);
+				pointT.setX(points[j]);
+				pointT.setY(points[j+1]);
 				pointsT.add(pointT);
 			}
 			
@@ -132,24 +135,36 @@ public class LevelSaver {
 		return doc.getValue();
 	}
 	
-	public Level loadLevel() {
+	public Level loadLevel(SwashbucklerEngine engine) throws SlickException {
 		try {
 			LevelType levelType = unmarshal(LevelType.class, new FileInputStream(
 			"data/levels/hei.level.xml"));
 			Level level = new LevelImpl();
 			
-			for (ObstacleType object : levelType.getObstacles().getObstacle()) {
-				List<PointType> points = object.getShape().getPoints()
+			float manX = (float)levelType.getPlayer().getX();
+			float manY = (float)levelType.getPlayer().getY();
+			
+			Swashbuckler man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero",
+					15.5f, manX, manY, new org.newdawn.slick.geom.Vector2f(250,
+							500), 100.0f);
+			
+			engine.setMan(man);
+			level.getDrawableList().add(man);
+			level.getGameObjectList().add(man);
+			
+			for (ObstacleType obstacle : levelType.getObstacles().getObstacle()) {
+				List<PointType> points = obstacle.getShape().getPoints()
 						.getPoint();
 				float[] array = new float[points.size()*2];
 				for (int i = 0; i < points.size(); i++) {
 					array[i*2] = points.get(i).getX();
 					array[i*2+1] = points.get(i).getY();
 				}
-				GameObstacle obstacle1 = new GameObstacle(array, object.getTexture());
+				GameObstacle obstacle1 = new GameObstacle(array, obstacle.getTexture());
 				// obstacle is both drawable and a game object
 				level.getDrawableList().add(obstacle1);
 				level.getGameObjectList().add(obstacle1);
+				
 
 			}
 			
