@@ -46,6 +46,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JRadioButtonMenuItem jRadioButtonMenuItem3;
 	private JRadioButtonMenuItem jRadioButtonMenuItem4;
 	private JRadioButtonMenuItem jRadioButtonMenuItem5;
+	private JRadioButtonMenuItem jRadioButtonMenuItem6;
 	
 	/**
 	* Auto-generated main method to display this JFrame
@@ -117,6 +118,14 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jRadioButtonMenuItem3.setText("Draw Robot");
 						getButtonGroup1().add(jRadioButtonMenuItem3);
 						jRadioButtonMenuItem3.addActionListener(controlPanelActionListener);
+						
+					}
+					{
+						jRadioButtonMenuItem6 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem6);
+						jRadioButtonMenuItem6.setText("Draw Robat");
+						getButtonGroup1().add(jRadioButtonMenuItem6);
+						jRadioButtonMenuItem6.addActionListener(controlPanelActionListener);
 						
 					}
 					{
@@ -210,6 +219,12 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				System.out.println("Draw robot");
 				if (jRadioButtonMenuItem3.isSelected()){
 					levelEditor.setState(DrawEnum.DRAW_ROBOT);					
+				}
+			}
+			else if (event.getSource().equals(jRadioButtonMenuItem6)){ // Toggle Draw Robat
+				System.out.println("Draw robat");
+				if (jRadioButtonMenuItem6.isSelected()){
+					levelEditor.setState(DrawEnum.DRAW_ROBAT);					
 				}
 			}
 			else if (event.getSource().equals(jRadioButtonMenuItem4)){ // Toggle Draw Swashbuckler

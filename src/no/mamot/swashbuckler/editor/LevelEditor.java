@@ -109,6 +109,9 @@ public class LevelEditor implements Engine{
 		if (changeto.equals(DrawEnum.DRAW_ROBOT)){			
 			state = stateFactory.getRobotState();
 		}
+		if (changeto.equals(DrawEnum.DRAW_ROBAT)){			
+			state = stateFactory.getRobatState();
+		}
 		if (changeto.equals(DrawEnum.DRAW_TOURMALINE)){			
 			state = stateFactory.getTourmalineState();
 		}

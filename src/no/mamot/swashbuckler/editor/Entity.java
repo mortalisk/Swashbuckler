@@ -25,6 +25,8 @@ public class Entity implements Drawable {
 			image = new Image("/data/Robots/Robot1.png");
 		} else if (type.equals(TypeEnum.TOURMALINE)) {
 			image = new Image("/data/Items/Tourmaline1.png");
+		} else if (type.equals(TypeEnum.ROBAT)) {
+			image = new Image("/data/Robots/Robat1.png");
 		} else if (type.equals(TypeEnum.SWASHBUCKLER)) {
 			image = new Image("/data/Swashbuckler/Swashbuckler.png");
 		}

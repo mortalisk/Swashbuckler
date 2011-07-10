@@ -12,6 +12,7 @@ public class StateFactory {
 	private LevelEditorState particleState = null;
 	private LevelEditorState placeOnObstacleState = null;
 	private LevelEditorState robotState = null;
+	private LevelEditorState robatState = null;
 	private LevelEditorState tourmalineState = null;
 	private LevelEditorState swashbucklerState = null;
 	
@@ -34,6 +35,13 @@ public class StateFactory {
 			robotState = new RobotState(levelEditor.getEntityCreator());
 		}		
 		return robotState;
+	}
+	
+	public LevelEditorState getRobatState() {
+		if (robatState == null){
+			robatState = new RobatState(levelEditor.getEntityCreator());
+		}		
+		return robatState;
 	}
 	
 	public LevelEditorState getTourmalineState() {
