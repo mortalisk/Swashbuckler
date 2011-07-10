@@ -59,6 +59,8 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private ButtonGroup buttonGroup1;
 	private JRadioButtonMenuItem jRadioButtonMenuItem2;
 	private JRadioButtonMenuItem jRadioButtonMenuItem1;
+	private JRadioButtonMenuItem jRadioButtonMenuItem3;
+	private JRadioButtonMenuItem jRadioButtonMenuItem4;
 
 	
 	
@@ -128,6 +130,22 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jRadioButtonMenuItem2.addActionListener(controlPanelActionListener);
 						
 					}
+					{
+						jRadioButtonMenuItem3 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem3);
+						jRadioButtonMenuItem3.setText("Draw Robot");
+						getButtonGroup1().add(jRadioButtonMenuItem3);
+						jRadioButtonMenuItem3.addActionListener(controlPanelActionListener);
+						
+					}
+					{
+						jRadioButtonMenuItem4 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem4);
+						jRadioButtonMenuItem4.setText("Draw Swashbuckler");
+						getButtonGroup1().add(jRadioButtonMenuItem4);
+						jRadioButtonMenuItem4.addActionListener(controlPanelActionListener);
+						
+					}
 				}
 			}
 			pack();
@@ -186,6 +204,18 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				System.out.println("Draw particle");
 				if (jRadioButtonMenuItem2.isSelected()){
 					levelEditor.setState("Draw_Particle");					
+				}
+			}
+			else if (event.getSource().equals(jRadioButtonMenuItem3)){ // Toggle Draw Particle
+				System.out.println("Draw robot");
+				if (jRadioButtonMenuItem3.isSelected()){
+					levelEditor.setState("Draw_Robot");					
+				}
+			}
+			else if (event.getSource().equals(jRadioButtonMenuItem4)){ // Toggle Draw Particle
+				System.out.println("Draw swashbuckler");
+				if (jRadioButtonMenuItem4.isSelected()){
+					levelEditor.setState("Draw_Swashbuckler");					
 				}
 			}
 			

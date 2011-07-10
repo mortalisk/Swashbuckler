@@ -6,21 +6,13 @@ import no.mamot.engine.Camera;
 import no.mamot.engine.Engine;
 import no.mamot.engine.GameProxy;
 import no.mamot.engine.InputHandler;
-import no.mamot.engine.Level;
-import no.mamot.engine.LevelImpl;
 import no.mamot.engine.Updateable;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
 import no.mamot.swashbuckler.editor.state.LevelEditorState;
-import no.mamot.swashbuckler.editor.state.PlaceOnObstacleState;
 import no.mamot.swashbuckler.editor.state.PolygonState;
 import no.mamot.swashbuckler.editor.state.StateFactory;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class LevelEditor implements Engine{
@@ -38,6 +30,7 @@ public class LevelEditor implements Engine{
 	private StateFactory stateFactory;
 	private ParticleObject particleTest;
 	private ParticleCreator particleCreator;
+	private EntityCreator entityCreator;
 
 	public LevelEditor() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
@@ -46,6 +39,7 @@ public class LevelEditor implements Engine{
 		camera = view.getCamera();
 		polygonCreator = new PolygonCreator(level);
 		particleCreator = new ParticleCreator(level);
+		entityCreator = new EntityCreator(level);
 		state = new PolygonState(polygonCreator);
 		stateFactory = new StateFactory();
 		stateFactory.setLevelEditor(this);
@@ -110,6 +104,9 @@ public class LevelEditor implements Engine{
 			state = stateFactory.getPlaceOnObstacleState();
 			state.setTransition(changeto);
 		}
+		if (changeto.equals("Draw_Robot")){			
+			state = stateFactory.getRobotState();
+		}
 	}
 	public StateFactory getStateFactory(){
 		return stateFactory;
@@ -130,5 +127,8 @@ public class LevelEditor implements Engine{
 		return particleCreator;
 	}
 
+	public EntityCreator getEntityCreator() {
+		return entityCreator;
+	}
 
 }

@@ -11,6 +11,7 @@ public class StateFactory {
 	private LevelEditorState polygonState = null;
 	private LevelEditorState particleState = null;
 	private LevelEditorState placeOnObstacleState = null;
+	private LevelEditorState robotState = null;
 	
 	
 	public LevelEditorState getPolygonState(){
@@ -19,11 +20,19 @@ public class StateFactory {
 		}
 		return polygonState;
 	}
+	
 	public LevelEditorState getParticleState(){
 		if (particleState == null){
 			particleState = new ParticleState(levelEditor);
 		}
 		return particleState;		
+	}
+	
+	public LevelEditorState getRobotState() {
+		if (robotState == null){
+			robotState = new RobotState(levelEditor.getEntityCreator());
+		}		
+		return robotState;
 	}
 	
 	public LevelEditorState getPlaceOnObstacleState() {

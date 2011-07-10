@@ -1,6 +1,5 @@
 package no.mamot.swashbuckler.editor;
 
-import net.phys2d.math.ROVector2f;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.Updateable;
 
@@ -9,7 +8,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.newdawn.slick.particles.effects.FireEmitter;
-import org.newdawn.slick.tests.ParticleTest;
 
 public class ParticleObject implements Drawable, Updateable{
 

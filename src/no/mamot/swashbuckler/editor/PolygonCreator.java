@@ -5,10 +5,7 @@ import java.util.List;
 
 import no.mamot.engine.Level;
 
-import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.ShapeRenderer;
 
 public class PolygonCreator {
 
