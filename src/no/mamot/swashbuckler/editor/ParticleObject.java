@@ -13,6 +13,8 @@ public class ParticleObject implements Drawable, Updateable{
 
 	private ParticleSystem system;
 	private int x,y;
+	private int damage = 10;
+	private int radius = 30;
 	
 	public ParticleObject(float x , float y){
 		this.x = (int)x;
@@ -41,6 +43,22 @@ public class ParticleObject implements Drawable, Updateable{
 	
 	public ParticleSystem getParticleSystem(){
 		return system;
+	}
+
+	public int getDamage() {
+		return damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+	public int getRadius() {
+		return radius;
+	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
 	}
 	
 }
