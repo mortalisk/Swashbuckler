@@ -135,23 +135,24 @@ public class LevelSaver {
 	public Level loadLevel() {
 		try {
 			LevelType levelType = unmarshal(LevelType.class, new FileInputStream(
-			"data/testlevel.xml"));
+			"data/levels/hei.level.xml"));
 			Level level = new LevelImpl();
 			
-//			for (ObjectType object : levelType.getObject()) {
-//				List<PointType> points = object.getShape().getPoints()
-//						.getPoint();
-//				float[] array = new float[points.size()*2];
-//				for (int i = 0; i < points.size(); i++) {
-//					array[i*2] = points.get(i).getX();
-//					array[i*2+1] = points.get(i).getY();
-//				}
-//				GameObstacle obstacle1 = new GameObstacle(array);
-//				// obstacle is both drawable and a game object
-//				level.getDrawableList().add(obstacle1);
-//				level.getGameObjectList().add(obstacle1);
-//
-//			}
+			for (ObstacleType object : levelType.getObstacles().getObstacle()) {
+				List<PointType> points = object.getShape().getPoints()
+						.getPoint();
+				float[] array = new float[points.size()*2];
+				for (int i = 0; i < points.size(); i++) {
+					array[i*2] = points.get(i).getX();
+					array[i*2+1] = points.get(i).getY();
+				}
+				GameObstacle obstacle1 = new GameObstacle(array, object.getTexture());
+				// obstacle is both drawable and a game object
+				level.getDrawableList().add(obstacle1);
+				level.getGameObjectList().add(obstacle1);
+
+			}
+			
 			return level;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
