@@ -3,6 +3,7 @@ package no.mamot.swashbuckler;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
@@ -28,6 +29,8 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 	
 	private Image image = null;
 	
+	private Sound pickUp = null;
+	
 	public Tourmaline(String imageFile, String entityName, float radius, float x, float y, float value, Swashbuckler player, Level playerLevel)
 			throws SlickException {
 		
@@ -47,6 +50,8 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 		this.player = player;
 		this.playerLevel = playerLevel;
 		this.value = value;
+		
+		pickUp = new Sound("data/Sound/Tourmaline.wav");
 	}
 	
 	
@@ -58,6 +63,7 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 			player.addScore(value);
 			
 			//TODO: play tourmaline sound
+			pickUp.play();
 		}	
 	}
 

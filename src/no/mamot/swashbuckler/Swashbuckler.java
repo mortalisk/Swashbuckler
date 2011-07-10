@@ -9,6 +9,7 @@ import no.mamot.engine.GameObject;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
@@ -26,6 +27,8 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private float bodyRadius = 0;
 	private float playerScore = 0;
 	private float playerHP = 0;
+	
+	private Sound jump = null;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
@@ -52,6 +55,8 @@ public final class Swashbuckler implements GameObject, Drawable {
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 
 		this.playerHP = playerHP;
+		
+		jump = new Sound("data/Sound/Swashbuckler_Jump2.wav");
 	}
 	
 	public final void draw(Graphics g) {
@@ -102,6 +107,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 			body.setIsResting(false);
 			
 			//TODO: play jump sound
+			jump.play();
 		}		
 	}
 
