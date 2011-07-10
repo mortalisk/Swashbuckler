@@ -109,5 +109,9 @@ public class Obstacle implements Drawable{
 	public List<ParticleObject> getParticles() {
 		return particles;
 	}
+
+	public String getTexture() {
+		return "GroundTexture1.png";
+	}
 	
 }
