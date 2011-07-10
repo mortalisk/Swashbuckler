@@ -16,9 +16,14 @@ import javax.xml.bind.Unmarshaller;
 import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
 import no.mamot.swashbuckler.GameObstacle;
+import no.mamot.swashbuckler.xml.EntityEnum;
+import no.mamot.swashbuckler.xml.EntityType;
 import no.mamot.swashbuckler.xml.LevelType;
 import no.mamot.swashbuckler.xml.ObjectFactory;
 import no.mamot.swashbuckler.xml.ObjectType;
+import no.mamot.swashbuckler.xml.ObstacleType;
+import no.mamot.swashbuckler.xml.ParticleType;
+import no.mamot.swashbuckler.xml.PlayerType;
 import no.mamot.swashbuckler.xml.PointType;
 import no.mamot.swashbuckler.xml.ShapeEnum;
 import no.mamot.swashbuckler.xml.ShapeType;
@@ -29,38 +34,25 @@ import org.newdawn.slick.Input;
 public class LevelSaver {
 
 	private PolygonCreator polygonCreator;
-	private String fileName = "/data/testlevel.xml";
+	private String path = "data/levels/";
+	private EntityCreator entityCreator;
 
-	public LevelSaver(PolygonCreator polygonCreator) {
+	public LevelSaver(PolygonCreator polygonCreator, EntityCreator entityCreator) {
 		this.polygonCreator = polygonCreator;
+		this.entityCreator = entityCreator;
 	}
 
-	public void save() {
+	public void save(String name) {
 		ObjectFactory obF = new ObjectFactory();
 
+		String file = path + name + ".level.xml";
 		LevelType level = obF.createLevelType();
 		JAXBElement<LevelType> doc = obF.createLevel(level);
-		List<Obstacle> obstacles = polygonCreator.getObstacles();
-		for (int i = 0; i < obstacles.size(); ++i) {
-			ObjectType objT = obF.createObjectType();
-			ShapeType shapeT = obF.createShapeType();
-			shapeT.setType(ShapeEnum.POLYGON);
-			Points pointS = obF.createShapeTypePoints();
-			shapeT.setPoints(pointS);
-			List<PointType> pointList = shapeT.getPoints().getPoint();
-			float[] points = obstacles.get(i).getShape().getPoints();
-			for (int j = 0; j < points.length; ++j) {
-				PointType point = obF.createPointType();
-				point.setX(points[j]);
-				point.setY(points[++j]);
-				pointList.add(point);
-			}
-			objT.setShape(shapeT);
-			level.getObject().add(objT);
-		}
+		saveObstacles(obF, level);
+		saveEntities(obF, level);
 		try {
 			System.out.println("Saving...");
-			marshall(doc, fileName);
+			marshall(doc, file);
 			System.out.println("Saving complete!");
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
@@ -71,10 +63,52 @@ public class LevelSaver {
 		}
 	}
 
-	public void handleInput(Input input) {
-		if (input.isKeyPressed(Input.KEY_S)
-				&& input.isKeyPressed(Input.KEY_LCONTROL)) {
-			save();
+	private void saveEntities(ObjectFactory obF, LevelType level) {
+		PlayerType player = obF.createPlayerType();
+		player.setX(entityCreator.getSwashbuckler().getPosition().x);
+		player.setY(entityCreator.getSwashbuckler().getPosition().y);
+		level.setPlayer(player);
+		
+		for(Entity e : entityCreator.getEntityList()) {
+			EntityType entityT = obF.createEntityType();
+			entityT.setType(EntityEnum.valueOf(e.getType().toString()));
+			entityT.setX(e.getPosition().x);
+			entityT.setY(e.getPosition().y);
+			level.getEntities().getEntities().add(entityT);
+		}
+	}
+
+	private void saveObstacles(ObjectFactory obF, LevelType level) {
+		List<Obstacle> obstacles = polygonCreator.getObstacles();
+		for (int i = 0; i < obstacles.size(); ++i) {
+			ObstacleType obstacleT = obF.createObstacleType();
+			ShapeType shapeT = obF.createShapeType();
+			obstacleT.setShape(shapeT);
+			shapeT.setPoints(obF.createShapeTypePoints());
+			List<PointType> pointsT = shapeT.getPoints().getPoint();
+			Obstacle o = obstacles.get(i);
+			
+			obstacleT.setTexture(o.getTexture());
+			
+			float[] points = o.getShape().getPoints();
+			for (int j = 0; j<points.length; j+=2) {
+				PointType pointT = obF.createPointType();
+				pointT.setX(points[i]);
+				pointT.setY(points[i+1]);
+				pointsT.add(pointT);
+			}
+			
+			obstacleT.setParticles(obF.createObstacleTypeParticles());
+			for (ParticleObject p: o.getParticles()) {
+				ParticleType particleT = obF.createParticleType();
+				particleT.setX(p.getParticleSystem().getPositionX());
+				particleT.setY(p.getParticleSystem().getPositionY());
+				particleT.setDamage(p.getDamage());
+				particleT.setRadius(p.getRadius());
+				obstacleT.getParticles().getParticle().add(particleT);
+			}
+			level.setObstacles(obF.createLevelTypeObstacles());
+			level.getObstacles().getObstacle().add(obstacleT);
 		}
 	}
 
@@ -104,20 +138,20 @@ public class LevelSaver {
 			"data/testlevel.xml"));
 			Level level = new LevelImpl();
 			
-			for (ObjectType object : levelType.getObject()) {
-				List<PointType> points = object.getShape().getPoints()
-						.getPoint();
-				float[] array = new float[points.size()*2];
-				for (int i = 0; i < points.size(); i++) {
-					array[i*2] = points.get(i).getX();
-					array[i*2+1] = points.get(i).getY();
-				}
-				GameObstacle obstacle1 = new GameObstacle(array);
-				// obstacle is both drawable and a game object
-				level.getDrawableList().add(obstacle1);
-				level.getGameObjectList().add(obstacle1);
-
-			}
+//			for (ObjectType object : levelType.getObject()) {
+//				List<PointType> points = object.getShape().getPoints()
+//						.getPoint();
+//				float[] array = new float[points.size()*2];
+//				for (int i = 0; i < points.size(); i++) {
+//					array[i*2] = points.get(i).getX();
+//					array[i*2+1] = points.get(i).getY();
+//				}
+//				GameObstacle obstacle1 = new GameObstacle(array);
+//				// obstacle is both drawable and a game object
+//				level.getDrawableList().add(obstacle1);
+//				level.getGameObjectList().add(obstacle1);
+//
+//			}
 			return level;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

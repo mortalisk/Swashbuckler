@@ -1,28 +1,19 @@
 package no.mamot.swashbuckler.editor;
-import java.awt.Canvas;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.URI;
+import java.io.IOException;
 
-import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
-
 import javax.swing.WindowConstants;
-import javax.swing.SwingUtilities;
-
-import no.mamot.swashbuckler.editor.state.LevelEditorState;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -163,20 +154,31 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			// TODO Auto-generated method stub
 			
 			if (event.getSource().equals(jMenuItem1)){ //Save
 				System.out.println("Save");				
 				String path = System.getProperty("user.dir");
-				path += "/data/";
+				path += "data/levels/";
 				JFileChooser fc = new JFileChooser(path);
+				fc.setFileFilter(new FileFilter() {
+					
+					@Override
+					public String getDescription() {
+						return "Level XML files (*.level.xml])";
+					}
+					
+					@Override
+					public boolean accept(File f) {
+						return f.getName().endsWith(".level.xml");
+					}
+				});
 				int returnVal = fc.showSaveDialog(jMenuItem1.getParent());
 				
 				if (returnVal == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile(); // might just be a string??
 					System.out.println("Selected file " + file);
-					//TODO 
-					// save to this file
+					String[] name = file.getName().split("[.]");
+					levelEditor.save(name[0]);
 				}
 				else {
 					System.out.println("Canceled");

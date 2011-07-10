@@ -20,7 +20,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	private Camera camera;
 	private Level level;
 	private View view;
-	private LevelSaver levelLoader = new LevelSaver(null);
+	private LevelSaver levelLoader = new LevelSaver(null, null);
 	private Swashbuckler man;
 	int screenHeight = 768;
 	int screenWidth = 1024;

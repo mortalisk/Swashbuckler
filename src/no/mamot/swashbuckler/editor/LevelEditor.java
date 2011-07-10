@@ -64,12 +64,14 @@ public class LevelEditor implements Engine{
 	}
 
 
-
+	public void save(String name) {
+		levelSaver.save(name);
+	}
 
 	@Override
 	public void init() throws SlickException {
 		pointer = new Pointer(camera);		
-		levelSaver = new LevelSaver(polygonCreator);
+		levelSaver = new LevelSaver(polygonCreator, entityCreator);
 
 	}
 

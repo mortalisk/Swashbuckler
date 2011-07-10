@@ -8,20 +8,52 @@
 
 	<complexType name="levelType">
 		<sequence>
-			<element ref="tns:object" minOccurs="1" maxOccurs="unbounded"></element>
+			<element name="player" type="tns:playerType"></element>
+			<element name="entities">
+					<complexType>
+    				<sequence>
+    					<element name="entities" type="tns:entityType" minOccurs="0" maxOccurs="unbounded"/>
+    				</sequence>
+    			</complexType>
+			</element>
+			<element name="obstacles">
+				<complexType>
+    				<sequence>
+    					<element name="obstacle" type="tns:obstacleType" minOccurs="0" maxOccurs="unbounded"/>
+    				</sequence>
+    			</complexType>
+			</element>
 		</sequence>
 	</complexType>
 
-	<element name="object" type="tns:objectType"></element>
-	<complexType name="objectType">
-		<sequence>
-    		<element name="x" type="float" />
-    		<element name="y" type="float" />
-			<element ref="tns:shape"></element>
-		</sequence>
+	<complexType name="obstacleType">
+				<sequence>
+					<element name="shape" type="tns:shapeType"></element>
+					<element name="particles">
+						<complexType>
+							<sequence>
+								<element name="particle"
+									type="tns:particleType" minOccurs="0" maxOccurs="unbounded">
+								</element>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="texture" type="string"></element>
+				</sequence>
 	</complexType>
-    
-    <complexType name="shapeType">
+
+	<complexType name="particleType">
+		<complexContent>
+			<extension base="tns:objectType">
+				<sequence>
+					<element name="radius" type="float"></element>
+					<element name="damage" type="float"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="shapeType">
     	<sequence>
     		<element name="type" type="tns:shapeEnum" />
     		<element name="points">
@@ -47,6 +79,48 @@
 	    		<enumeration value="polygon"></enumeration>
 	    	</restriction>
     </simpleType>
-
+    
+    <simpleType name="entityEnum">
+	    	<restriction base="string">
+	    		<enumeration value="robot"></enumeration>
+	    		<enumeration value="bat"></enumeration>
+	    		<enumeration value="turmaline"></enumeration>
+	    	</restriction>
+    </simpleType>
+    
     <element name="shape" type="tns:shapeType"></element>
+
+    <element name="player" type="tns:playerType"></element>
+    
+    <element name="entity" type="tns:shapeType"></element>
+
+    <complexType name="objectType">
+    	<sequence>
+            <element name="x" type="double"></element>
+            <element name="y" type="double"></element>
+    	</sequence>
+    	
+    </complexType>
+
+    <complexType name="entityType">
+    	<complexContent>
+    		<extension base="tns:objectType">
+    			<sequence>
+    				<element ref="tns:type"></element>
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
+    
+    <complexType name="playerType">
+    	<complexContent>
+    		<extension base="tns:objectType"></extension>
+    	</complexContent>
+    </complexType>
+
+
+
+    <complexType name="obstaclesType"></complexType>
+
+    <element name="type" type="tns:entityEnum"></element>
 </schema>

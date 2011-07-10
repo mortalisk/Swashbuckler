@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<level xmlns="http://www.example.org/level">
+    <player>
+        <x>-67.0</x>
+        <y>-122.0</y>
+    </player>
+    <obstacles>
+        <obstacle>
+            <shape>
+                <points>
+                    <point>
+                        <x>-207.0</x>
+                        <y>-98.0</y>
+                    </point>
+                    <point>
+                        <x>-207.0</x>
+                        <y>-98.0</y>
+                    </point>
+                    <point>
+                        <x>-207.0</x>
+                        <y>-98.0</y>
+                    </point>
+                    <point>
+                        <x>-207.0</x>
+                        <y>-98.0</y>
+                    </point>
+                </points>
+            </shape>
+            <particles/>
+            <texture>GroundTexture1.png</texture>
+        </obstacle>
+    </obstacles>
+</level>
