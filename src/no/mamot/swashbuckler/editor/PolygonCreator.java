@@ -74,10 +74,11 @@ public class PolygonCreator {
 	}
 	
 	public void selectPolygon(float x , float y){
+		DeselectAll();
+		
 		for (Obstacle obstacle : obstacles){
 			if (obstacle.getShape().contains(x, y)){					
-				obstacle.select();		
-				
+				obstacle.select();				
 			}
 		}
 	}
@@ -127,5 +128,9 @@ public class PolygonCreator {
 		return noObstaclesSelected;
 	}
 	
-	
+	private void DeselectAll() {
+		for (Obstacle obstacle : obstacles){
+			obstacle.deSelect();
+		}
+	}
 }

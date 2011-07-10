@@ -43,7 +43,7 @@ public class ParticleState implements LevelEditorState {
 		// Deselect obstacle
 		for (Obstacle obstacle : levelEditor.getLevel().getObstacleList()){
 			if (obstacle.isSelected()){
-				obstacle.select();
+				obstacle.deSelect();
 			}			
 		}
 	}

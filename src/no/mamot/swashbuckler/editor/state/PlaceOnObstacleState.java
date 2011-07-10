@@ -38,7 +38,7 @@ public class PlaceOnObstacleState implements LevelEditorState{
 		// Deselect obstacles..
 		for (Obstacle obstacle : levelEditor.getLevel().getObstacleList()){
 			if (obstacle.isSelected()){
-				obstacle.select();
+				obstacle.deSelect();
 			}			
 		}		
 		// select obstacle

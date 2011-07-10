@@ -48,15 +48,19 @@ public class Obstacle implements Drawable{
 		return polygon;
 	}
 	
-	public void select(){
-		if (!selected){
-			makeRed();
-			selected = true;
-		}
-		else {
+	public void select() {		
+		if (this.selected) {
+			this.selected = false;
 			makeWhite();
-			selected = false;
+		} else {
+			this.selected = true;
+			makeRed();
 		}
+	}
+	
+	public void deSelect() {
+		this.selected = false;
+		makeWhite();
 	}
 	
 	private void makeRed(){

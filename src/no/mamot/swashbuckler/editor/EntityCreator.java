@@ -22,6 +22,8 @@ public class EntityCreator {
 	}
 
 	public void select(String type, float x, float y) {
+		DeselectAll();
+		
 		for (Entity entity : entityList) {
 			if (entity.getType().equals(type)
 					&& x >= entity.getPosition().getX()
@@ -55,6 +57,12 @@ public class EntityCreator {
 
 				entity.move(x, y);
 			}
+		}
+	}
+	
+	private void DeselectAll() {
+		for (Entity entity : entityList) {
+			entity.setSelected(false);
 		}
 	}
 }
