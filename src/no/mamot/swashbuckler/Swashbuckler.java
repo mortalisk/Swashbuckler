@@ -57,7 +57,7 @@ public final class Swashbuckler extends GameEntity implements GameObject, Drawab
 
 		this.playerHP = playerHP;
 		
-		jump = new Sound("data/Sound/Swashbuckler_Jump2.wav");
+		jump = new Sound("data/Sound/Swashbuckler_Jump3.wav");
 	}
 	
 	public final void draw(Graphics g) {
