@@ -2,6 +2,8 @@ package no.mamot.swashbuckler;
 
 import java.util.Random;
 
+import javax.swing.text.Position;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -17,7 +19,7 @@ import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 import no.mamot.engine.Updateable;
 
-public final class Robot implements GameObject, Drawable, Updateable {
+public final class Robat implements GameObject, Drawable, Updateable {
 
 	private boolean goingLeft = false;
 	private Circle circle;
@@ -34,13 +36,13 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
 	private Image imageRight = null;
-	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -1500000);
+	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -150000);
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 	
 	Random randomGenerator = new Random();
 
-	Robot(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength, float attackSpeed, float attackSkill)
+	Robat(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength, float attackSpeed, float attackSkill)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -79,13 +81,12 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	}
 	
 	public void jump() {
-		//only allow jumping if the body is currently touching something		
-		if (body.isResting()) {
+		//only allow jumping if the body is currently touching something	
+		if (getPosition().getY() >= player.getPosition().getY()) {
 			body.addForce(jumpForce);
-			body.setIsResting(false);
+		}					
 			
-			//TODO: play jump sound
-		}		
+		//TODO: play jump sound		
 	}
 	
 	@Override
@@ -122,11 +123,13 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	public void update(int delta) {
 		//TODO: initiate AI stuff here???
 		if (body.getPosition().distance(player.getPosition()) <= viewRadius) {		
-			if (player.getPosition().getX() <= (this.getPosition().getX() - (bodyRadius + player.getPlayerRadius()) )) { //player is to the left of the robot
-				left(delta);			
-			} else if (player.getPosition().getX() >= (this.getPosition().getX() + (bodyRadius + player.getPlayerRadius()) )) { //player is to the right of the robot
+			if (player.getPosition().getX() <= (this.getPosition().getX() - (bodyRadius + player.getPlayerRadius()) )) { //player is to the left of the robat
+				left(delta);	
+				jump();
+			} else if (player.getPosition().getX() >= (this.getPosition().getX() + (bodyRadius + player.getPlayerRadius()) )) { //player is to the right of the robat
 				right(delta);
-			} else if (body.getPosition().distance(player.getPosition()) <=  (bodyRadius + player.getPlayerRadius())) { //robot is close enough to attack
+				jump();
+			} else if (body.getPosition().distance(player.getPosition()) <=  (bodyRadius + player.getPlayerRadius())) { //robat is close enough to attack
 				int random = (randomGenerator.nextInt(100) + 1); //random number which is used to check against the attackSkill
 				System.out.println("random: " + random + ", attackTimer: " + attackTimer);
 				
@@ -139,11 +142,8 @@ public final class Robot implements GameObject, Drawable, Updateable {
 				} else {
 					attackTimer -= attackSpeed; //it is not the time to attack yet, decrease the timer
 				}
-			}
+			}			
 			
-			if (player.getPosition().getY() <= this.getPosition().getY()) { //check if robot must jump to get to the player
-				jump();			
-			}
 		}
 	}
 	

@@ -24,7 +24,6 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private Circle circle;
 	private Body body;
 	private float bodyRadius = 0;
-	private float viewRadius = 0;
 	private float playerScore = 0;
 	private float playerHP = 0;
 
@@ -35,7 +34,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 
-	Swashbuckler(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, float playerHP)
+	Swashbuckler(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, float playerHP)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -51,8 +50,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 		body.setPosition(x, y);
 		body.setIsResting(false);
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
-		
-		this.viewRadius = viewRadius;
+
 		this.playerHP = playerHP;
 	}
 	
@@ -109,10 +107,6 @@ public final class Swashbuckler implements GameObject, Drawable {
 
 	public void goTo(float x, float y) {
 		body.setPosition(x, y);
-	}
-	
-	public float getViewRadius() {
-		return this.viewRadius;
 	}
 	
 	public float getPlayerRadius() {

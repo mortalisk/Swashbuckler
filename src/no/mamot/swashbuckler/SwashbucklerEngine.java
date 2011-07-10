@@ -84,10 +84,13 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level = levelLoader.loadLevel();
 
 		man = new Swashbuckler("/data/Swashbuckler/Swashbuckler.png", "Hero",
-				15.5f, 200.0f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
+				15.5f, 300.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(250,
 						500), 100.0f);
-		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f,
+		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f, 200.0f,
 				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man, 1.0f, 25.0f, 75.0f);
+		
+		Robat robat = new Robat("/data/Robots/Robat1.png", "Robat1", 15.5f, 300.0f,
+				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), man, 1.0f, 25.0f, 75.0f);
 		
 		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);
 		
@@ -103,6 +106,10 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level.AddToObjectList(robot);
 		level.AddToDrawableList(robot);
 		level.AddToUpdatableList(robot);
+		
+		level.AddToObjectList(robat);
+		level.AddToDrawableList(robat);
+		level.AddToUpdatableList(robat);
 		
 		level.AddToObjectList(crystal);
 		level.AddToDrawableList(crystal);
