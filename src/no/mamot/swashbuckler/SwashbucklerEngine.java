@@ -90,12 +90,15 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		Robat robat = new Robat("/data/Robots/Robat1.png", "Robat1", 15.5f, 300.0f,
 				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), man, 1.0f, 25.0f, 75.0f);
 		
-		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);
+		Spaceship spaceship = new Spaceship("/data/Swashbuckler/Spaceship.png", "Spaceship1", 20.0f, 800.0f, 157.0f);
+
+		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);		
+
+
+		level.AddToObjectList(spaceship);
+		level.AddToDrawableList(spaceship);
 		
-		level.AddToObjectList(man);
-		level.AddToEntityList(man);
-		level.AddToDrawableList(man);
-		
+
 		level.AddToObjectList(robot);
 		level.AddToDrawableList(robot);
 		level.AddToUpdatableList(robot);

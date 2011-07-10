@@ -33,7 +33,7 @@ public final class Swashbuckler implements GameObject, Drawable {
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
 	private Image imageRight = null;
-	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -1500000);
+	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(0, -1750000);
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 

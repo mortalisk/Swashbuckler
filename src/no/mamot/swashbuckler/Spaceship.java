@@ -1,0 +1,59 @@
+package no.mamot.swashbuckler;
+
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.ShapeRenderer;
+import org.newdawn.slick.geom.Vector2f;
+
+import net.phys2d.math.ROVector2f;
+import net.phys2d.raw.Body;
+import net.phys2d.raw.World;
+import no.mamot.engine.Drawable;
+import no.mamot.engine.GameObject;
+
+public class Spaceship implements GameObject, Drawable {
+
+	private Body body;
+	private float bodyRadius = 0;	
+	private Image image = null;
+	
+	public Spaceship(String imageFile, String entityName, float radius, float x, float y) throws SlickException {
+		
+		if (imageFile != null) {
+			image = new Image(imageFile);
+		}
+		bodyRadius = radius;
+		
+		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(radius);
+		body = new Body(entityName,physCircle, 100);		
+		body.setRotatable(false);
+		body.setFriction(0.5f);
+		body.setPosition(x, y);
+		body.setIsResting(true);
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		getImage().draw(body.getPosition().getX() - 10, body.getPosition().getY() - bodyRadius* 1.5f);	
+	}
+
+	@Override
+	public void addPhysics(World world) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ROVector2f getPosition() {
+		return body.getPosition();
+	}
+	
+	public final Image getImage() {
+		return image;		
+	}
+	
+
+}
