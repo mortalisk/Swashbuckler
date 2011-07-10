@@ -96,17 +96,24 @@ public class LevelEditor implements Engine{
 		this.state = state;
 	}
 	// String based
-	public void setState(String changeto){
-		if (changeto.equals("Draw_Polygon")){
+	public void setState(DrawEnum changeto){
+		if (changeto.equals(DrawEnum.DRAW_POLYGON)){
 			state = stateFactory.getPolygonState();
 		}
-		if (changeto.equals("Draw_Particle")){			
+		if (changeto.equals(DrawEnum.DRAW_PARTICLE)){			
 			state = stateFactory.getPlaceOnObstacleState();
-			state.setTransition(changeto);
+			state.setTransition(changeto.toString());
 		}
-		if (changeto.equals("Draw_Robot")){			
+		if (changeto.equals(DrawEnum.DRAW_ROBOT)){			
 			state = stateFactory.getRobotState();
 		}
+		if (changeto.equals(DrawEnum.DRAW_TOURMALINE)){			
+			state = stateFactory.getTourmalineState();
+		}
+		if (changeto.equals(DrawEnum.DRAW_SWASHBUCKLER)){			
+			state = stateFactory.getSwashbucklerState();
+		}
+		
 	}
 	public StateFactory getStateFactory(){
 		return stateFactory;

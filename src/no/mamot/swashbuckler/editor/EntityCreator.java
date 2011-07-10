@@ -8,20 +8,31 @@ import org.newdawn.slick.SlickException;
 public class EntityCreator {
 
 	private List<Entity> entityList = new ArrayList<Entity>();
+	private Entity swashbuckler = null;
 	private LevelImplEditor level;
 	
 	public EntityCreator(LevelImplEditor level) {
 		this.level = level;
 	}
 
-	public void createNewEntity(String type, float x, float y) throws SlickException {
-		Entity newEntity = new Entity(type, x, y);
+	public void createNewEntity(TypeEnum type, float x, float y) throws SlickException {
+		if (!type.equals(TypeEnum.SWASHBUCKLER)) {
+			Entity newEntity = new Entity(type, x, y);
 
-		entityList.add(newEntity);
-		level.getDrawableList().add(newEntity);
+			entityList.add(newEntity);
+			level.getDrawableList().add(newEntity);
+		} else if (type.equals(TypeEnum.SWASHBUCKLER))	{
+			if (swashbuckler != null) {				
+				//swashbuckler.setSelected(true);
+				swashbuckler.move(x, y);			
+			} else {
+				swashbuckler = new Entity(TypeEnum.SWASHBUCKLER, x, y);
+				level.getDrawableList().add(swashbuckler);
+			}
+		}
 	}
 
-	public void select(String type, float x, float y) {
+	public void select(TypeEnum type, float x, float y) {
 		DeselectAll();
 		
 		for (Entity entity : entityList) {
@@ -40,7 +51,7 @@ public class EntityCreator {
 		}
 	}
 
-	public void delete(String type) {
+	public void delete(TypeEnum type) {
 		for (int i = entityList.size() - 1; i >= 0; i--)
 			if (entityList.get(i).getType().equals(type)
 					&& entityList.get(i).isSelected()) {
@@ -50,7 +61,7 @@ public class EntityCreator {
 			}
 	}
 	
-	public void moveSelectedEntities(String type, float x, float y) {
+	public void moveSelectedEntities(TypeEnum type, float x, float y) {
 		for (Entity entity : entityList) {
 			if (entity.getType().equals(type)
 					&& entity.isSelected()) {
@@ -58,6 +69,14 @@ public class EntityCreator {
 				entity.move(x, y);
 			}
 		}
+	}
+	
+	public Entity getSwashbuckler() {
+		return swashbuckler;
+	}
+	
+	public List<Entity> getEntityList() {
+		return entityList;
 	}
 	
 	private void DeselectAll() {

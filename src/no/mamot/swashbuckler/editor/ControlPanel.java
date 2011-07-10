@@ -40,13 +40,6 @@ import no.mamot.swashbuckler.editor.state.LevelEditorState;
 public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	
 	private LevelEditor levelEditor;
-
-	
-	
-	
-	
-	
-	
 	
 	private JMenuBar jMenuBar1;
 	private JMenu jMenu3;
@@ -57,14 +50,11 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JMenu jMenu1;
 	private ControlPanelActionListener controlPanelActionListener;
 	private ButtonGroup buttonGroup1;
-	private JRadioButtonMenuItem jRadioButtonMenuItem2;
 	private JRadioButtonMenuItem jRadioButtonMenuItem1;
+	private JRadioButtonMenuItem jRadioButtonMenuItem2;
 	private JRadioButtonMenuItem jRadioButtonMenuItem3;
 	private JRadioButtonMenuItem jRadioButtonMenuItem4;
-
-	
-	
-	
+	private JRadioButtonMenuItem jRadioButtonMenuItem5;
 	
 	/**
 	* Auto-generated main method to display this JFrame
@@ -146,6 +136,14 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jRadioButtonMenuItem4.addActionListener(controlPanelActionListener);
 						
 					}
+					{
+						jRadioButtonMenuItem5 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem5);
+						jRadioButtonMenuItem5.setText("Draw Tourmaline");
+						getButtonGroup1().add(jRadioButtonMenuItem5);
+						jRadioButtonMenuItem5.addActionListener(controlPanelActionListener);
+						
+					}
 				}
 			}
 			pack();
@@ -197,25 +195,31 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			else if (event.getSource().equals(jRadioButtonMenuItem1)){ // Toggle Draw Polygon
 				System.out.println("Draw polygon");
 				if (jRadioButtonMenuItem1.isSelected()){
-					levelEditor.setState("Draw_Polygon");
+					levelEditor.setState(DrawEnum.DRAW_POLYGON);
 				}
 			}
 			else if (event.getSource().equals(jRadioButtonMenuItem2)){ // Toggle Draw Particle
 				System.out.println("Draw particle");
 				if (jRadioButtonMenuItem2.isSelected()){
-					levelEditor.setState("Draw_Particle");					
+					levelEditor.setState(DrawEnum.DRAW_PARTICLE);					
 				}
 			}
-			else if (event.getSource().equals(jRadioButtonMenuItem3)){ // Toggle Draw Particle
+			else if (event.getSource().equals(jRadioButtonMenuItem3)){ // Toggle Draw Robot
 				System.out.println("Draw robot");
 				if (jRadioButtonMenuItem3.isSelected()){
-					levelEditor.setState("Draw_Robot");					
+					levelEditor.setState(DrawEnum.DRAW_ROBOT);					
 				}
 			}
-			else if (event.getSource().equals(jRadioButtonMenuItem4)){ // Toggle Draw Particle
-				System.out.println("Draw swashbuckler");
+			else if (event.getSource().equals(jRadioButtonMenuItem4)){ // Toggle Draw Swashbuckler
+				System.out.println("Draw Swashbuckler");
 				if (jRadioButtonMenuItem4.isSelected()){
-					levelEditor.setState("Draw_Swashbuckler");					
+					levelEditor.setState(DrawEnum.DRAW_SWASHBUCKLER);					
+				}
+			}
+			else if (event.getSource().equals(jRadioButtonMenuItem5)){ // Toggle Draw Tourmaline
+				System.out.println("Draw Tourmaline");
+				if (jRadioButtonMenuItem5.isSelected()){
+					levelEditor.setState(DrawEnum.DRAW_TOURMALINE);					
 				}
 			}
 			

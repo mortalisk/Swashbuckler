@@ -11,18 +11,22 @@ import org.newdawn.slick.geom.ShapeRenderer;
 
 public class Entity implements Drawable {
 	private Vector2f position;
-	private String type;
+	private TypeEnum type;
 	private boolean selected;
 	private Image image;
 	private Circle selector;
 	
-	public Entity(String type, float x, float y) throws SlickException {
+	public Entity(TypeEnum type, float x, float y) throws SlickException {
 		this.type = type;
 		position = new Vector2f(x, y);
 		selector = new Circle(x + 10.0f, y + 15.0f, 5.0f);
 				
-		if (type.equals("Robot")) {
+		if (type.equals(TypeEnum.ROBOT)) {
 			image = new Image("/data/Robots/Robot1.png");
+		} else if (type.equals(TypeEnum.TOURMALINE)) {
+			image = new Image("/data/Items/Tourmaline1.png");
+		} else if (type.equals(TypeEnum.SWASHBUCKLER)) {
+			image = new Image("/data/Swashbuckler/Swashbuckler.png");
 		}
 	}
 	
@@ -44,7 +48,7 @@ public class Entity implements Drawable {
 		return image.getHeight();
 	}	
 	
-	public String getType() {
+	public TypeEnum getType() {
 		return this.type;
 	}
 	
@@ -58,9 +62,12 @@ public class Entity implements Drawable {
 
 	@Override
 	public void draw(Graphics g) {
-		image.draw(position.x, position.y);
-		if (selected) {
-			ShapeRenderer.draw(selector);			
+		if (image != null) {
+			image.draw(position.x, position.y);
+			if (selected) {
+				ShapeRenderer.draw(selector);			
+			}
 		}
+		
 	}
 }

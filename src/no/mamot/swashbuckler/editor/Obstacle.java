@@ -77,9 +77,7 @@ public class Obstacle implements Drawable{
 	
 	public void draw(Graphics g){
 		renderer.draw(polygon, fill);
-		renderer.texture(polygon, texture);
-		
-		
+		renderer.texture(polygon, texture);		
 		
 		for (ParticleObject particle : particles){
 			particle.update(1000/60);

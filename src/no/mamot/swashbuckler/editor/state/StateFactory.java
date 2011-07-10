@@ -12,7 +12,8 @@ public class StateFactory {
 	private LevelEditorState particleState = null;
 	private LevelEditorState placeOnObstacleState = null;
 	private LevelEditorState robotState = null;
-	
+	private LevelEditorState tourmalineState = null;
+	private LevelEditorState swashbucklerState = null;
 	
 	public LevelEditorState getPolygonState(){
 		if (polygonState == null){
@@ -33,6 +34,20 @@ public class StateFactory {
 			robotState = new RobotState(levelEditor.getEntityCreator());
 		}		
 		return robotState;
+	}
+	
+	public LevelEditorState getTourmalineState() {
+		if (tourmalineState == null){
+			tourmalineState = new TourmalineState(levelEditor.getEntityCreator());
+		}		
+		return tourmalineState;
+	}
+	
+	public LevelEditorState getSwashbucklerState() {
+		if (swashbucklerState == null){
+			swashbucklerState = new SwashbucklerState(levelEditor.getEntityCreator());
+		}		
+		return swashbucklerState;
 	}
 	
 	public LevelEditorState getPlaceOnObstacleState() {

@@ -5,18 +5,18 @@ import org.newdawn.slick.SlickException;
 import no.mamot.swashbuckler.editor.EntityCreator;
 import no.mamot.swashbuckler.editor.TypeEnum;
 
-public class RobotState implements LevelEditorState {
+public class TourmalineState implements LevelEditorState {
 
 	private EntityCreator entityCreator = null;
 	
-	public RobotState(EntityCreator robotCreator){
-		this.entityCreator = robotCreator;
+	public TourmalineState(EntityCreator entityCreator){
+		this.entityCreator = entityCreator;
 	}	
 	
 	@Override
 	public void place(float x, float y) {
 		try {
-			entityCreator.createNewEntity(TypeEnum.ROBOT, x, y);
+			entityCreator.createNewEntity(TypeEnum.TOURMALINE, x, y);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,17 +30,17 @@ public class RobotState implements LevelEditorState {
 
 	@Override
 	public void select(float x, float y) {
-		entityCreator.select(TypeEnum.ROBOT, x, y);
+		entityCreator.select(TypeEnum.TOURMALINE, x, y);
 	}
 
 	@Override
 	public void delete() {
-		entityCreator.delete(TypeEnum.ROBOT);	
+		entityCreator.delete(TypeEnum.TOURMALINE);	
 	}
 
 	@Override
 	public void move(float x, float y) {
-		entityCreator.moveSelectedEntities(TypeEnum.ROBOT, x, y);
+		entityCreator.moveSelectedEntities(TypeEnum.TOURMALINE, x, y);
 	}
 
 	@Override
