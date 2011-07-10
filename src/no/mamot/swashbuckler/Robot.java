@@ -5,6 +5,7 @@ import java.util.Random;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.ShapeRenderer;
@@ -30,6 +31,8 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private float attackSkill = 0;
 	
 	private Swashbuckler player = null;
+	
+	private Sound jump = null;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
@@ -62,6 +65,8 @@ public final class Robot implements GameObject, Drawable, Updateable {
 		this.attackSpeed = attackSpeed;
 		this.attackSkill = attackSkill;
 		this.viewRadius = viewRadius;
+		
+		jump = new Sound("data/Sound/Robot_Jump.wav");
 	}
 	
 	public void left(int delta) {
@@ -85,6 +90,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 			body.setIsResting(false);
 			
 			//TODO: play jump sound
+			//jump.play();
 		}		
 	}
 	
