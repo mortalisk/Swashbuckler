@@ -8,11 +8,11 @@ import org.newdawn.slick.SlickException;
 public class RobotState implements LevelEditorState {
 
 	private EntityCreator entityCreator = null;
-	
-	public RobotState(EntityCreator robotCreator){
+
+	public RobotState(EntityCreator robotCreator) {
 		this.entityCreator = robotCreator;
-	}	
-	
+	}
+
 	@Override
 	public void place(float x, float y) {
 		try {
@@ -25,7 +25,7 @@ public class RobotState implements LevelEditorState {
 
 	@Override
 	public void placeFinished() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class RobotState implements LevelEditorState {
 
 	@Override
 	public void delete() {
-		entityCreator.delete(TypeEnum.ROBOT);	
+		entityCreator.delete(TypeEnum.ROBOT);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class RobotState implements LevelEditorState {
 	@Override
 	public void setTransition(String transitionTo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

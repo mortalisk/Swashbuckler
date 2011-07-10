@@ -5,10 +5,9 @@ import java.util.List;
 
 import no.mamot.engine.LevelImpl;
 
-public class LevelImplEditor extends LevelImpl{
+public class LevelImplEditor extends LevelImpl {
 
 	List<Obstacle> obstacles = new ArrayList<Obstacle>();
-	
 
 	public List<Obstacle> getObstacleList() {
 		return obstacles;

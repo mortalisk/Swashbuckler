@@ -8,11 +8,11 @@ import org.newdawn.slick.SlickException;
 public class TourmalineState implements LevelEditorState {
 
 	private EntityCreator entityCreator = null;
-	
-	public TourmalineState(EntityCreator entityCreator){
+
+	public TourmalineState(EntityCreator entityCreator) {
 		this.entityCreator = entityCreator;
-	}	
-	
+	}
+
 	@Override
 	public void place(float x, float y) {
 		try {
@@ -25,7 +25,7 @@ public class TourmalineState implements LevelEditorState {
 
 	@Override
 	public void placeFinished() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class TourmalineState implements LevelEditorState {
 
 	@Override
 	public void delete() {
-		entityCreator.delete(TypeEnum.TOURMALINE);	
+		entityCreator.delete(TypeEnum.TOURMALINE);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class TourmalineState implements LevelEditorState {
 	@Override
 	public void setTransition(String transitionTo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

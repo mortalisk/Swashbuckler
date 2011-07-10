@@ -8,7 +8,7 @@ public interface Engine {
 
 	// TODO replace with GameCouldNotStartException
 	void start() throws SlickException;
-	
+
 	void init() throws SlickException;
 
 }

@@ -8,15 +8,15 @@ import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
 
 /**
- * A simple demo with so flat blocks falling. This instance is used
- * to test the collision listener interface
+ * A simple demo with so flat blocks falling. This instance is used to test the
+ * collision listener interface
  * 
  * @author Kevin Glass
  */
 public class CollisionDemo1 extends AbstractDemo implements CollisionListener {
 	/** True if the listener has already been added */
 	private boolean added = false;
-	
+
 	/**
 	 * Create the demo
 	 */
@@ -32,7 +32,7 @@ public class CollisionDemo1 extends AbstractDemo implements CollisionListener {
 			world.addListener(this);
 			added = true;
 		}
-		
+
 		Body body1 = new StaticBody("Ground1", new Box(400.0f, 20.0f));
 		body1.setPosition(250.0f, 400);
 		world.add(body1);
@@ -45,7 +45,7 @@ public class CollisionDemo1 extends AbstractDemo implements CollisionListener {
 		Body body6 = new StaticBody("Ground3", new Box(20.0f, 100.0f));
 		body6.setPosition(400.0f, 300);
 		world.add(body6);
-		
+
 		Body body2 = new Body("Mover1", new Box(50.0f, 50.0f), 100.0f);
 		body2.setPosition(250.0f, 4.0f);
 		world.add(body2);
@@ -63,11 +63,12 @@ public class CollisionDemo1 extends AbstractDemo implements CollisionListener {
 	public void collisionOccured(CollisionEvent event) {
 		System.out.println(event);
 	}
-	
+
 	/**
 	 * Entry point for tetsing
 	 * 
-	 * @param argv The arguments to the test
+	 * @param argv
+	 *            The arguments to the test
 	 */
 	public static void main(String[] argv) {
 		CollisionDemo1 demo = new CollisionDemo1();

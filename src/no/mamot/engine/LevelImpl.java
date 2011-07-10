@@ -59,6 +59,4 @@ public class LevelImpl implements Level {
 		updateables.add(object);
 	}
 
-	
-
 }

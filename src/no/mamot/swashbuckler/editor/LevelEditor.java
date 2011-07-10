@@ -15,11 +15,11 @@ import no.mamot.swashbuckler.editor.state.StateFactory;
 
 import org.newdawn.slick.SlickException;
 
-public class LevelEditor implements Engine{
+public class LevelEditor implements Engine {
 
 	private Pointer pointer;
 	private PolygonCreator polygonCreator;
-	private LevelSaver levelSaver ;
+	private LevelSaver levelSaver;
 	private Camera camera;
 	private View view;
 	private int screenWidth = 1024;
@@ -44,25 +44,21 @@ public class LevelEditor implements Engine{
 		stateFactory = new StateFactory();
 		stateFactory.setLevelEditor(this);
 
-		
-		InputHandler inputHandler = new InputHandlerEditor(this,camera);
-		gameProxy = new GameProxy("Swashbuckler Editor", view, inputHandler, this,
-				screenWidth, screenHeight);
+		InputHandler inputHandler = new InputHandlerEditor(this, camera);
+		gameProxy = new GameProxy("Swashbuckler Editor", view, inputHandler,
+				this, screenWidth, screenHeight);
 	}
-
 
 	public static void main(String[] args) {
 		try {
-			LevelEditor levelEditor = new LevelEditor();			
-			SwingUtilities.invokeLater(new ControlPanel(levelEditor));			
+			LevelEditor levelEditor = new LevelEditor();
+			SwingUtilities.invokeLater(new ControlPanel(levelEditor));
 			levelEditor.start();
-			
-			
+
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void save(String name) {
 		levelSaver.save(name);
@@ -70,69 +66,68 @@ public class LevelEditor implements Engine{
 
 	@Override
 	public void init() throws SlickException {
-		pointer = new Pointer(camera);		
+		pointer = new Pointer(camera);
 		levelSaver = new LevelSaver(polygonCreator, entityCreator);
 
 	}
 
-
 	@Override
 	public void start() throws SlickException {
 		gameProxy.start();
-		
-	}
 
+	}
 
 	@Override
 	public void updateWorld(int delta) {
-		for (Updateable updateable : level.getUpdatableList()){
+		for (Updateable updateable : level.getUpdatableList()) {
 			updateable.update(delta);
 		}
-		
+
 	}
-	
+
 	public LevelEditorState getState() {
 		return state;
 	}
+
 	public void setState(LevelEditorState state) {
 		this.state = state;
 	}
+
 	// String based
-	public void setState(DrawEnum changeto){
-		if (changeto.equals(DrawEnum.DRAW_POLYGON)){
+	public void setState(DrawEnum changeto) {
+		if (changeto.equals(DrawEnum.DRAW_POLYGON)) {
 			state = stateFactory.getPolygonState();
 		}
-		if (changeto.equals(DrawEnum.DRAW_PARTICLE)){			
+		if (changeto.equals(DrawEnum.DRAW_PARTICLE)) {
 			state = stateFactory.getPlaceOnObstacleState();
 			state.setTransition(changeto.toString());
 		}
-		if (changeto.equals(DrawEnum.DRAW_ROBOT)){			
+		if (changeto.equals(DrawEnum.DRAW_ROBOT)) {
 			state = stateFactory.getRobotState();
 		}
-		if (changeto.equals(DrawEnum.DRAW_ROBAT)){			
+		if (changeto.equals(DrawEnum.DRAW_ROBAT)) {
 			state = stateFactory.getRobatState();
 		}
-		if (changeto.equals(DrawEnum.DRAW_TOURMALINE)){			
+		if (changeto.equals(DrawEnum.DRAW_TOURMALINE)) {
 			state = stateFactory.getTourmalineState();
 		}
-		if (changeto.equals(DrawEnum.DRAW_SWASHBUCKLER)){			
+		if (changeto.equals(DrawEnum.DRAW_SWASHBUCKLER)) {
 			state = stateFactory.getSwashbucklerState();
 		}
-		
+
 	}
-	public StateFactory getStateFactory(){
+
+	public StateFactory getStateFactory() {
 		return stateFactory;
 	}
-	
 
 	public PolygonCreator getPolygonCreator() {
 		// TODO Auto-generated method stub
 		return polygonCreator;
 	}
-	
 
-	public LevelImplEditor getLevel(){
-		return (LevelImplEditor)level;
+	public LevelImplEditor getLevel() {
+		return (LevelImplEditor) level;
 	}
 
 	public ParticleCreator getParticleCreator() {

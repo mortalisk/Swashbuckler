@@ -8,14 +8,14 @@ import org.newdawn.slick.geom.Vector2f;
 public class Pointer {
 	private Camera camera;
 	private Vector2f position;
-	
-	public Pointer(Camera camera){
+
+	public Pointer(Camera camera) {
 		this.camera = camera;
 
 		position = new Vector2f();
 	}
-	
-	public void handleInput(Input input){
+
+	public void handleInput(Input input) {
 		float x = input.getMouseX();
 		float y = input.getMouseY();
 		x -= camera.getTopLeftCorner().x;
@@ -24,14 +24,13 @@ public class Pointer {
 		position.y = y;
 
 	}
-	
-	public void draw(){
+
+	public void draw() {
 
 	}
+
 	public Vector2f getPosition() {
 		return position;
 	}
-	
-	
-	
+
 }

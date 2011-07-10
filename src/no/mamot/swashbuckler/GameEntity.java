@@ -6,12 +6,12 @@ import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
 import no.mamot.engine.Updateable;
 
-public abstract class GameEntity implements Drawable, Updateable, GameObject{
+public abstract class GameEntity implements Drawable, Updateable, GameObject {
 
 	protected Swashbuckler player = null;
 
 	protected Level playerLevel;
-	
+
 	protected Body body;
 
 	public Swashbuckler getPlayer() {
@@ -29,7 +29,7 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject{
 	public void setPlayerLevel(Level playerLevel) {
 		this.playerLevel = playerLevel;
 	}
-	
+
 	public void setPosition(float x, float y) {
 		body.setPosition(x, y);
 	}

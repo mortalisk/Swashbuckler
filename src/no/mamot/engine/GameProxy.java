@@ -14,15 +14,15 @@ public class GameProxy extends BasicGame {
 
 	AppGameContainer app = null;
 
-	public GameProxy(String title, View view, InputHandler inputHandler, Engine engine, int x, int y)
-			throws SlickException {
+	public GameProxy(String title, View view, InputHandler inputHandler,
+			Engine engine, int x, int y) throws SlickException {
 		super(title);
 		this.view = view;
 		this.inputHandler = inputHandler;
 		this.engine = engine;
 		app = new AppGameContainer(this);
 		app.setDisplayMode(x, y, false);
-		
+
 	}
 
 	@Override

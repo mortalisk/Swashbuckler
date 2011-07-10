@@ -10,21 +10,22 @@ public class EntityCreator {
 	private List<Entity> entityList = new ArrayList<Entity>();
 	private Entity swashbuckler = null;
 	private LevelImplEditor level;
-	
+
 	public EntityCreator(LevelImplEditor level) {
 		this.level = level;
 	}
 
-	public void createNewEntity(TypeEnum type, float x, float y) throws SlickException {
+	public void createNewEntity(TypeEnum type, float x, float y)
+			throws SlickException {
 		if (!type.equals(TypeEnum.SWASHBUCKLER)) {
 			Entity newEntity = new Entity(type, x, y);
 
 			entityList.add(newEntity);
 			level.getDrawableList().add(newEntity);
-		} else if (type.equals(TypeEnum.SWASHBUCKLER))	{
-			if (swashbuckler != null) {				
-				//swashbuckler.setSelected(true);
-				swashbuckler.move(x, y);			
+		} else if (type.equals(TypeEnum.SWASHBUCKLER)) {
+			if (swashbuckler != null) {
+				// swashbuckler.setSelected(true);
+				swashbuckler.move(x, y);
 			} else {
 				swashbuckler = new Entity(TypeEnum.SWASHBUCKLER, x, y);
 				level.getDrawableList().add(swashbuckler);
@@ -34,7 +35,7 @@ public class EntityCreator {
 
 	public void select(TypeEnum type, float x, float y) {
 		DeselectAll();
-		
+
 		for (Entity entity : entityList) {
 			if (entity.getType().equals(type)
 					&& x >= entity.getPosition().getX()
@@ -57,28 +58,27 @@ public class EntityCreator {
 					&& entityList.get(i).isSelected()) {
 
 				level.getDrawableList().remove(entityList.get(i));
-				entityList.remove(i);				
+				entityList.remove(i);
 			}
 	}
-	
+
 	public void moveSelectedEntities(TypeEnum type, float x, float y) {
 		for (Entity entity : entityList) {
-			if (entity.getType().equals(type)
-					&& entity.isSelected()) {
+			if (entity.getType().equals(type) && entity.isSelected()) {
 
 				entity.move(x, y);
 			}
 		}
 	}
-	
+
 	public Entity getSwashbuckler() {
 		return swashbuckler;
 	}
-	
+
 	public List<Entity> getEntityList() {
 		return entityList;
 	}
-	
+
 	private void DeselectAll() {
 		for (Entity entity : entityList) {
 			entity.setSelected(false);

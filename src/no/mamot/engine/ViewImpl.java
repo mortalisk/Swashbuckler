@@ -14,9 +14,9 @@ public class ViewImpl implements View {
 	@Override
 	public void draw(Graphics g) {
 		g.translate(-camera.getTopLeftCorner().x, -camera.getTopLeftCorner().y);
-		for (int i = level.getDrawableList().size()-1; i >= 0; i--) {
+		for (int i = level.getDrawableList().size() - 1; i >= 0; i--) {
 			level.getDrawableList().get(i).draw(g);
-		}		
+		}
 	}
 
 	public Level getLevel() {

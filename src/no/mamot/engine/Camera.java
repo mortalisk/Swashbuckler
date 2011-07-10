@@ -8,14 +8,10 @@ public class Camera {
 	private int screenWidth;
 	private int screenHeight;
 
-	
-
 	public Camera(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 	}
-
-
 
 	public void moveCameraVertical(float y) {
 		center.y += y;

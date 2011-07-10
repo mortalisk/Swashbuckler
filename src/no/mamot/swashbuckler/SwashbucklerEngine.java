@@ -39,9 +39,9 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.doPhysics(delta);
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
-		for (int i = level.getUpdatableList().size()-1; i >= 0; i--) {
+		for (int i = level.getUpdatableList().size() - 1; i >= 0; i--) {
 			level.getUpdatableList().get(i).update(delta);
-		}		
+		}
 	}
 
 	@Override
@@ -81,13 +81,13 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	@Override
 	public void init() throws SlickException {
 		level = levelLoader.loadLevel(this);
-		
+
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 
 		view.setLevel(level);
 		physics.setLevel(level);
 		physics.init();
-		
+
 		Sound music = new Sound("data/Music/backgroundSound.wav");
 		music.loop();
 	}

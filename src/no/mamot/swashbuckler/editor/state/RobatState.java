@@ -5,15 +5,14 @@ import no.mamot.swashbuckler.editor.TypeEnum;
 
 import org.newdawn.slick.SlickException;
 
-public class RobatState implements LevelEditorState{
+public class RobatState implements LevelEditorState {
 
 	private EntityCreator entityCreator = null;
-	
-	
-	public RobatState(EntityCreator robatCreator){
+
+	public RobatState(EntityCreator robatCreator) {
 		this.entityCreator = robatCreator;
 	}
-	
+
 	@Override
 	public void place(float x, float y) {
 		try {
@@ -26,7 +25,7 @@ public class RobatState implements LevelEditorState{
 
 	@Override
 	public void placeFinished() {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class RobatState implements LevelEditorState{
 
 	@Override
 	public void delete() {
-		entityCreator.delete(TypeEnum.ROBAT);	
+		entityCreator.delete(TypeEnum.ROBAT);
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class RobatState implements LevelEditorState{
 	@Override
 	public void setTransition(String transitionTo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -26,25 +26,25 @@ public final class GameObstacle implements GameObject, Drawable {
 
 	public GameObstacle(float[] arg0, String textureName) {
 		polygon = new Polygon(arg0);
-		ROVector2f[] physPoints = new ROVector2f[arg0.length/2];
+		ROVector2f[] physPoints = new ROVector2f[arg0.length / 2];
 		for (int i = 0; i < physPoints.length; i++) {
-			physPoints[i] = new Vector2f(arg0[i*2], arg0[i*2+1]);
+			physPoints[i] = new Vector2f(arg0[i * 2], arg0[i * 2 + 1]);
 		}
-		net.phys2d.raw.shapes.Polygon physPolygon = new net.phys2d.raw.shapes.Polygon(physPoints);
-		body = new StaticBody("WorldObstacle",physPolygon);
+		net.phys2d.raw.shapes.Polygon physPolygon = new net.phys2d.raw.shapes.Polygon(
+				physPoints);
+		body = new StaticBody("WorldObstacle", physPolygon);
 		body.setFriction(0.1f);
-		
-		
+
 		try {
-			texture = new Image("data/textures/"+textureName);
+			texture = new Image("data/textures/" + textureName);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public void draw(Graphics g) {
-		//ShapeRenderer.draw(this.getShape());
+		// ShapeRenderer.draw(this.getShape());
 		ShapeRenderer.texture(this.getShape(), texture);
 	}
 
@@ -56,12 +56,11 @@ public final class GameObstacle implements GameObject, Drawable {
 	public void addPhysics(World world) {
 		world.add(body);
 	}
-	
+
 	@Override
 	public ROVector2f getPosition() {
-		throw new UnsupportedOperationException("GameObstacle has no posisiton per today");
+		throw new UnsupportedOperationException(
+				"GameObstacle has no posisiton per today");
 	}
-
-
 
 }
