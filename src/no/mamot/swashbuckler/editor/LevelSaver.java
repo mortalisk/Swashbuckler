@@ -15,6 +15,7 @@ import javax.xml.bind.Unmarshaller;
 
 import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
+import no.mamot.swashbuckler.GameEntity;
 import no.mamot.swashbuckler.GameObstacle;
 import no.mamot.swashbuckler.Swashbuckler;
 import no.mamot.swashbuckler.SwashbucklerEngine;
@@ -71,6 +72,7 @@ public class LevelSaver {
 		player.setX(entityCreator.getSwashbuckler().getPosition().x);
 		player.setY(entityCreator.getSwashbuckler().getPosition().y);
 		level.setPlayer(player);
+		level.setEntities(obF.createLevelTypeEntities());
 		
 		for(Entity e : entityCreator.getEntityList()) {
 			EntityType entityT = obF.createEntityType();
@@ -167,6 +169,20 @@ public class LevelSaver {
 				level.getGameObjectList().add(obstacle1);
 				
 
+			}
+			
+			for (EntityType entityType: levelType.getEntities().getEntities()) {
+				TypeEnum type = TypeEnum.valueOf(entityType.getType().toString());
+				GameEntity entity = type.getInstance();
+				entity.setPlayer(man);
+				entity.setPlayerLevel(level);
+				entity.setPosition((float)entityType.getX(), (float)entityType.getY());
+				
+				level.getDrawableList().add(entity);
+				level.getGameObjectList().add(entity);
+				level.getUpdatableList().add(entity);
+				
+				
 			}
 			
 			return level;

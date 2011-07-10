@@ -5,6 +5,7 @@ import net.phys2d.raw.Body;
 import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
+import no.mamot.engine.Updateable;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -19,7 +20,7 @@ import org.newdawn.slick.geom.Vector2f;
  * Interactive objects in the level. I.e. objects that move. (the player or an
  * enemy)
  */
-public final class Swashbuckler implements GameObject, Drawable {
+public final class Swashbuckler extends GameEntity implements GameObject, Drawable, Updateable {
 
 	private boolean goingLeft = false;
 	private Circle circle;
@@ -151,5 +152,10 @@ public final class Swashbuckler implements GameObject, Drawable {
 		if (playerHP <= 0) {
 			//TODO: DEAD!
 		}
+	}
+
+	@Override
+	public void update(int delta) {
+		
 	}
 }

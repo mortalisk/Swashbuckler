@@ -82,9 +82,9 @@
     
     <simpleType name="entityEnum">
 	    	<restriction base="string">
-	    		<enumeration value="robot"></enumeration>
-	    		<enumeration value="bat"></enumeration>
-	    		<enumeration value="turmaline"></enumeration>
+	    		<enumeration value="ROBOT"></enumeration>
+	    		<enumeration value="ROBAT"></enumeration>
+	    		<enumeration value="TOURMALINE"></enumeration>
 	    	</restriction>
     </simpleType>
     

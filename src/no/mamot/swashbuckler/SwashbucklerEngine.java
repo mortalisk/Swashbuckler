@@ -84,32 +84,32 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level = levelLoader.loadLevel(this);
 
 		
-		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f, 200.0f,
-				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man, 1.0f, 25.0f, 75.0f);
-		
-		Robat robat = new Robat("/data/Robots/Robat1.png", "Robat1", 15.5f, 300.0f,
-				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), man, 1.0f, 25.0f, 75.0f);
-		
-		Spaceship spaceship = new Spaceship("/data/Swashbuckler/Spaceship.png", "Spaceship1", 20.0f, 800.0f, 157.0f);
+//		Robot robot = new Robot("/data/Robots/Robot1.png", "Robot1", 15.5f, 200.0f,
+//				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), man, 1.0f, 25.0f, 75.0f);
+//		
+//		Robat robat = new Robat("/data/Robots/Robat1.png", "Robat1", 15.5f, 300.0f,
+//				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), man, 1.0f, 25.0f, 75.0f);
+//		
+//		Spaceship spaceship = new Spaceship("/data/Swashbuckler/Spaceship.png", "Spaceship1", 20.0f, 800.0f, 157.0f);
+//
+//		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);		
 
-		Tourmaline crystal = new Tourmaline("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f, man, level);		
 
-
-		level.AddToObjectList(spaceship);
-		level.AddToDrawableList(spaceship);
-		
-
-		level.AddToObjectList(robot);
-		level.AddToDrawableList(robot);
-		level.AddToUpdatableList(robot);
-		
-		level.AddToObjectList(robat);
-		level.AddToDrawableList(robat);
-		level.AddToUpdatableList(robat);
-		
-		level.AddToObjectList(crystal);
-		level.AddToDrawableList(crystal);
-		level.AddToUpdatableList(crystal);
+//		level.AddToObjectList(spaceship);
+//		level.AddToDrawableList(spaceship);
+//		
+//
+//		level.AddToObjectList(robot);
+//		level.AddToDrawableList(robot);
+//		level.AddToUpdatableList(robot);
+//		
+//		level.AddToObjectList(robat);
+//		level.AddToDrawableList(robat);
+//		level.AddToUpdatableList(robat);
+//		
+//		level.AddToObjectList(crystal);
+//		level.AddToDrawableList(crystal);
+//		level.AddToUpdatableList(crystal);
 		
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 

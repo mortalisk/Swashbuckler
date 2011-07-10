@@ -17,21 +17,21 @@ import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
 import no.mamot.engine.Updateable;
 
-public class Tourmaline implements GameObject, Drawable, Updateable {
+public class Tourmaline extends GameEntity implements GameObject, Drawable, Updateable {
 
 	private Circle circle;
-	private Body body;
 	private float bodyRadius = 0;
 	private float value = 0;
-	private Level playerLevel;
-	
-	private Swashbuckler player = null;
 	
 	private Image image = null;
 	
 	private Sound pickUp = null;
 	
-	public Tourmaline(String imageFile, String entityName, float radius, float x, float y, float value, Swashbuckler player, Level playerLevel)
+	public Tourmaline() throws SlickException{
+		this("/data/Items/Tourmaline1.png", "Tourmaline1", 15.0f, 175.0f, 270.0f, 100.0f);
+	}
+	
+	public Tourmaline(String imageFile, String entityName, float radius, float x, float y, float value)
 			throws SlickException {
 		
 		if (imageFile != null) {
@@ -46,9 +46,7 @@ public class Tourmaline implements GameObject, Drawable, Updateable {
 		body.setFriction(0.5f);
 		body.setPosition(x, y);
 		body.setIsResting(false);
-		
-		this.player = player;
-		this.playerLevel = playerLevel;
+	
 		this.value = value;
 		
 		pickUp = new Sound("data/Sound/Tourmaline.wav");

@@ -14,11 +14,14 @@ import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 
-public class Spaceship implements GameObject, Drawable {
+public class Spaceship extends GameEntity{
 
-	private Body body;
 	private float bodyRadius = 0;	
 	private Image image = null;
+	
+	public Spaceship() throws SlickException {
+		this("/data/Swashbuckler/Spaceship.png", "Spaceship1", 20.0f, 800.0f, 157.0f);
+	}
 	
 	public Spaceship(String imageFile, String entityName, float radius, float x, float y) throws SlickException {
 		
@@ -53,6 +56,11 @@ public class Spaceship implements GameObject, Drawable {
 	
 	public final Image getImage() {
 		return image;		
+	}
+
+	@Override
+	public void update(int delta) {
+		
 	}
 	
 

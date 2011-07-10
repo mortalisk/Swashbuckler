@@ -20,19 +20,16 @@ import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 import no.mamot.engine.Updateable;
 
-public final class Robat implements GameObject, Drawable, Updateable {
+public final class Robat extends GameEntity implements GameObject, Drawable, Updateable {
 
 	private boolean goingLeft = false;
 	private Circle circle;
-	private Body body;
 	private float bodyRadius = 0;
 	private float viewRadius = 0;
 	private float strength = 0;
 	private float attackSpeed = 0;
 	private float attackTimer = 0;
 	private float attackSkill = 0;
-	
-	private Swashbuckler player = null;
 	
 	private Sound jump = null;
 
@@ -44,8 +41,13 @@ public final class Robat implements GameObject, Drawable, Updateable {
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 	
 	Random randomGenerator = new Random();
+	
+	public Robat() throws SlickException{
+		this("/data/Robots/Robat1.png", "Robat1", 15.5f, 300.0f,
+				370.0f, 180.0f, new org.newdawn.slick.geom.Vector2f(200, 500), 1.0f, 25.0f, 75.0f);
+	}
 
-	Robat(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength, float attackSpeed, float attackSkill)
+	Robat(String imageFile, String entityName, float radius, float viewRadius, float x, float y, Vector2f maxVelocity, float strength, float attackSpeed, float attackSkill)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -62,7 +64,6 @@ public final class Robat implements GameObject, Drawable, Updateable {
 		body.setIsResting(false);
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 		
-		this.player = player;
 		this.strength = strength;
 		this.attackSpeed = attackSpeed;
 		this.attackSkill = attackSkill;
