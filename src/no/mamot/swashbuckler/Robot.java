@@ -26,6 +26,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private float strength = 0;
 	private float attackSpeed = 0;
 	private float attackTimer = 0;
+	private float attackSkill = 0;
 	
 	private Swashbuckler player = null;
 
@@ -36,9 +37,9 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(50000, 0);
 	
-	Random randomGenerator = new Random( 19580427 );
+	Random randomGenerator = new Random();
 
-	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength, float attackSpeed)
+	Robot(String imageFile, String entityName, float radius, float x, float y, Vector2f maxVelocity, Swashbuckler player, float strength, float attackSpeed, float attackSkill)
 			throws SlickException {
 		if (imageFile != null) {
 			imageLeft = new Image(imageFile);
@@ -58,6 +59,7 @@ public final class Robot implements GameObject, Drawable, Updateable {
 		this.player = player;
 		this.strength = strength;
 		this.attackSpeed = attackSpeed;
+		this.attackSkill = attackSkill;
 	}
 	
 	public void left(int delta) {
@@ -118,24 +120,26 @@ public final class Robot implements GameObject, Drawable, Updateable {
 	public void update(int delta) {
 		//TODO: initiate AI stuff here???
 		if (body.getPosition().distance(player.getPosition()) <= player.getViewRadius()) {		
-			if (player.getPosition().getX() <= (this.getPosition().getX() - (bodyRadius + player.getPlayerRadius()) )) {
+			if (player.getPosition().getX() <= (this.getPosition().getX() - (bodyRadius + player.getPlayerRadius()) )) { //player is to the left of the robot
 				left(delta);			
-			} else if (player.getPosition().getX() >= (this.getPosition().getX() + (bodyRadius + player.getPlayerRadius()) )) {
+			} else if (player.getPosition().getX() >= (this.getPosition().getX() + (bodyRadius + player.getPlayerRadius()) )) { //player is to the right of the robot
 				right(delta);
-			} else {
-				//TODO: attack
+			} else if (body.getPosition().distance(player.getPosition()) <=  (bodyRadius + player.getPlayerRadius())) { //robot is close enough to attack
+				int random = (randomGenerator.nextInt(100) + 1); //random number which is used to check against the attackSkill
+				System.out.println("random: " + random + ", attackTimer: " + attackTimer);
+				
 				if (attackTimer <= 0) {
-					if(randomGenerator.nextInt() > 0) {
+					if(random <= attackSkill) {
 						player.removeHP(strength);
-					}
+					}					
 					
-					attackTimer = attackSpeed * delta;
+					attackTimer = 100 * delta; //reset attacktimer
 				} else {
-					attackTimer--;
+					attackTimer -= attackSpeed; //it is not the time to attack yet, decrease the timer
 				}
 			}
 			
-			if (player.getPosition().getY() <= this.getPosition().getY()) {
+			if (player.getPosition().getY() <= this.getPosition().getY()) { //check if robot must jump to get to the player
 				jump();			
 			}
 		}
