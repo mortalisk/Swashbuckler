@@ -119,7 +119,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.init();
 		
 		//TODO: play game music
-		Sound music = new Sound("data/music/backgroundSound.wav");
+		Sound music = new Sound("data/Music/backgroundSound.wav");
 		music.loop();
 	}
 
