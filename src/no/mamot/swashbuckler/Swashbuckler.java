@@ -72,7 +72,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		g.drawString("HP: " + getHP(), getPosition().getX() - (1024 / 2)
 				+ 225.0f, getPosition().getY() - (768 / 2) + 9.0f);
 	}
-	
+
 	public final Image getImage() {
 		if (goingLeft) {
 			return imageLeft;
@@ -154,7 +154,14 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	}
 
 	@Override
-	public void collisionOccured(CollisionEvent event, GameObject other, World world) {
-		 canJump = true;
+	public void collisionOccured(CollisionEvent event, GameObject other,
+			World world) {
+		System.out.println(event);
+		ROVector2f cn = event.getNormal();
+		float cos = cn.getX() / cn.getY();
+		if (Math.abs(cos) < 0.75 && cn.getY() >= 0.0) {
+			canJump = true;
+		}
+		
 	}
 }

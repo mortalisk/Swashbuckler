@@ -44,6 +44,7 @@ public class Physics implements CollisionListener {
 	public void collisionOccured(CollisionEvent event) {
 		((GameObject)event.getBodyA().getUserData()).collisionOccured(event, (GameObject)event.getBodyB().getUserData(), world);
 		((GameObject)event.getBodyB().getUserData()).collisionOccured(event, (GameObject)event.getBodyA().getUserData(), world);
+		
 	}
 
 }
