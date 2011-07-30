@@ -27,6 +27,11 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 		this("/data/Items/Tourmaline1.png", "Tourmaline1", 20.0f, 175.0f,
 				270.0f, 100.0f);
 	}
+	
+	@Override
+	public void init() {
+		
+	}
 
 	public Tourmaline(String imageFile, String entityName, float radius,
 			float x, float y, float value) throws SlickException {
@@ -51,14 +56,7 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 
 	@Override
 	public void update(int delta) {
-		if ((body.getPosition().distance(player.getPosition())) <= bodyRadius) {
-			// add tourmaline to player and remove tourmaline from the level
-			playerLevel.RemoveObject(this);
-			player.addScore(value);
-
-			// TODO: play tourmaline sound
-			pickUp.play();
-		}
+		
 	}
 
 	@Override
@@ -73,17 +71,23 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 	}
 
 	@Override
-	public void addPhysics(World world) {
-		// world.add(body);
-	}
-
-	@Override
 	public ROVector2f getPosition() {
 		return body.getPosition();
 	}
 
 	public final Image getImage() {
 		return image;
+	}
+	
+	@Override
+	public void collisionOccured(CollisionEvent event, GameObject other, World world) {
+		if (other == player) {
+			player.addScore(value);
+			playerLevel.RemoveObject(this);
+			pickUp.play();
+			world.remove(body);
+			
+		}
 	}
 
 }

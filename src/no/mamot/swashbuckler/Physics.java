@@ -29,7 +29,7 @@ public class Physics implements CollisionListener {
 		if (level != null) {
 			for (int i = level.getGameObjectList().size() - 1; i >= 0; i--) {
 				GameObject gameObject = level.getGameObjectList().get(i);
-				gameObject.addPhysics(world);
+				world.add(gameObject.getBody());
 				gameObject.getBody().setUserData(gameObject);
 			}
 		}
@@ -42,8 +42,8 @@ public class Physics implements CollisionListener {
 
 	@Override
 	public void collisionOccured(CollisionEvent event) {
-		((GameObject)event.getBodyA().getUserData()).collisionOccured(event);
-		((GameObject)event.getBodyB().getUserData()).collisionOccured(event);
+		((GameObject)event.getBodyA().getUserData()).collisionOccured(event, (GameObject)event.getBodyB().getUserData(), world);
+		((GameObject)event.getBodyB().getUserData()).collisionOccured(event, (GameObject)event.getBodyA().getUserData(), world);
 	}
 
 }

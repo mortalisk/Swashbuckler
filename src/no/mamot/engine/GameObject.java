@@ -12,10 +12,8 @@ public interface GameObject {
 	
 	Body getBody();
 
-	void addPhysics(World world);
-
 	ROVector2f getPosition();
 
-	void collisionOccured(CollisionEvent event);
+	void collisionOccured(CollisionEvent event, GameObject other, World world);
 
 }

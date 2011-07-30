@@ -110,11 +110,6 @@ public final class Robot extends GameEntity implements GameObject, Drawable,
 		return body.getPosition();
 	}
 
-	@Override
-	public void addPhysics(World world) {
-		world.add(body);
-	}
-
 	public final Image getImage() {
 		if (goingLeft) {
 			return imageLeft;

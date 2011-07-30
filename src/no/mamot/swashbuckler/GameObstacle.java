@@ -54,11 +54,6 @@ public final class GameObstacle implements GameObject, Drawable {
 	}
 
 	@Override
-	public void addPhysics(World world) {
-		world.add(body);
-	}
-
-	@Override
 	public ROVector2f getPosition() {
 		throw new UnsupportedOperationException(
 				"GameObstacle has no posisiton per today");
@@ -70,9 +65,11 @@ public final class GameObstacle implements GameObject, Drawable {
 	}
 
 	@Override
-	public void collisionOccured(CollisionEvent event) {
+	public void collisionOccured(CollisionEvent event, GameObject other,
+			World world) {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

@@ -43,12 +43,6 @@ public class Spaceship extends GameEntity {
 	}
 
 	@Override
-	public void addPhysics(World world) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public ROVector2f getPosition() {
 		return body.getPosition();
 	}

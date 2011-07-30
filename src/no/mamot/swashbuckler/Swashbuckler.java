@@ -124,11 +124,6 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		return body.getPosition();
 	}
 
-	@Override
-	public void addPhysics(World world) {
-		world.add(body);
-	}
-
 	public float getScore() {
 		return playerScore;
 	}
@@ -159,7 +154,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	}
 
 	@Override
-	public void collisionOccured(CollisionEvent event) {
+	public void collisionOccured(CollisionEvent event, GameObject other, World world) {
 		 canJump = true;
 	}
 }

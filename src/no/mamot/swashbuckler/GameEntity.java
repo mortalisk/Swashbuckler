@@ -2,6 +2,7 @@ package no.mamot.swashbuckler;
 
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
@@ -14,6 +15,10 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 	protected Level playerLevel;
 
 	protected Body body;
+	
+	public void init() {
+		
+	}
 	
 	@Override
 	public Body getBody() {
@@ -41,7 +46,7 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 	}
 	
 	@Override
-	public void collisionOccured(CollisionEvent event) {
+	public void collisionOccured(CollisionEvent event, GameObject other, World world) {
 		
 	}
 
