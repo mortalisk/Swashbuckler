@@ -25,16 +25,17 @@ public class Obstacle implements Drawable {
 	private ShapeFill fill;
 	private List<ParticleObject> particles = new ArrayList<ParticleObject>();
 	private Image texture;
+	private String textureName;
 
-	public Obstacle(Shape polygon) {
+	public Obstacle(Shape polygon, String textureN) {
 		this.polygon = polygon;
 
 		startCol = new Color(1.0f, 1.0f, 1.0f);
 		endCol = new Color(1.0f, 1.0f, 1.0f);
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f, endCol);
-
+		textureName = textureN;
 		try {
-			texture = new Image("data/textures/GroundTexture1.png");
+			texture = new Image("data/textures/"+textureN);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,14 +73,9 @@ public class Obstacle implements Drawable {
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f, endCol);
 	}
 
-	public void draw(Graphics g) {
+	public void draw(Graphics g) {	
 		ShapeRenderer.draw(polygon, fill);
 		ShapeRenderer.texture(polygon, texture);
-
-		for (ParticleObject particle : particles) {
-			particle.update(1000 / 60);
-			particle.draw(null);
-		}
 	}
 
 	public boolean isSelected() {
@@ -107,7 +103,9 @@ public class Obstacle implements Drawable {
 	}
 
 	public String getTexture() {
-		return "GroundTexture1.png";
+		return textureName;
 	}
+	
+
 
 }

@@ -14,6 +14,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileFilter;
 
+import no.mamot.swashbuckler.editor.state.StateFactory;
+
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
  * Builder, which is free for non-commercial use. If Jigloo is being used
@@ -38,6 +40,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JMenuItem jMenuItem1;
 	private JMenu jMenu1;
 	private ControlPanelActionListener controlPanelActionListener;
+	private JMenuItem jMenuItem4;
 	private ButtonGroup buttonGroup1;
 	private JRadioButtonMenuItem jRadioButtonMenuItem1;
 	private JRadioButtonMenuItem jRadioButtonMenuItem2;
@@ -93,8 +96,16 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				{
 					jMenu2 = new JMenu();
 					jMenuBar1.add(jMenu2);
-					jMenu2.setText("Edit");
+					jMenu2.setText("Select");
+					jMenuItem4 = new JMenuItem();
+					jMenuItem4.setText("Set Texture");
+					jMenuItem4.addActionListener(controlPanelActionListener);
+					jMenu2.add(jMenuItem4);
 				}
+				
+				
+				
+				
 				{
 					jMenu3 = new JMenu();
 					jMenuBar1.add(jMenu3);
@@ -181,91 +192,138 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 		public void actionPerformed(ActionEvent event) {
 
 			if (event.getSource().equals(jMenuItem1)) { // Save
-				System.out.println("Save");
-				String path = System.getProperty("user.dir");
-				path += "data/levels/";
-				JFileChooser fc = new JFileChooser(path);
-				fc.setFileFilter(new FileFilter() {
-
-					@Override
-					public String getDescription() {
-						return "Level XML files (*.level.xml])";
-					}
-
-					@Override
-					public boolean accept(File f) {
-						return f.getName().endsWith(".level.xml");
-					}
-				});
-				int returnVal = fc.showSaveDialog(jMenuItem1.getParent());
-
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File file = fc.getSelectedFile(); // might just be a
-														// string??
-					System.out.println("Selected file " + file);
-					String[] name = file.getName().split("[.]");
-					levelEditor.save(name[0]);
-				} else {
-					System.out.println("Canceled");
-				}
+				saveLevel();
 
 			} else if (event.getSource().equals(jMenuItem2)) { // Level
 																// properties
 				System.out.println("Level properties");
 			} else if (event.getSource().equals(jMenuItem3)) { // Exit
 				System.out.println("Exit");
-			} else if (event.getSource().equals(jRadioButtonMenuItem1)) { // Toggle
-																			// Draw
-																			// Polygon
-				System.out.println("Draw polygon");
-				if (jRadioButtonMenuItem1.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_POLYGON);
-				}
-			} else if (event.getSource().equals(jRadioButtonMenuItem2)) { // Toggle
-																			// Draw
-																			// Particle
-				System.out.println("Draw fire particle");
-				if (jRadioButtonMenuItem2.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_FIREPARTICLE);
-				}
+			} else if (event.getSource().equals(jMenuItem4)) {
+				setTexture();
+			}		
+			else if (event.getSource().equals(jRadioButtonMenuItem1)) { 
+				drawPolygon();
+			} else if (event.getSource().equals(jRadioButtonMenuItem2)) { 
+				drawFireParticle();
 			} else if (event.getSource().equals(jRadioButtonMenuItem7)){
-				System.out.println("Draw heal particle");
-				if (jRadioButtonMenuItem7.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_HEALPARTICLE);
-				}
-			} else if (event.getSource().equals(jRadioButtonMenuItem3)) { // Toggle
-																			// Draw
-																			// Robot
-				System.out.println("Draw robot");
-				if (jRadioButtonMenuItem3.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_ROBOT);
-				}
-			} else if (event.getSource().equals(jRadioButtonMenuItem6)) { // Toggle
-																			// Draw
-																			// Robat
-				System.out.println("Draw robat");
-				if (jRadioButtonMenuItem6.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_ROBAT);
-				}
-			} else if (event.getSource().equals(jRadioButtonMenuItem4)) { // Toggle
-																			// Draw
-																			// Swashbuckler
-				System.out.println("Draw Swashbuckler");
-				if (jRadioButtonMenuItem4.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_SWASHBUCKLER);
-				}
-			} else if (event.getSource().equals(jRadioButtonMenuItem5)) { // Toggle
-																			// Draw
-																			// Tourmaline
-				System.out.println("Draw Tourmaline");
-				if (jRadioButtonMenuItem5.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_TOURMALINE);
-				}
-			}
+				drawHealParticle();
+			} else if (event.getSource().equals(jRadioButtonMenuItem3)) {
+				drawRobot();
+			} else if (event.getSource().equals(jRadioButtonMenuItem6)) {
+				drawRobat();
+			} else if (event.getSource().equals(jRadioButtonMenuItem4)) { 
+				drawSwashbuckler();
+			} else if (event.getSource().equals(jRadioButtonMenuItem5)) { 
+				drawTourmaline();
+			} 
 
 		}
 
-	}
+		private void saveLevel() {
+			System.out.println("Save");
+			String path = System.getProperty("user.dir");
+			path += "data/levels/";
+			JFileChooser fc = new JFileChooser(path);
+			fc.setFileFilter(new FileFilter() {
+
+				@Override
+				public String getDescription() {
+					return "Level XML files (*.level.xml])";
+				}
+
+				@Override
+				public boolean accept(File f) {
+					return f.getName().endsWith(".level.xml");
+				}
+			});
+			int returnVal = fc.showSaveDialog(jMenuItem1.getParent());
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile(); // might just be a
+													// string??
+				System.out.println("Selected file " + file);
+				String[] name = file.getName().split("[.]");
+				levelEditor.save(name[0]);
+			} else {
+				System.out.println("Canceled");
+			}
+		}
+
+		private void setTexture() {
+			System.out.println("Set Texture");
+			
+					System.out.println("Selecting texture");
+					String path = System.getProperty("user.dir");
+					path += "data/textures/";
+					JFileChooser fc = new JFileChooser(path);
+					
+					int returnVal = fc.showOpenDialog(jMenuItem1.getParent());
+
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						File file = fc.getSelectedFile(); // might just be a
+															// string??
+						System.out.println("Selected file " + file);
+						String name = file.getName();
+						System.out.println("Selected texture = " + name);
+						levelEditor.getPolygonCreator().setTexture(name);
+					} else {
+						System.out.println("Canceled");
+					}
+				}
+			
+		}
+
+		private void drawPolygon() {
+			System.out.println("Draw polygon");
+			if (jRadioButtonMenuItem1.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_POLYGON);
+			}
+		}
+
+		private void drawFireParticle() {
+			System.out.println("Draw fire particle");
+			if (jRadioButtonMenuItem2.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_FIREPARTICLE);
+			}
+		}
+
+		private void drawHealParticle() {
+			System.out.println("Draw heal particle");
+			if (jRadioButtonMenuItem7.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_HEALPARTICLE);
+			}
+		}
+
+		private void drawRobot() {
+			System.out.println("Draw robot");
+			if (jRadioButtonMenuItem3.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_ROBOT);
+			}
+		}
+
+		private void drawRobat() {
+			System.out.println("Draw robat");
+			if (jRadioButtonMenuItem6.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_ROBAT);
+			}
+		}
+
+		private void drawTourmaline() {
+			System.out.println("Draw Tourmaline");
+			if (jRadioButtonMenuItem5.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_TOURMALINE);
+			}
+		}
+
+		private void drawSwashbuckler() {
+			System.out.println("Draw Swashbuckler");
+			if (jRadioButtonMenuItem4.isSelected()) {
+				levelEditor.setState(DrawEnum.DRAW_SWASHBUCKLER);
+			}
+		}
+
+	
 
 	@Override
 	public void run() {
@@ -282,5 +340,6 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 		}
 		return buttonGroup1;
 	}
+	
 
 }

@@ -12,6 +12,7 @@ public class PolygonCreator {
 	private LevelImplEditor level;
 	private List<Dott> dotts;
 	private List<Obstacle> obstacles;
+	private String drawTexture = "GroundTexture1.png";
 
 	public List<Obstacle> getObstacles() {
 		return obstacles;
@@ -54,7 +55,7 @@ public class PolygonCreator {
 				j++;
 			}
 			Polygon newPolygon = new Polygon(points);
-			Obstacle newObstacle = new Obstacle(newPolygon);
+			Obstacle newObstacle = new Obstacle(newPolygon,drawTexture);
 			obstacles.add(newObstacle);
 			level.getDrawableList().add(newObstacle);
 			removeDotts();
@@ -73,7 +74,6 @@ public class PolygonCreator {
 
 	public void selectPolygon(float x, float y) {
 		DeselectAll();
-
 		for (Obstacle obstacle : obstacles) {
 			if (obstacle.getShape().contains(x, y)) {
 				obstacle.select();
@@ -132,5 +132,18 @@ public class PolygonCreator {
 		for (Obstacle obstacle : obstacles) {
 			obstacle.deSelect();
 		}
+	}
+	public Obstacle getSelectedObstacle(){
+		for (Obstacle obstacle : obstacles){
+			if (obstacle.isSelected()){
+				return obstacle;
+			}
+			else return null;
+		}
+		return null;
+	}
+
+	public void setTexture(String name) {
+		drawTexture = name;		
 	}
 }
