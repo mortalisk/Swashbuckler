@@ -16,7 +16,7 @@ public class Fire extends GameEntity {
 	private Image image = null;
 	private ParticleSystem system;
 	private int damage = 5;
-	private boolean particleEnable = true;
+	private boolean particleEnable = false;
 	
 	
 	public Fire (float x, float y) throws SlickException{
@@ -34,7 +34,7 @@ public class Fire extends GameEntity {
 	}	
 	@Override
 	public void draw(Graphics g) {
-		if (!particleEnable){
+		if (particleEnable){
 			system.render();
 		}		
 		else {

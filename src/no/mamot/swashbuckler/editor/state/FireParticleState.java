@@ -4,12 +4,12 @@ import no.mamot.swashbuckler.editor.LevelEditor;
 import no.mamot.swashbuckler.editor.Obstacle;
 import no.mamot.swashbuckler.editor.ParticleCreator;
 
-public class ParticleState implements LevelEditorState {
+public class FireParticleState implements LevelEditorState {
 
 	private ParticleCreator particleCreator;
 	private LevelEditor levelEditor;
 
-	public ParticleState(LevelEditor levelEditor) {
+	public FireParticleState(LevelEditor levelEditor) {
 		this.particleCreator = levelEditor.getParticleCreator();
 		this.levelEditor = levelEditor;
 

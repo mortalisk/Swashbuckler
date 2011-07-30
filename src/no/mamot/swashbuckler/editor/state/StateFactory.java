@@ -22,7 +22,7 @@ public class StateFactory {
 
 	public LevelEditorState getParticleState() {
 		if (particleState == null) {
-			particleState = new ParticleState(levelEditor);
+			particleState = new FireParticleState(levelEditor);
 		}
 		return particleState;
 	}
