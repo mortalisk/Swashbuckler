@@ -27,7 +27,7 @@ public class Fire extends GameEntity {
 		system = new ParticleSystem(image);	
 		Box shape = new Box(30, 40);
 		body = new StaticBody(shape);
-		body = new StaticBody(shape);
+		body.setEnabled(false);
 	}	
 	
 
