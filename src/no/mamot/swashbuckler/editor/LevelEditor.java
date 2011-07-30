@@ -96,7 +96,7 @@ public class LevelEditor implements Engine {
 			state = stateFactory.getPolygonState();
 		}
 		if (changeto.equals(DrawEnum.DRAW_PARTICLE)) {
-			state = stateFactory.getPlaceOnObstacleState();
+			state = stateFactory.getParticleState();
 			state.setTransition(changeto.toString());
 		}
 		if (changeto.equals(DrawEnum.DRAW_ROBOT)) {
