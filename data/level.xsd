@@ -85,6 +85,9 @@
 	    		<enumeration value="ROBOT"></enumeration>
 	    		<enumeration value="ROBAT"></enumeration>
 	    		<enumeration value="TOURMALINE"></enumeration>
+	    		<enumeration value="FIRE"></enumeration>
+	    		<enumeration value="HEAL"></enumeration>
+	    		
 	    	</restriction>
     </simpleType>
     
