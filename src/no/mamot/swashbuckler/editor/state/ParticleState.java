@@ -33,17 +33,7 @@ public class ParticleState implements LevelEditorState {
 
 	@Override
 	public void placeFinished() {
-		LevelEditorState state = levelEditor.getStateFactory()
-				.getPlaceOnObstacleState();
-		state.setTransition("Draw_Particle");
-		levelEditor.setState(state);
-
-		// Deselect obstacle
-		for (Obstacle obstacle : levelEditor.getLevel().getObstacleList()) {
-			if (obstacle.isSelected()) {
-				obstacle.deSelect();
-			}
-		}
+	
 	}
 
 	@Override

@@ -27,7 +27,8 @@ public class ParticleObject implements Drawable, Updateable {
 		system = new ParticleSystem(image);
 		system.setPosition(x, y);
 		// x y might just be relative to the position of the system....
-		system.addEmitter(new FireEmitter(0, 0, 10.0f));
+	
+		system.addEmitter(new FireEmitter(0, 0, 20.0f));
 		system.setBlendingMode(ParticleSystem.BLEND_COMBINE);
 
 	}

@@ -8,7 +8,6 @@ public class StateFactory {
 
 	private LevelEditorState polygonState = null;
 	private LevelEditorState particleState = null;
-	private LevelEditorState placeOnObstacleState = null;
 	private LevelEditorState robotState = null;
 	private LevelEditorState robatState = null;
 	private LevelEditorState tourmalineState = null;
@@ -58,12 +57,7 @@ public class StateFactory {
 		return swashbucklerState;
 	}
 
-	public LevelEditorState getPlaceOnObstacleState() {
-		if (placeOnObstacleState == null) {
-			placeOnObstacleState = new PlaceOnObstacleState(levelEditor);
-		}
-		return placeOnObstacleState;
-	}
+
 
 	public LevelEditor getLevelEditor() {
 		return levelEditor;
