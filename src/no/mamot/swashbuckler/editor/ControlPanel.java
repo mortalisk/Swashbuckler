@@ -45,6 +45,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JRadioButtonMenuItem jRadioButtonMenuItem4;
 	private JRadioButtonMenuItem jRadioButtonMenuItem5;
 	private JRadioButtonMenuItem jRadioButtonMenuItem6;
+	private JRadioButtonMenuItem jRadioButtonMenuItem7;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -109,9 +110,18 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 					{
 						jRadioButtonMenuItem2 = new JRadioButtonMenuItem();
 						jMenu3.add(jRadioButtonMenuItem2);
-						jRadioButtonMenuItem2.setText("Draw Particle");
+						jRadioButtonMenuItem2.setText("Draw Fire");
 						getButtonGroup1().add(jRadioButtonMenuItem2);
 						jRadioButtonMenuItem2
+								.addActionListener(controlPanelActionListener);
+
+					}
+					{
+						jRadioButtonMenuItem7 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem7);
+						jRadioButtonMenuItem7.setText("Draw Heal");
+						getButtonGroup1().add(jRadioButtonMenuItem7);
+						jRadioButtonMenuItem7
 								.addActionListener(controlPanelActionListener);
 
 					}
@@ -214,9 +224,14 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			} else if (event.getSource().equals(jRadioButtonMenuItem2)) { // Toggle
 																			// Draw
 																			// Particle
-				System.out.println("Draw particle");
+				System.out.println("Draw fire particle");
 				if (jRadioButtonMenuItem2.isSelected()) {
-					levelEditor.setState(DrawEnum.DRAW_PARTICLE);
+					levelEditor.setState(DrawEnum.DRAW_FIREPARTICLE);
+				}
+			} else if (event.getSource().equals(jRadioButtonMenuItem7)){
+				System.out.println("Draw heal particle");
+				if (jRadioButtonMenuItem7.isSelected()) {
+					levelEditor.setState(DrawEnum.DRAW_HEALPARTICLE);
 				}
 			} else if (event.getSource().equals(jRadioButtonMenuItem3)) { // Toggle
 																			// Draw

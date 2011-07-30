@@ -2,6 +2,7 @@ package no.mamot.swashbuckler.editor;
 
 import no.mamot.swashbuckler.Fire;
 import no.mamot.swashbuckler.GameEntity;
+import no.mamot.swashbuckler.Heal;
 import no.mamot.swashbuckler.Robat;
 import no.mamot.swashbuckler.Robot;
 import no.mamot.swashbuckler.Swashbuckler;
@@ -11,7 +12,7 @@ import org.newdawn.slick.SlickException;
 
 public enum TypeEnum {
 	SWASHBUCKLER(Swashbuckler.class), TOURMALINE(Tourmaline.class), ROBOT(
-			Robot.class), ROBAT(Robat.class), FIRE(Fire.class);
+			Robot.class), ROBAT(Robat.class), FIRE(Fire.class), HEAL(Heal.class);
 
 	Class<? extends GameEntity> c;
 

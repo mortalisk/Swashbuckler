@@ -32,6 +32,9 @@ public class Entity implements Drawable {
 		}else if (type.equals(TypeEnum.FIRE)) {
 			image = new Image("/data/particles/Fire.png");
 		}
+		else if (type.equals(TypeEnum.HEAL)) {
+			image = new Image("/data/particles/Heal.png");
+		}
 	}
 
 	public void move(float x, float y) {

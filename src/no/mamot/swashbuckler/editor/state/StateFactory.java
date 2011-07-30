@@ -7,7 +7,8 @@ public class StateFactory {
 	private LevelEditor levelEditor;
 
 	private LevelEditorState polygonState = null;
-	private LevelEditorState particleState = null;
+	private LevelEditorState fireParticleState = null;
+	private LevelEditorState healParticleState = null;
 	private LevelEditorState robotState = null;
 	private LevelEditorState robatState = null;
 	private LevelEditorState tourmalineState = null;
@@ -20,11 +21,18 @@ public class StateFactory {
 		return polygonState;
 	}
 
-	public LevelEditorState getParticleState() {
-		if (particleState == null) {
-			particleState = new FireParticleState(levelEditor);
+	public LevelEditorState getFireParticleState() {
+		if (fireParticleState == null) {
+			fireParticleState = new FireParticleState(levelEditor.getEntityCreator());
 		}
-		return particleState;
+		return fireParticleState;
+	}
+	
+	public LevelEditorState getHealParticleState() {
+		if (healParticleState == null) {
+			healParticleState = new HealParticleState(levelEditor.getEntityCreator());
+		}
+		return healParticleState;
 	}
 
 	public LevelEditorState getRobotState() {
@@ -66,5 +74,7 @@ public class StateFactory {
 	public void setLevelEditor(LevelEditor levelEditor) {
 		this.levelEditor = levelEditor;
 	}
+
+
 
 }

@@ -1,20 +1,19 @@
 package no.mamot.swashbuckler.editor.state;
 
-import org.newdawn.slick.SlickException;
-
 import no.mamot.swashbuckler.editor.EntityCreator;
 import no.mamot.swashbuckler.editor.LevelEditor;
-import no.mamot.swashbuckler.editor.Obstacle;
 import no.mamot.swashbuckler.editor.ParticleCreator;
 import no.mamot.swashbuckler.editor.TypeEnum;
 
-public class FireParticleState implements LevelEditorState {
+import org.newdawn.slick.SlickException;
+
+public class HealParticleState implements LevelEditorState {
 
 	private ParticleCreator particleCreator;
 	private LevelEditor levelEditor;
 	private EntityCreator entityCreator = null;
 	
-	public FireParticleState(EntityCreator entityCreator) {
+	public HealParticleState(EntityCreator entityCreator) {
 		this.entityCreator = entityCreator;
 	}
 
@@ -22,7 +21,7 @@ public class FireParticleState implements LevelEditorState {
 	public void place(float x, float y) {
 		//particleCreator.createNewParticle(x, y);
 		try {
-			entityCreator.createNewEntity(TypeEnum.FIRE, x, y);
+			entityCreator.createNewEntity(TypeEnum.HEAL, x, y);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,17 +30,17 @@ public class FireParticleState implements LevelEditorState {
 
 	@Override
 	public void select(float x, float y) {
-		entityCreator.select(TypeEnum.FIRE, x, y);
+		entityCreator.select(TypeEnum.HEAL, x, y);
 	}
 
 	@Override
 	public void delete() {
-		entityCreator.delete(TypeEnum.FIRE);
+		entityCreator.delete(TypeEnum.HEAL);
 	}
 
 	@Override
 	public void move(float x, float y) {
-		entityCreator.moveSelectedEntities(TypeEnum.FIRE, x, y);
+		entityCreator.moveSelectedEntities(TypeEnum.HEAL, x, y);
 	}
 
 	@Override
@@ -55,5 +54,6 @@ public class FireParticleState implements LevelEditorState {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
