@@ -136,16 +136,19 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		return playerHP;
 	}
 
-	public void addHP(float hp) {
+	public void addHP(int hp) {
 		playerHP += hp;
-	}
-
-	public void removeHP(float hp) {
-		playerHP -= hp;
-
+		if (playerHP >100) {
+			playerHP = 100;
+		}
+		
 		if (playerHP <= 0) {
 			// TODO: DEAD!
 		}
+	}
+	
+	public void doDamage(int amount) {
+		addHP(-amount);
 	}
 
 	@Override

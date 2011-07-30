@@ -151,7 +151,7 @@ public final class Robot extends GameEntity implements GameObject, Drawable,
 
 				if (attackTimer <= 0) {
 					if (random <= attackSkill) {
-						player.removeHP(strength);
+						player.doDamage((int)strength);
 					}
 
 					attackTimer = 100 * delta; // reset attacktimer

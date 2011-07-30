@@ -18,8 +18,9 @@ public class Heal extends GameEntity {
 
 	private Image image = null;
 	private ParticleSystem system;
-	private int heal = 5;
+	private int heal = 1;
 	private boolean particleEnable = true;
+	private long timeWhenHealedLast = 0;
 	
 	
 	
@@ -83,6 +84,13 @@ public class Heal extends GameEntity {
 	@Override
 	public void update(int delta) {
 		system.update(delta);
+		
+		long time = System.currentTimeMillis();
+		float distance = player.getPosition().distance(getPosition());
+		if((time-timeWhenHealedLast) > 100 && distance < 35) {
+			player.addHP(heal);
+			timeWhenHealedLast = time;
+		}
 	}
 	
 
@@ -96,9 +104,7 @@ public class Heal extends GameEntity {
 	}
 	@Override
 	public void collisionOccured(CollisionEvent event, GameObject other,World world) {
-		if (other.equals(player)){
-			player.addHP(heal);
-		}
+		
 	}
 
 }

@@ -19,6 +19,7 @@ public class Fire extends GameEntity {
 	private ParticleSystem system;
 	private int damage = -5;
 	private boolean particleEnable = true;
+	private long timeWhenDamagedLast;
 	
 	
 	
@@ -49,6 +50,13 @@ public class Fire extends GameEntity {
 	@Override
 	public void update(int delta) {
 		system.update(delta);		
+		
+		long time = System.currentTimeMillis();
+		float distance = player.getPosition().distance(getPosition());
+		if((time-timeWhenDamagedLast) > 100 && distance < 35) {
+			player.addHP(damage);
+			timeWhenDamagedLast = time;
+		}
 	}
 	
 
