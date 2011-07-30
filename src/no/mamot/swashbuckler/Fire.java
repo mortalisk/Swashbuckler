@@ -48,7 +48,7 @@ public class Fire extends GameEntity {
 	}
 	@Override
 	public void update(int delta) {
-		system.update(delta);
+		system.update(delta);		
 	}
 	
 
