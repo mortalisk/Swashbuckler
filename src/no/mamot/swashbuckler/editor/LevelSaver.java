@@ -176,7 +176,7 @@ public class LevelSaver {
 				entity.setPlayerLevel(level);
 				entity.setPosition((float) entityType.getX(),
 						(float) entityType.getY());
-
+				entity.init();
 				level.getDrawableList().add(entity);
 				level.getGameObjectList().add(entity);
 				level.getUpdatableList().add(entity);

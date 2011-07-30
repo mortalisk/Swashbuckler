@@ -27,7 +27,7 @@ public class LevelEditor implements Engine {
 	private LevelEditorState state;
 	private LevelImplEditor level;
 	private StateFactory stateFactory;
-	private ParticleCreator particleCreator;
+
 	private EntityCreator entityCreator;
 
 	public LevelEditor() throws SlickException {
@@ -36,7 +36,7 @@ public class LevelEditor implements Engine {
 		view.setLevel(level);
 		camera = view.getCamera();
 		polygonCreator = new PolygonCreator(level);
-		particleCreator = new ParticleCreator(level);
+
 		entityCreator = new EntityCreator(level);
 		state = new PolygonState(polygonCreator);
 		stateFactory = new StateFactory();
@@ -129,9 +129,7 @@ public class LevelEditor implements Engine {
 		return (LevelImplEditor) level;
 	}
 
-	public ParticleCreator getParticleCreator() {
-		return particleCreator;
-	}
+
 
 	public EntityCreator getEntityCreator() {
 		return entityCreator;

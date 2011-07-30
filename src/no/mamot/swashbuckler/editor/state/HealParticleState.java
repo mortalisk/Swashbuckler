@@ -2,14 +2,13 @@ package no.mamot.swashbuckler.editor.state;
 
 import no.mamot.swashbuckler.editor.EntityCreator;
 import no.mamot.swashbuckler.editor.LevelEditor;
-import no.mamot.swashbuckler.editor.ParticleCreator;
 import no.mamot.swashbuckler.editor.TypeEnum;
 
 import org.newdawn.slick.SlickException;
 
 public class HealParticleState implements LevelEditorState {
 
-	private ParticleCreator particleCreator;
+
 	private LevelEditor levelEditor;
 	private EntityCreator entityCreator = null;
 	

@@ -16,22 +16,25 @@ public class Fire extends GameEntity {
 	private Image image = null;
 	private ParticleSystem system;
 	private int damage = 5;
-	private boolean particleEnable = false;
+	private boolean particleEnable = true;
 	
 	
-	public Fire (float x, float y) throws SlickException{
+	
+	public Fire () throws SlickException{
 		image = new Image("data/particles/Fire.png", false);
-		system = new ParticleSystem(image);
-		system.setPosition(x, y);
-		// x y might just be relative to the position of the system....	
-		system.addEmitter(new FireEmitter(0, 0, 20.0f));
-		system.setBlendingMode(ParticleSystem.BLEND_COMBINE);
-		
+		system = new ParticleSystem(image);	
 		Box shape = new Box(30, 40);
 		body = new StaticBody(shape);
-		body.setPosition(x, y);
-		
+		body = new StaticBody(shape);
 	}	
+	
+
+	public void init() {
+		system.setPosition(body.getPosition().getX(), body.getPosition().getY());
+		// x y might just be relative to the position of the system....	
+		system.addEmitter(new FireEmitter(0, 0, 20.0f));
+		system.setBlendingMode(ParticleSystem.BLEND_COMBINE);				
+	}
 	@Override
 	public void draw(Graphics g) {
 		if (particleEnable){
@@ -45,11 +48,9 @@ public class Fire extends GameEntity {
 	public void update(int delta) {
 		system.update(delta);
 	}
-	@Override
-	public void addPhysics(World world) {
-		world.add(body);
-		
-	}
+	
+
+
 	@Override
 	public ROVector2f getPosition() {
 		return body.getPosition();
