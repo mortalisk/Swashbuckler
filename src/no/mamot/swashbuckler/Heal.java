@@ -18,7 +18,7 @@ public class Heal extends GameEntity {
 
 	private Image image = null;
 	private ParticleSystem system;
-	private int heal = 1;
+	private int heal = 5;
 	private boolean particleEnable = true;
 	private long timeWhenHealedLast = 0;
 	

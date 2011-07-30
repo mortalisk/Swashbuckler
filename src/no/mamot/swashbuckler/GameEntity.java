@@ -16,6 +16,8 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 
 	protected Body body;
 	
+	protected World world;
+
 	public void init() {
 		
 	}
@@ -43,6 +45,14 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 
 	public void setPosition(float x, float y) {
 		body.setPosition(x, y);
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
 	}
 	
 	@Override

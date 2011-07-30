@@ -29,6 +29,7 @@ public class Physics implements CollisionListener {
 		if (level != null) {
 			for (int i = level.getGameObjectList().size() - 1; i >= 0; i--) {
 				GameObject gameObject = level.getGameObjectList().get(i);
+				gameObject.setWorld(world);
 				world.add(gameObject.getBody());
 				gameObject.getBody().setUserData(gameObject);
 			}

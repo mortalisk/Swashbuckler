@@ -102,7 +102,9 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 
 	public void jump() {
 		// only allow jumping if the body is currently touching something
-		if (canJump) {
+		CollisionEvent[] events = world.getContacts(body);
+	
+		if (events.length > 0) {
 			body.addForce(jumpForce);
 			canJump = false;
 

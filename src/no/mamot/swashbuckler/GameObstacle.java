@@ -71,5 +71,11 @@ public final class GameObstacle implements GameObject, Drawable {
 		
 	}
 
+	@Override
+	public void setWorld(World world) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
