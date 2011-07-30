@@ -24,7 +24,7 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 	private Sound pickUp = null;
 
 	public Tourmaline() throws SlickException {
-		this("/data/Items/Tourmaline1.png", "Tourmaline1", 20.0f, 175.0f,
+		this("/data/Items/Tourmaline1.png", "Tourmaline1", 16.0f, 175.0f,
 				270.0f, 100.0f);
 	}
 	
@@ -43,7 +43,7 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(
 				radius);
-		body = new Body(entityName, physCircle, 100);
+		body = new Body(entityName, physCircle, 1);
 		body.setRotatable(false);
 		body.setFriction(0.5f);
 		body.setPosition(x, y);
