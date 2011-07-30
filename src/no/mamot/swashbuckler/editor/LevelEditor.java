@@ -17,7 +17,6 @@ import org.newdawn.slick.SlickException;
 
 public class LevelEditor implements Engine {
 
-	private Pointer pointer;
 	private PolygonCreator polygonCreator;
 	private LevelSaver levelSaver;
 	private Camera camera;
@@ -28,7 +27,6 @@ public class LevelEditor implements Engine {
 	private LevelEditorState state;
 	private LevelImplEditor level;
 	private StateFactory stateFactory;
-	private ParticleObject particleTest;
 	private ParticleCreator particleCreator;
 	private EntityCreator entityCreator;
 
@@ -66,7 +64,6 @@ public class LevelEditor implements Engine {
 
 	@Override
 	public void init() throws SlickException {
-		pointer = new Pointer(camera);
 		levelSaver = new LevelSaver(polygonCreator, entityCreator);
 
 	}

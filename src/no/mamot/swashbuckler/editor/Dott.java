@@ -19,14 +19,12 @@ public class Dott implements Drawable {
 	private Color startCol;
 	private Color endCol;
 	private ShapeFill fill;
-	private ShapeRenderer renderer;
 
 	private static float radius = 3.0f; // radius of the dott..
 
 	public Dott(float x, float y) {
 		dott = new Circle(x, y, radius);
 		position = new Vector2f(x, y);
-		renderer = new ShapeRenderer();
 		startCol = new Color(1.0f, 1.0f, 1.0f);
 		endCol = new Color(1.0f, 1.0f, 1.0f);
 		fill = new GradientFill(0.0f, 0.0f, startCol, 1000.0f, 1000.0f, endCol);
@@ -64,7 +62,7 @@ public class Dott implements Drawable {
 	}
 
 	public void draw(Graphics g) {
-		renderer.draw(dott, fill);
+		ShapeRenderer.draw(dott, fill);
 	}
 
 	public boolean isSelected() {

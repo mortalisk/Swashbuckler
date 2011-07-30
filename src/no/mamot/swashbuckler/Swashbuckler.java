@@ -11,8 +11,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -23,7 +21,6 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		Drawable, Updateable {
 
 	private boolean goingLeft = false;
-	private Circle circle;
 	private Body body;
 	private float bodyRadius = 0;
 	private float playerScore = 0;
@@ -48,7 +45,6 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 			imageLeft = new Image(imageFile);
 			imageRight = imageLeft.getFlippedCopy(true, false);
 		}
-		circle = new Circle(x, y, radius);
 		bodyRadius = radius;
 
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(
@@ -75,13 +71,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		g.drawString("HP: " + getHP(), getPosition().getX() - (1024 / 2)
 				+ 225.0f, getPosition().getY() - (768 / 2) + 9.0f);
 	}
-
-	private Shape getShape() {
-		circle.setX(body.getPosition().getX() - bodyRadius);
-		circle.setY(body.getPosition().getY() - bodyRadius);
-		return circle;
-	}
-
+	
 	public final Image getImage() {
 		if (goingLeft) {
 			return imageLeft;

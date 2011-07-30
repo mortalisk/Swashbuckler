@@ -11,13 +11,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
 
 public class Tourmaline extends GameEntity implements GameObject, Drawable,
 		Updateable {
 
-	private Circle circle;
 	private float bodyRadius = 0;
 	private float value = 0;
 
@@ -36,7 +33,6 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 		if (imageFile != null) {
 			image = new Image(imageFile);
 		}
-		circle = new Circle(x, y, radius);
 		bodyRadius = radius;
 
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(
@@ -88,11 +84,4 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 	public final Image getImage() {
 		return image;
 	}
-
-	private Shape getShape() {
-		circle.setX(body.getPosition().getX() - bodyRadius);
-		circle.setY(body.getPosition().getY() - bodyRadius);
-		return circle;
-	}
-
 }

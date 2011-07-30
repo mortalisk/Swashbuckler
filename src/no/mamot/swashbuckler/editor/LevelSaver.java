@@ -130,6 +130,7 @@ public class LevelSaver {
 		String packageName = docClass.getPackage().getName();
 		JAXBContext jc = JAXBContext.newInstance(packageName);
 		Unmarshaller u = jc.createUnmarshaller();
+		@SuppressWarnings("unchecked")
 		JAXBElement<T> doc = (JAXBElement<T>) u.unmarshal(inputStream);
 		return doc.getValue();
 	}

@@ -1,14 +1,10 @@
 package no.mamot.swashbuckler.editor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.newdawn.slick.SlickException;
 
 public class ParticleCreator {
 
 	private LevelImplEditor level;
-	private List<ParticleObject> particleObjects = new ArrayList<ParticleObject>();
 
 	public ParticleCreator(LevelImplEditor level) {
 		this.level = level;

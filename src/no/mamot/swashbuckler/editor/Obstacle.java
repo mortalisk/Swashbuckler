@@ -23,13 +23,11 @@ public class Obstacle implements Drawable {
 	private Color startCol;
 	private Color endCol;
 	private ShapeFill fill;
-	private ShapeRenderer renderer;
 	private List<ParticleObject> particles = new ArrayList<ParticleObject>();
 	private Image texture;
 
 	public Obstacle(Shape polygon) {
 		this.polygon = polygon;
-		renderer = new ShapeRenderer();
 
 		startCol = new Color(1.0f, 1.0f, 1.0f);
 		endCol = new Color(1.0f, 1.0f, 1.0f);
@@ -75,8 +73,8 @@ public class Obstacle implements Drawable {
 	}
 
 	public void draw(Graphics g) {
-		renderer.draw(polygon, fill);
-		renderer.texture(polygon, texture);
+		ShapeRenderer.draw(polygon, fill);
+		ShapeRenderer.texture(polygon, texture);
 
 		for (ParticleObject particle : particles) {
 			particle.update(1000 / 60);

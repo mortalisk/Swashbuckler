@@ -13,15 +13,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 public final class Robat extends GameEntity implements GameObject, Drawable,
 		Updateable {
 
 	private boolean goingLeft = false;
-	private Circle circle;
 	private float bodyRadius = 0;
 	private float viewRadius = 0;
 	private float strength = 0;
@@ -56,7 +53,6 @@ public final class Robat extends GameEntity implements GameObject, Drawable,
 			imageLeft = new Image(imageFile);
 			imageRight = imageLeft.getFlippedCopy(true, false);
 		}
-		circle = new Circle(x, y, radius);
 		bodyRadius = radius;
 
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(
@@ -123,12 +119,6 @@ public final class Robat extends GameEntity implements GameObject, Drawable,
 		} else {
 			return imageRight;
 		}
-	}
-
-	private Shape getShape() {
-		circle.setX(body.getPosition().getX() - bodyRadius);
-		circle.setY(body.getPosition().getY() - bodyRadius);
-		return circle;
 	}
 
 	@Override

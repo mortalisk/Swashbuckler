@@ -26,6 +26,8 @@ import javax.swing.filechooser.FileFilter;
  */
 public class ControlPanel extends javax.swing.JFrame implements Runnable {
 
+	private static final long serialVersionUID = 1L;
+
 	private LevelEditor levelEditor;
 
 	private JMenuBar jMenuBar1;

@@ -9,7 +9,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Swashbuckler/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/phys2d-060408.jar" sourcepath="lib/phys2d-060408.jar">
+	<classpathentry kind="lib" path="lib/phys2d-060408.jar" sourcepath="/home/morten/Downloads/src060408.zip">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Swashbuckler/lib"/>
 		</attributes>
