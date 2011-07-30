@@ -1,9 +1,11 @@
 package no.mamot.swashbuckler;
 
 import net.phys2d.math.ROVector2f;
+import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
+import no.mamot.engine.GameObject;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -15,7 +17,7 @@ public class Fire extends GameEntity {
 
 	private Image image = null;
 	private ParticleSystem system;
-	private int damage = 5;
+	private int damage = -5;
 	private boolean particleEnable = true;
 	
 	
@@ -57,6 +59,12 @@ public class Fire extends GameEntity {
 	}
 	public void setEnableParticleEffect(boolean enable){
 		particleEnable = enable;
+	}
+	@Override
+	public void collisionOccured(CollisionEvent event, GameObject other,World world) {
+		if (other.equals(player)){
+			player.addHP(damage);
+		}
 	}
 
 }
