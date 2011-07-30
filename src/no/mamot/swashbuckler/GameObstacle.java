@@ -3,6 +3,7 @@ package no.mamot.swashbuckler;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
@@ -61,6 +62,17 @@ public final class GameObstacle implements GameObject, Drawable {
 	public ROVector2f getPosition() {
 		throw new UnsupportedOperationException(
 				"GameObstacle has no posisiton per today");
+	}
+
+	@Override
+	public Body getBody() {
+		return body;
+	}
+
+	@Override
+	public void collisionOccured(CollisionEvent event) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

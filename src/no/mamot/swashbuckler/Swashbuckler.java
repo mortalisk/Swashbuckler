@@ -2,6 +2,7 @@ package no.mamot.swashbuckler;
 
 import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
@@ -21,7 +22,6 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		Drawable, Updateable {
 
 	private boolean goingLeft = false;
-	private Body body;
 	private float bodyRadius = 0;
 	private float playerScore = 0;
 	private float playerHP = 0;
@@ -37,6 +37,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 			-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(
 			50000, 0);
+	private boolean canJump;
 
 	public Swashbuckler(String imageFile, String entityName, float radius,
 			float x, float y, Vector2f maxVelocity, float playerHP)
@@ -101,9 +102,9 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 
 	public void jump() {
 		// only allow jumping if the body is currently touching something
-		if (body.isResting()) {
+		if (canJump) {
 			body.addForce(jumpForce);
-			body.setIsResting(false);
+			canJump = false;
 
 			// TODO: play jump sound
 			jump.play();
@@ -155,5 +156,10 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	@Override
 	public void update(int delta) {
 
+	}
+
+	@Override
+	public void collisionOccured(CollisionEvent event) {
+		 canJump = true;
 	}
 }

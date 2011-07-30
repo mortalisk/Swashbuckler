@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
+import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;

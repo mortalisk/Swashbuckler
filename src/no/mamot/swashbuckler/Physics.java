@@ -4,6 +4,7 @@ import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
 import net.phys2d.raw.World;
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
+import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
 
 public class Physics implements CollisionListener {
@@ -27,7 +28,9 @@ public class Physics implements CollisionListener {
 	public void init() {
 		if (level != null) {
 			for (int i = level.getGameObjectList().size() - 1; i >= 0; i--) {
-				level.getGameObjectList().get(i).addPhysics(world);
+				GameObject gameObject = level.getGameObjectList().get(i);
+				gameObject.addPhysics(world);
+				gameObject.getBody().setUserData(gameObject);
 			}
 		}
 		world.addListener(this);
@@ -39,10 +42,8 @@ public class Physics implements CollisionListener {
 
 	@Override
 	public void collisionOccured(CollisionEvent event) {
-		// the acting object is now resting
-		event.getBodyB().setIsResting(true);
-		event.getBodyA().setIsResting(true);
-		System.out.println(event);
+		((GameObject)event.getBodyA().getUserData()).collisionOccured(event);
+		((GameObject)event.getBodyB().getUserData()).collisionOccured(event);
 	}
 
 }
