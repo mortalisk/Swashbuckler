@@ -158,8 +158,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 			World world) {
 		System.out.println(event);
 		ROVector2f cn = event.getNormal();
-		float cos = cn.getX() / cn.getY();
-		if (Math.abs(cos) < 0.75 && cn.getY() >= 0.0) {
+		if (cn.getY() >= 0.0) {
 			canJump = true;
 		}
 		
