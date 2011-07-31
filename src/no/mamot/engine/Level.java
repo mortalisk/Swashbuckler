@@ -8,11 +8,12 @@ public interface Level {
 
 	List<GameObject> getGameObjectList();
 
-	List<Swashbuckler> getEntityList();
-
 	List<Drawable> getDrawableList();
 
 	List<Updateable> getUpdatableList();
 
 	void removeObject(Object object);
+	
+	Swashbuckler getMan();
+	
 }
