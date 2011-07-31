@@ -175,7 +175,7 @@ public class LevelSaver {
 				Shape polygon = new Polygon(poly);
 				Obstacle obstacle = new Obstacle(polygon, ot.getTexture());
 				polygonCreator.getObstacles().add(obstacle);
-				level.getDrawableList().add(swashbuckler);
+				level.getDrawableList().add(obstacle);
 			}
 			
 			
