@@ -42,6 +42,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JMenu jMenu1;
 	private ControlPanelActionListener controlPanelActionListener;
 	private JMenuItem jMenuItem4;
+	private JMenuItem jMenuItem5;
 	private ButtonGroup buttonGroup1;
 	private JRadioButtonMenuItem jRadioButtonMenuItem1;
 	private JRadioButtonMenuItem jRadioButtonMenuItem2;
@@ -80,12 +81,20 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 								.addActionListener(controlPanelActionListener);
 					}
 					{
+						jMenuItem5 = new JMenuItem();
+						jMenu1.add(jMenuItem5);
+						jMenuItem5.setText("Load");
+						jMenuItem5
+								.addActionListener(controlPanelActionListener);
+					}
+					{
 						jMenuItem2 = new JMenuItem();
 						jMenu1.add(jMenuItem2);
 						jMenuItem2.setText("Level properties");
 						jMenuItem2
 								.addActionListener(controlPanelActionListener);
 					}
+				
 					{
 						jMenuItem3 = new JMenuItem();
 						jMenu1.add(jMenuItem3);
@@ -93,6 +102,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jMenuItem3
 								.addActionListener(controlPanelActionListener);
 					}
+					
 				}
 				{
 					jMenu2 = new JMenu();
@@ -195,7 +205,9 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			if (event.getSource().equals(jMenuItem1)) { // Save
 				saveLevel();
 
-			} else if (event.getSource().equals(jMenuItem2)) { // Level
+			}else if (event.getSource().equals(jMenuItem5)) { // load
+				loadLevel();
+			}else if (event.getSource().equals(jMenuItem2)) { // Level
 																// properties
 				System.out.println("Level properties");
 			} else if (event.getSource().equals(jMenuItem3)) { // Exit
@@ -219,6 +231,37 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				drawTourmaline();
 			} 
 
+		}
+
+		private void loadLevel() {
+			System.out.println("Load");
+			String path = System.getProperty("user.dir");
+			path += ".\\data\\levels\\";
+			JFileChooser fc = new JFileChooser(path);
+			fc.setFileFilter(new FileFilter() {
+
+				@Override
+				public String getDescription() {
+					return "Level XML files (*.level.xml])";
+				}
+
+				@Override
+				public boolean accept(File f) {
+					return f.getName().endsWith(".level.xml");
+				}
+			});
+			int returnVal = fc.showOpenDialog(jMenuItem1.getParent());
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile(); // might just be a
+													// string??
+				System.out.println("Selected file " + file);
+				String[] name = file.getName().split("[.]");
+				levelEditor.load(name[0]);
+			} else {
+				System.out.println("Canceled");
+			}
+			
 		}
 
 		private void saveLevel() {

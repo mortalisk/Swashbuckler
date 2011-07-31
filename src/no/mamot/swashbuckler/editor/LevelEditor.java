@@ -135,4 +135,8 @@ public class LevelEditor implements Engine {
 		return entityCreator;
 	}
 
+	public void load(String string) {
+		levelSaver.editLevel(string);		
+	}
+
 }
