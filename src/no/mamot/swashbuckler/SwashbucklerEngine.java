@@ -105,7 +105,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.setLevel(level);
 		physics.init();
 
-		Sound music = new Sound("data/Music/backgroundSound.wav");
+		Sound music = new Sound("data/Music/backgroundSound2.wav");
 		music.loop();
 	}
 
