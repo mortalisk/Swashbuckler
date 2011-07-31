@@ -137,7 +137,7 @@ public class LevelSaver {
 		return doc.getValue();
 	}
 	
-	public void editLevel(String name) {
+	public void loadLevelForEditor(String name) {
 		try {
 			LevelType levelType = unmarshal(LevelType.class,
 					new FileInputStream("data/levels/" +name +".level.xml"));
