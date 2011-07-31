@@ -9,6 +9,10 @@ public class EntityCreator {
 
 	private List<Entity> entityList = new ArrayList<Entity>();
 	private Entity swashbuckler = null;
+	public void setSwashbuckler(Entity swashbuckler) {
+		this.swashbuckler = swashbuckler;
+	}
+
 	private LevelImplEditor level;
 
 	public EntityCreator(LevelImplEditor level) {

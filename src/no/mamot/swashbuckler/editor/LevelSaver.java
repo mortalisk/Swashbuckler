@@ -30,6 +30,8 @@ import no.mamot.swashbuckler.xml.PointType;
 import no.mamot.swashbuckler.xml.ShapeType;
 
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
 
 public class LevelSaver {
 
@@ -133,6 +135,51 @@ public class LevelSaver {
 		@SuppressWarnings("unchecked")
 		JAXBElement<T> doc = (JAXBElement<T>) u.unmarshal(inputStream);
 		return doc.getValue();
+	}
+	
+	public void editLevel(String name) {
+		try {
+			LevelType levelType = unmarshal(LevelType.class,
+					new FileInputStream("data/levels/" +name +".level.xml"));
+			
+			// SET ENTITIES
+			List<EntityType> entities = levelType.getEntities().getEntities();
+			entityCreator.getEntityList().clear();
+			for (EntityType et : entities) {
+				Entity entity = new Entity(TypeEnum.valueOf(et.getType().toString()), (float)et.getX(), (float)et.getY());
+				entityCreator.getEntityList().add(entity);
+			}
+			
+			// SET PLAYER
+			Entity swashbuckler = new Entity(TypeEnum.SWASHBUCKLER, (float)levelType.getPlayer().getX(), (float)levelType.getPlayer().getY());
+			entityCreator.setSwashbuckler(swashbuckler);
+			
+			// SET OBSTACLES
+			polygonCreator.getObstacles().clear();
+			List<ObstacleType> obstacles = levelType.getObstacles().getObstacle();
+			for (ObstacleType ot : obstacles) {
+				List<PointType> points = ot.getShape().getPoints().getPoint();
+				float[] poly = new float[points.size()*2];
+				for (int i = 0; i<points.size(); i++) {
+					poly[i] = points.get(i).getX();
+					poly[i+1] = points.get(i).getY();
+				}
+				Shape polygon = new Polygon(poly);
+				Obstacle obstacle = new Obstacle(polygon);
+				polygonCreator.getObstacles().add(obstacle);
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Level loadLevel() throws SlickException {
