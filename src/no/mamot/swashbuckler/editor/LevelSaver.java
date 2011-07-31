@@ -168,9 +168,9 @@ public class LevelSaver {
 			for (ObstacleType ot : obstacles) {
 				List<PointType> points = ot.getShape().getPoints().getPoint();
 				float[] poly = new float[points.size()*2];
-				for (int i = 0; i<points.size(); i+=2) {
-					poly[i] = points.get(i).getX();
-					poly[i+1] = points.get(i).getY();
+				for (int i = 0; i<points.size(); i+=1) {
+					poly[i*2] = points.get(i).getX();
+					poly[i*2+1] = points.get(i).getY();
 				}
 				Shape polygon = new Polygon(poly);
 				Obstacle obstacle = new Obstacle(polygon, ot.getTexture());
