@@ -71,23 +71,28 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		if (input.isKeyDown(Input.KEY_D)) {
 			level.getMan().right(delta);
 		}
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			
-			LightningStrike strike = new LightningStrike(level.getMan());
-			strike.setPlayer(level.getMan());
-			strike.setPlayerLevel(level);
-			//strike.setPosition(level.getMan().getPosition().getX(),level.getMan().getPosition().getY());
-			strike.setPosition(input.getMouseX() + camera.getTopLeftCorner().x,
-					input.getMouseY() + camera.getTopLeftCorner().y);
-			strike.init();
-			level.getDrawableList().add(strike);
-			level.getGameObjectList().add(strike);
-			level.getUpdatableList().add(strike);
+		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {			
+			attack(input);
 		}
 		if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
 			level.getMan().goTo(input.getMouseX() + camera.getTopLeftCorner().x,
 					input.getMouseY() + camera.getTopLeftCorner().y);
 		}
+	}
+
+	
+	private void attack(Input input) {
+		// use command pattern..
+		LightningStrike strike = new LightningStrike(level.getMan());
+		strike.setPlayer(level.getMan());
+		strike.setPlayerLevel(level);
+		//strike.setPosition(level.getMan().getPosition().getX(),level.getMan().getPosition().getY());
+		strike.setPosition(input.getMouseX() + camera.getTopLeftCorner().x,
+				input.getMouseY() + camera.getTopLeftCorner().y);
+		strike.init();
+		level.getDrawableList().add(strike);
+		level.getGameObjectList().add(strike);
+		level.getUpdatableList().add(strike);
 	}
 
 	@Override
