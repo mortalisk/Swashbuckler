@@ -3,6 +3,7 @@ package no.mamot.swashbuckler.editor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -223,7 +224,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 		private void saveLevel() {
 			System.out.println("Save");
 			String path = System.getProperty("user.dir");
-			path += "data/levels/";
+			path += ".\\data\\levels\\";
 			JFileChooser fc = new JFileChooser(path);
 			fc.setFileFilter(new FileFilter() {
 
@@ -255,8 +256,12 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			
 					System.out.println("Selecting texture");
 					String path = System.getProperty("user.dir");
-					path += "data/textures/";
-					JFileChooser fc = new JFileChooser(path);
+					path += ".\\data\\textures\\";
+					
+					File f = new File(path);
+				
+					JFileChooser fc = new JFileChooser(f);
+
 					
 					int returnVal = fc.showOpenDialog(jMenuItem1.getParent());
 
