@@ -135,11 +135,11 @@ public class LevelSaver {
 		return doc.getValue();
 	}
 
-	public Level loadLevel(SwashbucklerEngine engine) throws SlickException {
+	public Level loadLevel() throws SlickException {
 		try {
 			LevelType levelType = unmarshal(LevelType.class,
 					new FileInputStream("data/levels/hei.level.xml"));
-			Level level = new LevelImpl();
+			LevelImpl level = new LevelImpl();
 
 			float manX = (float) levelType.getPlayer().getX();
 			float manY = (float) levelType.getPlayer().getY();
@@ -148,7 +148,7 @@ public class LevelSaver {
 					"/data/Swashbuckler/Swashbuckler.png", "Hero", 15.5f, manX,
 					manY, new org.newdawn.slick.geom.Vector2f(250, 500), 100.0f);
 
-			engine.setMan(man);
+			level.setMan(man);
 			level.getDrawableList().add(man);
 			level.getGameObjectList().add(man);
 
