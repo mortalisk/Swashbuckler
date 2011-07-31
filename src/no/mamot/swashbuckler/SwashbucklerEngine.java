@@ -72,7 +72,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 			level.getMan().right(delta);
 		}
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			System.out.println("Click");
+			
 			LightningStrike strike = new LightningStrike(level.getMan());
 			strike.setPlayer(level.getMan());
 			strike.setPlayerLevel(level);
