@@ -81,6 +81,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	@Override
 	public void init() throws SlickException {
 		level = levelLoader.loadLevel(this);
+		
 
 		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
 

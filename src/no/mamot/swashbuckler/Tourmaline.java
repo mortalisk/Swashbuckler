@@ -83,7 +83,7 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 	public void collisionOccured(CollisionEvent event, GameObject other, World world) {
 		if (other == player) {
 			player.addScore(value);
-			playerLevel.RemoveObject(this);
+			playerLevel.removeObject(this);
 			pickUp.play();
 			world.remove(body);
 			

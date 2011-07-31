@@ -14,13 +14,5 @@ public interface Level {
 
 	List<Updateable> getUpdatableList();
 
-	void RemoveObject(Object object);
-
-	void AddToObjectList(GameObject object);
-
-	void AddToEntityList(Swashbuckler object);
-
-	void AddToDrawableList(Drawable object);
-
-	void AddToUpdatableList(Updateable object);
+	void removeObject(Object object);
 }
