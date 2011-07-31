@@ -256,15 +256,10 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			
 					System.out.println("Selecting texture");
 					String path = System.getProperty("user.dir");
-					path += ".\\data\\textures\\";
-					
-					File f = new File(path);
-				
-					JFileChooser fc = new JFileChooser(f);
-
-					
+					path += ".\\data\\textures\\";					
+					File f = new File(path);				
+					JFileChooser fc = new JFileChooser(f);					
 					int returnVal = fc.showOpenDialog(jMenuItem1.getParent());
-
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						File file = fc.getSelectedFile(); // might just be a
 															// string??
