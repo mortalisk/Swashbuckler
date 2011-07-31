@@ -27,6 +27,8 @@ public class LevelEditor implements Engine {
 	private LevelEditorState state;
 	private LevelImplEditor level;
 	private StateFactory stateFactory;
+	private boolean loadLevel = false;
+	private String levelToLoad = "";
 
 	private EntityCreator entityCreator;
 
@@ -76,9 +78,15 @@ public class LevelEditor implements Engine {
 
 	@Override
 	public void updateWorld(int delta) {
+		if (loadLevel){
+			System.out.println("hei");
+			levelSaver.loadLevelForEditor(levelToLoad);
+			loadLevel = false;
+		}
 		for (Updateable updateable : level.getUpdatableList()) {
 			updateable.update(delta);
 		}
+
 
 	}
 
@@ -136,7 +144,8 @@ public class LevelEditor implements Engine {
 	}
 
 	public void load(String string) {
-		levelSaver.editLevel(string);		
+		levelToLoad = string;
+		loadLevel = true;
 	}
 
 }
