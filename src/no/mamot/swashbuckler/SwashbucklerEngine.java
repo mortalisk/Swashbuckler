@@ -20,7 +20,6 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	private Level level;
 	private View view;
 	private LevelSaver levelLoader = new LevelSaver(null, null);
-	private Swashbuckler man;
 	int screenHeight = 768;
 	int screenWidth = 1024;
 	private Physics physics;
@@ -37,7 +36,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	@Override
 	public void updateWorld(int delta) {
 		physics.doPhysics(delta);
-		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
+		camera.setCenter(level.getMan().getPosition().getX(), level.getMan().getPosition().getY());
 
 		for (int i = level.getUpdatableList().size() - 1; i >= 0; i--) {
 			level.getUpdatableList().get(i).update(delta);
@@ -58,7 +57,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	public void handleInput(Input input, int delta) {
 		// movement
 		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			man.jump();
+			level.getMan().jump();
 		}
 		if (input.isKeyDown(Input.KEY_W)) {
 			// position.y -= speed / delta;
@@ -67,23 +66,22 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 			// position.y += speed / delta;
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
-			man.left(delta);
+			level.getMan().left(delta);
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
-			man.right(delta);
+			level.getMan().right(delta);
 		}
 		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			man.goTo(input.getMouseX() + camera.getTopLeftCorner().x,
+			level.getMan().goTo(input.getMouseX() + camera.getTopLeftCorner().x,
 					input.getMouseY() + camera.getTopLeftCorner().y);
 		}
 	}
 
 	@Override
 	public void init() throws SlickException {
-		level = levelLoader.loadLevel(this);
+		level = levelLoader.loadLevel();
 		
-
-		camera.setCenter(man.getPosition().getX(), man.getPosition().getY());
+		camera.setCenter(level.getMan().getPosition().getX(), level.getMan().getPosition().getY());
 
 		view.setLevel(level);
 		physics.setLevel(level);
@@ -94,11 +92,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	}
 
 	public Swashbuckler getMan() {
-		return man;
-	}
-
-	public void setMan(Swashbuckler man) {
-		this.man = man;
+		return level.getMan();
 	}
 
 }
