@@ -165,7 +165,7 @@ public class LevelSaver {
 					poly[i+1] = points.get(i).getY();
 				}
 				Shape polygon = new Polygon(poly);
-				Obstacle obstacle = new Obstacle(polygon);
+				Obstacle obstacle = new Obstacle(polygon, ot.getTexture());
 				polygonCreator.getObstacles().add(obstacle);
 			}
 			
