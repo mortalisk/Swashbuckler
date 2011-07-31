@@ -142,20 +142,28 @@ public class LevelSaver {
 			LevelType levelType = unmarshal(LevelType.class,
 					new FileInputStream("data/levels/" +name +".level.xml"));
 			
+			// clear stuff
+			entityCreator.getEntityList().clear();
+			polygonCreator.getObstacles().clear();
+			Level level = entityCreator.getLevel();
+			level.getDrawableList().clear();
+			level.getUpdatableList().clear();
+			
+			
 			// SET ENTITIES
 			List<EntityType> entities = levelType.getEntities().getEntities();
-			entityCreator.getEntityList().clear();
 			for (EntityType et : entities) {
 				Entity entity = new Entity(TypeEnum.valueOf(et.getType().toString()), (float)et.getX(), (float)et.getY());
 				entityCreator.getEntityList().add(entity);
+				level.getDrawableList().add(entity);
 			}
 			
 			// SET PLAYER
 			Entity swashbuckler = new Entity(TypeEnum.SWASHBUCKLER, (float)levelType.getPlayer().getX(), (float)levelType.getPlayer().getY());
 			entityCreator.setSwashbuckler(swashbuckler);
+			level.getDrawableList().add(swashbuckler);
 			
 			// SET OBSTACLES
-			polygonCreator.getObstacles().clear();
 			List<ObstacleType> obstacles = levelType.getObstacles().getObstacle();
 			for (ObstacleType ot : obstacles) {
 				List<PointType> points = ot.getShape().getPoints().getPoint();
@@ -167,6 +175,7 @@ public class LevelSaver {
 				Shape polygon = new Polygon(poly);
 				Obstacle obstacle = new Obstacle(polygon, ot.getTexture());
 				polygonCreator.getObstacles().add(obstacle);
+				level.getDrawableList().add(swashbuckler);
 			}
 			
 			

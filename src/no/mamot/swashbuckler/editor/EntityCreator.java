@@ -3,6 +3,8 @@ package no.mamot.swashbuckler.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.mamot.engine.Level;
+
 import org.newdawn.slick.SlickException;
 
 public class EntityCreator {
@@ -87,5 +89,9 @@ public class EntityCreator {
 		for (Entity entity : entityList) {
 			entity.setSelected(false);
 		}
+	}
+
+	public Level getLevel() {
+		return level;
 	}
 }
