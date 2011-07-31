@@ -1,38 +1,45 @@
 package no.mamot.swashbuckler;
 
 import net.phys2d.math.ROVector2f;
+import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
 import net.phys2d.raw.shapes.Box;
+import net.phys2d.raw.shapes.Circle;
 import no.mamot.engine.GameObject;
+import no.mamot.engine.Level;
+
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleSystem;
-import org.newdawn.slick.particles.effects.FireEmitter;
 
-public class Heal extends GameEntity {
+public class LightningStrike extends GameEntity {
 
 	private Image image = null;
 	private ParticleSystem system;
 	private int heal = 5;
 	private boolean particleEnable = true;
-	private long timeWhenHealedLast = 0;
-	private Sound healSound = null;
+	private long timeWhenSpawned = 0;
 	
 	
 	
-	public Heal () throws SlickException{
-		image = new Image("data/particles/Heal.png", false);
+	public LightningStrike (Swashbuckler player) {
+		try {
+			image = new Image("data/particles/Lightning.png", false);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		system = new ParticleSystem(image);	
-		Box shape = new Box(20, 40);
-		body = new StaticBody(shape);
-		body.setEnabled(false);
-		healSound = new Sound("data/Sound/healing.wav");
+		Circle shape = new Circle(50);
+		body = new Body(shape,400.0f);
+		body.setEnabled(true);
+		timeWhenSpawned = System.currentTimeMillis();
+		
 		
 	}	
 	
@@ -54,18 +61,18 @@ public class Heal extends GameEntity {
 		// x y might just be relative to the position of the system....	
 		ConfigurableEmitter healEmitter = new ConfigurableEmitter("Heal");
 		HealEmitterValue gravity = new HealEmitterValue();
-		gravity.setValue(-5.0f);		
+		gravity.setValue(0.0f);		
 		HealEmitterValue angle = new HealEmitterValue();
 		angle.setValue(60.0f);		
 		HealEmitterValue growth = new HealEmitterValue();
-		growth.setValue(10.0f);		
+		growth.setValue(-44.0f);		
 		healEmitter.gravityFactor = gravity;
 		healEmitter.angularOffset = angle;
 		healEmitter.growthFactor = growth;
-		healEmitter.spawnCount.setMin(1.0f);
-		healEmitter.spawnCount.setMax(1.0f);
-		healEmitter.initialSize.setMin(20.0f);
-		healEmitter.initialSize.setMax(20.0f);
+		healEmitter.spawnCount.setMin(20.0f);
+		healEmitter.spawnCount.setMax(20.0f);
+		healEmitter.initialSize.setMin(13.0f);
+		healEmitter.initialSize.setMax(13.0f);
 		healEmitter.spawnInterval.setMin(250.0f);
 		healEmitter.spawnInterval.setMax(250.0f);
 		healEmitter.initialLife.setMin(1000.0f);
@@ -90,14 +97,18 @@ public class Heal extends GameEntity {
 		
 		long time = System.currentTimeMillis();
 		float distance = player.getPosition().distance(getPosition());
-		if((time-timeWhenHealedLast) > 100 && distance < 35) {
-			player.addHP(heal);
-			timeWhenHealedLast = time;
-			healSound.play();
+		if((time-timeWhenSpawned) > 400 ) {
+			remove();
+			
 		}
+	
 	}
 	
-
+	private void remove(){
+		playerLevel.getDrawableList().remove(this);
+		playerLevel.getUpdatableList().remove(this);
+		playerLevel.getGameObjectList().remove(this);
+	}
 
 	@Override
 	public ROVector2f getPosition() {
