@@ -45,6 +45,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		Circle shape = new Circle(20);
 		body = new Body(shape,1000.0f);
 		body.setEnabled(true);
+		body.setMaxVelocity(2000.0f, 2000.0f);
 		timeWhenSpawned = System.currentTimeMillis();
 		
 		
@@ -88,7 +89,8 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		healEmitter.speed.setMin(50.0f);
 		healEmitter.speed.setMax(50.0f);
 		system.addEmitter(healEmitter);
-		system.setBlendingMode(ParticleSystem.BLEND_COMBINE);				
+		system.setBlendingMode(ParticleSystem.BLEND_COMBINE);	
+		body.addExcludedBody(playerLevel.getMan().getBody());
 	}
 	@Override
 	public void draw(Graphics g) {
@@ -143,18 +145,19 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	}
 	@Override
 	public void attack(float mouseX, float mouseY) {
-		world.remove(body);
-		body.setPosition(mouseX, mouseY);
-		world.add(body);
+		
+		body.setPosition(playerLevel.getMan().getPosition().getX(),playerLevel.getMan().getPosition().getY());
+		
+		
 		system.setPosition(mouseX, mouseY);
 		timeWhenSpawned = System.currentTimeMillis();
 		setEnableParticleEffect(true);
-		float x = body.getPosition().getX();
-		float y = body.getPosition().getY();
+		float x = mouseX;
+		float y = mouseY;
 		x -= playerLevel.getMan().getPosition().getX();
-		y -= playerLevel.getMan().getPosition().getX();
-		x = x*1000;
-		y = y *1000;
+		y -= playerLevel.getMan().getPosition().getY();
+		x = x*1000000;
+		y = y *1000000;
 		body.addForce(new Vector2f(x, y));
 	}
 
