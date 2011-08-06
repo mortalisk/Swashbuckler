@@ -65,6 +65,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	}
 
 	public final void draw(Graphics g) {
+		
 		getImage().draw(body.getPosition().getX() - 10,
 				body.getPosition().getY() - bodyRadius * 1.5f);
 		// ShapeRenderer.draw(this.getShape());
@@ -73,6 +74,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 				+ 90.0f, getPosition().getY() - (768 / 2) + 9.0f);
 		g.drawString("HP: " + getHP(), getPosition().getX() - (1024 / 2)
 				+ 225.0f, getPosition().getY() - (768 / 2) + 9.0f);
+		//g.drawRect(body.getPosition().getX(), body.getPosition().getY(), 2, 2);
 	}
 
 	public final Image getImage() {
@@ -105,13 +107,14 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	public void jump() {
 		// only allow jumping if the body is currently touching something
 		CollisionEvent[] events = world.getContacts(body);
-	
-		if (events.length > 0) {
-			body.addForce(jumpForce);
-			canJump = false;
-
-			// TODO: play jump sound
-			jump.play();
+		// the distance that contact point needs to be below center of man
+		float distanceBelow = 10;
+		
+		for (CollisionEvent e : events) {
+			if (e.getPoint().getY() > body.getPosition().getY() + distanceBelow){
+				body.addForce(jumpForce);
+				jump.play();
+			}
 		}
 	}
 
@@ -163,10 +166,15 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	@Override
 	public void collisionOccured(CollisionEvent event, GameObject other,
 			World world) {
+		
+		ROVector2f cn = event.getPoint();
+		System.out.println(cn);
 		System.out.println(event);
-		ROVector2f cn = event.getNormal();
-		if (cn.getY() >= 0.0) {
+		
+		if (cn.getY() > body.getPosition().getY()) {
 			canJump = true;
+		} else {
+			canJump = false;
 		}
 		
 	}

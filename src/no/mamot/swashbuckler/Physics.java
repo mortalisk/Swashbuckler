@@ -13,8 +13,8 @@ public class Physics implements CollisionListener {
 	World world = null;
 
 	public Physics(float gravity) {
-		world = new World(new net.phys2d.math.Vector2f(0, gravity), 1,
-				new QuadSpaceStrategy(5, 5));
+		world = new World(new net.phys2d.math.Vector2f(0, gravity), 100,
+				new QuadSpaceStrategy(20, 4));
 	}
 
 	public void setLevel(Level level) {
@@ -45,6 +45,7 @@ public class Physics implements CollisionListener {
 
 	@Override
 	public void collisionOccured(CollisionEvent event) {
+		
 		((GameObject)event.getBodyA().getUserData()).collisionOccured(event, (GameObject)event.getBodyB().getUserData(), world);
 		((GameObject)event.getBodyB().getUserData()).collisionOccured(event, (GameObject)event.getBodyA().getUserData(), world);
 		

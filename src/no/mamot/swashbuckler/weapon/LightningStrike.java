@@ -32,9 +32,11 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	private int heal = 5;
 	private boolean particleEnable = true;
 	private long timeOfCollision = 0;
+	private long timeOfShot = 0;
 	private Shape thisShape;
 	private boolean collision = false;
 	private boolean showBullet = false;
+	private Circle shape;
 	
 	
 	
@@ -47,13 +49,11 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 			e.printStackTrace();
 		}
 		system = new ParticleSystem(particleImage);	
-		Circle shape = new Circle(10);
+		shape = new Circle(10);
 		body = new Body(shape,1000.0f);
 		body.setEnabled(true);
 		body.setMaxVelocity(1000.0f, 1000.0f);
 		timeOfCollision = System.currentTimeMillis();
-		
-		
 		
 	}	
 	
@@ -128,12 +128,6 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		
 	
 	}
-	
-	private void remove(){
-		playerLevel.getDrawableList().remove(this);
-		playerLevel.getUpdatableList().remove(this);
-		playerLevel.getGameObjectList().remove(this);
-	}
 
 	@Override
 	public ROVector2f getPosition() {
@@ -148,25 +142,33 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		system.setPosition(body.getPosition().getX(), body.getPosition().getY());
 		timeOfCollision = System.currentTimeMillis();
 		setEnableParticleEffect(true);
+		
+	}
+	
+	private void remove() {
 		showBullet = false;		
 		world.remove(body);
 	}
+	
 	@Override
 	public void attack(float mouseX, float mouseY) {
-		
+		long time = System.currentTimeMillis();
+		if (showBullet && time - timeOfShot < 5) return;
+		//remove();
+		timeOfShot = time;
+		body = new Body(shape, 1000.0f);
+		body.addExcludedBody(player.getBody());
+		body.setUserData(this);
 		body.setPosition(playerLevel.getMan().getPosition().getX(),playerLevel.getMan().getPosition().getY());
 		world.add(body);
 		showBullet = true;
-		
-		
-		
 		
 		float x = mouseX;
 		float y = mouseY;
 		x -= playerLevel.getMan().getPosition().getX();
 		y -= playerLevel.getMan().getPosition().getY();
-		x = x*100000;
-		y = y *100000;
+		x = x*350000;
+		y = y *350000;
 		body.addForce(new Vector2f(x, y));
 	}
 
