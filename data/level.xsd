@@ -87,7 +87,7 @@
 	    		<enumeration value="TOURMALINE"></enumeration>
 	    		<enumeration value="FIRE"></enumeration>
 	    		<enumeration value="HEAL"></enumeration>
-	    		
+	    		<enumeration value="RHINOBOT"></enumeration>
 	    	</restriction>
     </simpleType>
     
