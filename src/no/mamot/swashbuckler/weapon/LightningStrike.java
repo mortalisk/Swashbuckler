@@ -119,6 +119,8 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		if(collision&& (time-timeOfCollision) > 400 ) {
 			setEnableParticleEffect(false);
 			collision = false;
+			body.setEnabled(false);
+			
 			
 			
 			
@@ -152,6 +154,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	
 	@Override
 	public void attack(float mouseX, float mouseY) {
+		remove();
 		long time = System.currentTimeMillis();
 		if (showBullet && time - timeOfShot < 5) return;
 		//remove();
