@@ -40,7 +40,7 @@ public final class Rhinobot extends GameEntity implements GameObject, Drawable,
 	Random randomGenerator = new Random();
 
 	public Rhinobot() throws SlickException {
-		this("/data/Robots/Rhinobot.png", "Rhinobot", 17.5f, 300.0f, 370.0f,
+		this("/data/Robots/Rhinobot.png", "Rhinobot", 17.0f, 300.0f, 370.0f,
 				180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), 1.0f,
 				25.0f, 75.0f);
 	}
@@ -98,7 +98,7 @@ public final class Rhinobot extends GameEntity implements GameObject, Drawable,
 
 	@Override
 	public void draw(Graphics g) {
-		getImage().draw(body.getPosition().getX() - 10,
+		getImage().draw(body.getPosition().getX() - 20,
 				body.getPosition().getY() - bodyRadius * 1.5f);
 		//ShapeRenderer.draw(this.getShape());
 	}

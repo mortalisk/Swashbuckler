@@ -14,6 +14,7 @@ public class StateFactory {
 	private LevelEditorState robatState = null;
 	private LevelEditorState tourmalineState = null;
 	private LevelEditorState swashbucklerState = null;
+	private LevelEditorState spaceshipState = null;
 
 	public LevelEditorState getPolygonState() {
 		if (polygonState == null) {
@@ -48,6 +49,13 @@ public class StateFactory {
 			rhinobotState = new RhinobotState(levelEditor.getEntityCreator());
 		}
 		return rhinobotState;
+	}
+	
+	public LevelEditorState getSpaceshipState() {
+		if (spaceshipState == null) {
+			spaceshipState = new SpaceshipState(levelEditor.getEntityCreator());
+		}
+		return spaceshipState;
 	}
 
 	public LevelEditorState getRobatState() {

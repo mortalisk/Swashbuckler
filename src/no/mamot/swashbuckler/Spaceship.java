@@ -3,19 +3,24 @@ package no.mamot.swashbuckler;
 import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
+import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
+import no.mamot.engine.Drawable;
+import no.mamot.engine.GameObject;
+import no.mamot.engine.Updateable;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Spaceship extends GameEntity {
+public class Spaceship extends GameEntity implements GameObject, Drawable,
+Updateable {
 
 	private float bodyRadius = 0;
 	private Image image = null;
 
 	public Spaceship() throws SlickException {
-		this("/data/Swashbuckler/Spaceship.png", "Spaceship1", 20.0f, 800.0f,
+		this("/data/Swashbuckler/Spaceship.png", "Spaceship1", 0.0f, 800.0f,
 				157.0f);
 	}
 
@@ -29,11 +34,8 @@ public class Spaceship extends GameEntity {
 
 		net.phys2d.raw.shapes.Circle physCircle = new net.phys2d.raw.shapes.Circle(
 				radius);
-		body = new Body(entityName, physCircle, 100);
-		body.setRotatable(false);
-		body.setFriction(0.5f);
-		body.setPosition(x, y);
-		body.setIsResting(true);
+		body = new StaticBody(entityName, physCircle);
+		body.setEnabled(false);
 	}
 
 	@Override

@@ -124,6 +124,9 @@ public class LevelEditor implements Engine {
 		if (changeto.equals(DrawEnum.DRAW_SWASHBUCKLER)) {
 			state = stateFactory.getSwashbucklerState();
 		}
+		if (changeto.equals(DrawEnum.DRAW_SPACESHIP)) {
+			state = stateFactory.getSpaceshipState();
+		}
 
 	}
 

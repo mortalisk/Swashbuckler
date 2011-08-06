@@ -52,6 +52,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JRadioButtonMenuItem jRadioButtonMenuItem6;
 	private JRadioButtonMenuItem jRadioButtonMenuItem7;
 	private JRadioButtonMenuItem jRadioButtonMenuItem8;
+	private JRadioButtonMenuItem jRadioButtonMenuItem9;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -190,6 +191,15 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 								.addActionListener(controlPanelActionListener);
 
 					}
+					{
+						jRadioButtonMenuItem9 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem9);
+						jRadioButtonMenuItem9.setText("Draw Spaceship");
+						getButtonGroup1().add(jRadioButtonMenuItem9);
+						jRadioButtonMenuItem9
+								.addActionListener(controlPanelActionListener);
+
+					}
 				}
 			}
 			pack();
@@ -237,6 +247,8 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 				drawSwashbuckler();
 			} else if (event.getSource().equals(jRadioButtonMenuItem5)) {
 				drawTourmaline();
+			} else if (event.getSource().equals(jRadioButtonMenuItem9)) {
+				drawSpaceship();
 			}
 
 		}
@@ -371,6 +383,13 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 		System.out.println("Draw Tourmaline");
 		if (jRadioButtonMenuItem5.isSelected()) {
 			levelEditor.setState(DrawEnum.DRAW_TOURMALINE);
+		}
+	}
+	
+	private void drawSpaceship() {
+		System.out.println("Draw Spaceship");
+		if (jRadioButtonMenuItem9.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_SPACESHIP);
 		}
 	}
 
