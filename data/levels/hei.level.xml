@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <level xmlns="http://www.example.org/level">
     <player>
-        <x>-637.0</x>
+        <x>-636.0</x>
         <y>-1676.0</y>
     </player>
     <entities>
