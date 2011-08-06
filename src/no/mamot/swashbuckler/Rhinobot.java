@@ -41,7 +41,7 @@ public final class Rhinobot extends GameEntity implements GameObject, Drawable,
 
 	public Rhinobot() throws SlickException {
 		this("/data/Robots/Rhinobot.png", "Rhinobot", 17.0f, 300.0f, 370.0f,
-				180.0f, new org.newdawn.slick.geom.Vector2f(500, 500), 1.0f,
+				180.0f, new org.newdawn.slick.geom.Vector2f(400, 500), 1.0f,
 				25.0f, 75.0f);
 	}
 
