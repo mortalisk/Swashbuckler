@@ -31,7 +31,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	private ParticleSystem system;
 	private int heal = 5;
 	private boolean particleEnable = true;
-	private long timeWhenSpawned = 0;
+	private long timeOfCollision = 0;
 	private Shape thisShape;
 	private boolean collision = false;
 	private boolean showBullet = false;
@@ -51,7 +51,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		body = new Body(shape,1000.0f);
 		body.setEnabled(true);
 		body.setMaxVelocity(1000.0f, 1000.0f);
-		timeWhenSpawned = System.currentTimeMillis();
+		timeOfCollision = System.currentTimeMillis();
 		
 		
 		
@@ -101,14 +101,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	public void draw(Graphics g) {
 
 		ShapeRenderer.draw(new org.newdawn.slick.geom.Circle(body.getPosition().getX(), body.getPosition().getY(), 10));
-		if (collision){
-			setEnableParticleEffect(true);
-			showBullet = false;
-			world.remove(body);
-		}
-		
-		
-		
+
 		if (particleEnable){
 			system.setPosition(body.getPosition().getX(), body.getPosition().getY());
 			system.render();
@@ -122,10 +115,12 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	public void update(int delta) {
 		system.update(delta);		
 		long time = System.currentTimeMillis();
-		float distance = player.getPosition().distance(getPosition());
-		if((time-timeWhenSpawned) > 400 ) {
+		
+		if(collision&& (time-timeOfCollision) > 400 ) {
 			setEnableParticleEffect(false);
 			collision = false;
+			
+			
 			
 		}
 		
@@ -150,15 +145,21 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	@Override
 	public void collisionOccured(CollisionEvent event, GameObject other,World world) {
 		collision = true;
+		system.setPosition(body.getPosition().getX(), body.getPosition().getY());
+		timeOfCollision = System.currentTimeMillis();
+		setEnableParticleEffect(true);
+		showBullet = false;		
+		world.remove(body);
 	}
 	@Override
-	public void attack(float mouseX, float mouseY) {		
+	public void attack(float mouseX, float mouseY) {
+		
 		body.setPosition(playerLevel.getMan().getPosition().getX(),playerLevel.getMan().getPosition().getY());
 		world.add(body);
 		showBullet = true;
 		
-		system.setPosition(mouseX, mouseY);
-		timeWhenSpawned = System.currentTimeMillis();
+		
+		
 		
 		float x = mouseX;
 		float y = mouseY;
