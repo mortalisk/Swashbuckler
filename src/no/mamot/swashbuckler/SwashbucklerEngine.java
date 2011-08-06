@@ -114,6 +114,7 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		level.getGameObjectList().add(strike);
 		level.getUpdatableList().add(strike);
 		level.getMan().setWeapon(strike);
+		physics.addGameObject(strike);
 	}
 
 	public Swashbuckler getMan() {

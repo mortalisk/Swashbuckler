@@ -1,5 +1,6 @@
 package no.mamot.swashbuckler;
 
+import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
 import net.phys2d.raw.World;
@@ -24,7 +25,11 @@ public class Physics implements CollisionListener {
 	public void setLevel(Level level) {
 		this.level = level;
 	}
-
+    public void addGameObject(GameObject object){
+    	world.add(object.getBody());
+    	object.setWorld(world);
+    	object.getBody().setUserData(object);
+    }
 	public void init() {
 		if (level != null) {
 			for (int i = level.getGameObjectList().size() - 1; i >= 0; i--) {

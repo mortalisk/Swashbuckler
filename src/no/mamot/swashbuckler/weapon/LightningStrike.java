@@ -1,6 +1,7 @@
 package no.mamot.swashbuckler.weapon;
 
 import net.phys2d.math.ROVector2f;
+import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
@@ -16,6 +17,8 @@ import no.mamot.swashbuckler.Swashbuckler;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleSystem;
 
@@ -26,6 +29,8 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	private int heal = 5;
 	private boolean particleEnable = true;
 	private long timeWhenSpawned = 0;
+	private Shape thisShape;
+	private boolean collision = false;
 	
 	
 	
@@ -37,10 +42,11 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 			e.printStackTrace();
 		}
 		system = new ParticleSystem(image);	
-		Circle shape = new Circle(50);
-		body = new Body(shape,400.0f);
+		Circle shape = new Circle(20);
+		body = new Body(shape,1000.0f);
 		body.setEnabled(true);
 		timeWhenSpawned = System.currentTimeMillis();
+		
 		
 		
 	}	
@@ -86,6 +92,15 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	}
 	@Override
 	public void draw(Graphics g) {
+		
+		ShapeRenderer.draw( new org.newdawn.slick.geom.Circle
+				(body.getPosition().getX(), body.getPosition().getY(), 20));
+		
+		if (collision){
+			ShapeRenderer.draw( new org.newdawn.slick.geom.Circle
+					(body.getPosition().getX(), body.getPosition().getY(), 10));
+		}
+		
 		if (particleEnable){
 			system.render();
 		}		
@@ -95,14 +110,17 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	}
 	@Override
 	public void update(int delta) {
-		system.update(delta);
-		
+		system.update(delta);		
 		long time = System.currentTimeMillis();
 		float distance = player.getPosition().distance(getPosition());
 		if((time-timeWhenSpawned) > 400 ) {
 			setEnableParticleEffect(false);
+			collision = false;
 			
 		}
+		
+		
+		
 	
 	}
 	
@@ -121,14 +139,23 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	}
 	@Override
 	public void collisionOccured(CollisionEvent event, GameObject other,World world) {
-		
+		collision = true;
 	}
 	@Override
 	public void attack(float mouseX, float mouseY) {
+		world.remove(body);
 		body.setPosition(mouseX, mouseY);
+		world.add(body);
 		system.setPosition(mouseX, mouseY);
 		timeWhenSpawned = System.currentTimeMillis();
 		setEnableParticleEffect(true);
+		float x = body.getPosition().getX();
+		float y = body.getPosition().getY();
+		x -= playerLevel.getMan().getPosition().getX();
+		y -= playerLevel.getMan().getPosition().getX();
+		x = x*1000;
+		y = y *1000;
+		body.addForce(new Vector2f(x, y));
 	}
 
 }
