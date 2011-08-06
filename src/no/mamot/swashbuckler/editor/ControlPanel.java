@@ -51,6 +51,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 	private JRadioButtonMenuItem jRadioButtonMenuItem5;
 	private JRadioButtonMenuItem jRadioButtonMenuItem6;
 	private JRadioButtonMenuItem jRadioButtonMenuItem7;
+	private JRadioButtonMenuItem jRadioButtonMenuItem8;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -94,7 +95,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jMenuItem2
 								.addActionListener(controlPanelActionListener);
 					}
-				
+
 					{
 						jMenuItem3 = new JMenuItem();
 						jMenu1.add(jMenuItem3);
@@ -102,7 +103,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jMenuItem3
 								.addActionListener(controlPanelActionListener);
 					}
-					
+
 				}
 				{
 					jMenu2 = new JMenu();
@@ -113,10 +114,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 					jMenuItem4.addActionListener(controlPanelActionListener);
 					jMenu2.add(jMenuItem4);
 				}
-				
-				
-				
-				
+
 				{
 					jMenu3 = new JMenu();
 					jMenuBar1.add(jMenu3);
@@ -153,6 +151,15 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 						jRadioButtonMenuItem3.setText("Draw Robot");
 						getButtonGroup1().add(jRadioButtonMenuItem3);
 						jRadioButtonMenuItem3
+								.addActionListener(controlPanelActionListener);
+
+					}
+					{
+						jRadioButtonMenuItem8 = new JRadioButtonMenuItem();
+						jMenu3.add(jRadioButtonMenuItem8);
+						jRadioButtonMenuItem8.setText("Draw Rhinobot");
+						getButtonGroup1().add(jRadioButtonMenuItem8);
+						jRadioButtonMenuItem8
 								.addActionListener(controlPanelActionListener);
 
 					}
@@ -205,31 +212,32 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			if (event.getSource().equals(jMenuItem1)) { // Save
 				saveLevel();
 
-			}else if (event.getSource().equals(jMenuItem5)) { // load
+			} else if (event.getSource().equals(jMenuItem5)) { // load
 				loadLevel();
-			}else if (event.getSource().equals(jMenuItem2)) { // Level
+			} else if (event.getSource().equals(jMenuItem2)) { // Level
 																// properties
 				System.out.println("Level properties");
 			} else if (event.getSource().equals(jMenuItem3)) { // Exit
 				System.out.println("Exit");
 			} else if (event.getSource().equals(jMenuItem4)) {
 				setTexture();
-			}		
-			else if (event.getSource().equals(jRadioButtonMenuItem1)) { 
+			} else if (event.getSource().equals(jRadioButtonMenuItem1)) {
 				drawPolygon();
-			} else if (event.getSource().equals(jRadioButtonMenuItem2)) { 
+			} else if (event.getSource().equals(jRadioButtonMenuItem2)) {
 				drawFireParticle();
-			} else if (event.getSource().equals(jRadioButtonMenuItem7)){
+			} else if (event.getSource().equals(jRadioButtonMenuItem7)) {
 				drawHealParticle();
+			} else if (event.getSource().equals(jRadioButtonMenuItem8)) {
+				drawRhinobot();
 			} else if (event.getSource().equals(jRadioButtonMenuItem3)) {
 				drawRobot();
 			} else if (event.getSource().equals(jRadioButtonMenuItem6)) {
 				drawRobat();
-			} else if (event.getSource().equals(jRadioButtonMenuItem4)) { 
+			} else if (event.getSource().equals(jRadioButtonMenuItem4)) {
 				drawSwashbuckler();
-			} else if (event.getSource().equals(jRadioButtonMenuItem5)) { 
+			} else if (event.getSource().equals(jRadioButtonMenuItem5)) {
 				drawTourmaline();
-			} 
+			}
 
 		}
 
@@ -261,7 +269,7 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 			} else {
 				System.out.println("Canceled");
 			}
-			
+
 		}
 
 		private void saveLevel() {
@@ -296,77 +304,82 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 
 		private void setTexture() {
 			System.out.println("Set Texture");
-			
-					System.out.println("Selecting texture");
-					String path = System.getProperty("user.dir");
-					path += ".\\data\\textures\\";					
-					File f = new File(path);				
-					JFileChooser fc = new JFileChooser(f);					
-					int returnVal = fc.showOpenDialog(jMenuItem1.getParent());
-					if (returnVal == JFileChooser.APPROVE_OPTION) {
-						File file = fc.getSelectedFile(); // might just be a
-															// string??
-						System.out.println("Selected file " + file);
-						String name = file.getName();
-						System.out.println("Selected texture = " + name);
-						levelEditor.getPolygonCreator().setTexture(name);
-					} else {
-						System.out.println("Canceled");
-					}
-				}
-			
-		}
 
-		private void drawPolygon() {
-			System.out.println("Draw polygon");
-			if (jRadioButtonMenuItem1.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_POLYGON);
+			System.out.println("Selecting texture");
+			String path = System.getProperty("user.dir");
+			path += ".\\data\\textures\\";
+			File f = new File(path);
+			JFileChooser fc = new JFileChooser(f);
+			int returnVal = fc.showOpenDialog(jMenuItem1.getParent());
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile(); // might just be a
+													// string??
+				System.out.println("Selected file " + file);
+				String name = file.getName();
+				System.out.println("Selected texture = " + name);
+				levelEditor.getPolygonCreator().setTexture(name);
+			} else {
+				System.out.println("Canceled");
 			}
 		}
 
-		private void drawFireParticle() {
-			System.out.println("Draw fire particle");
-			if (jRadioButtonMenuItem2.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_FIREPARTICLE);
-			}
-		}
+	}
 
-		private void drawHealParticle() {
-			System.out.println("Draw heal particle");
-			if (jRadioButtonMenuItem7.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_HEALPARTICLE);
-			}
+	private void drawPolygon() {
+		System.out.println("Draw polygon");
+		if (jRadioButtonMenuItem1.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_POLYGON);
 		}
+	}
 
-		private void drawRobot() {
-			System.out.println("Draw robot");
-			if (jRadioButtonMenuItem3.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_ROBOT);
-			}
+	private void drawFireParticle() {
+		System.out.println("Draw fire particle");
+		if (jRadioButtonMenuItem2.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_FIREPARTICLE);
 		}
+	}
 
-		private void drawRobat() {
-			System.out.println("Draw robat");
-			if (jRadioButtonMenuItem6.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_ROBAT);
-			}
+	private void drawHealParticle() {
+		System.out.println("Draw heal particle");
+		if (jRadioButtonMenuItem7.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_HEALPARTICLE);
 		}
+	}
 
-		private void drawTourmaline() {
-			System.out.println("Draw Tourmaline");
-			if (jRadioButtonMenuItem5.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_TOURMALINE);
-			}
+	private void drawRobot() {
+		System.out.println("Draw robot");
+		if (jRadioButtonMenuItem3.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_ROBOT);
 		}
-
-		private void drawSwashbuckler() {
-			System.out.println("Draw Swashbuckler");
-			if (jRadioButtonMenuItem4.isSelected()) {
-				levelEditor.setState(DrawEnum.DRAW_SWASHBUCKLER);
-			}
-		}
-
+	}
 	
+	private void drawRhinobot() {
+		System.out.println("Draw Rhinobot");
+		if (jRadioButtonMenuItem8.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_RHINOBOT);
+		}
+	}
+
+	private void drawRobat() {
+		System.out.println("Draw robat");
+		if (jRadioButtonMenuItem6.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_ROBAT);
+		}
+	}
+
+	private void drawTourmaline() {
+		System.out.println("Draw Tourmaline");
+		if (jRadioButtonMenuItem5.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_TOURMALINE);
+		}
+	}
+
+	private void drawSwashbuckler() {
+		System.out.println("Draw Swashbuckler");
+		if (jRadioButtonMenuItem4.isSelected()) {
+			levelEditor.setState(DrawEnum.DRAW_SWASHBUCKLER);
+		}
+	}
 
 	@Override
 	public void run() {
@@ -383,6 +396,5 @@ public class ControlPanel extends javax.swing.JFrame implements Runnable {
 		}
 		return buttonGroup1;
 	}
-	
 
 }

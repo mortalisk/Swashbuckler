@@ -112,6 +112,9 @@ public class LevelEditor implements Engine {
 		if (changeto.equals(DrawEnum.DRAW_ROBOT)) {
 			state = stateFactory.getRobotState();
 		}
+		if (changeto.equals(DrawEnum.DRAW_RHINOBOT)) {
+			state = stateFactory.getRhinobotState();
+		}
 		if (changeto.equals(DrawEnum.DRAW_ROBAT)) {
 			state = stateFactory.getRobatState();
 		}
