@@ -33,15 +33,15 @@ public final class Rhinobot extends GameEntity implements GameObject, Drawable,
 	private net.phys2d.math.Vector2f jumpForce = new net.phys2d.math.Vector2f(
 			0, -1500000);
 	private net.phys2d.math.Vector2f leftForce = new net.phys2d.math.Vector2f(
-			-500000, 0);
+			-40000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(
-			500000, 0);
+			40000, 0);
 
 	Random randomGenerator = new Random();
 
 	public Rhinobot() throws SlickException {
 		this("/data/Robots/Rhinobot.png", "Rhinobot", 17.0f, 300.0f, 370.0f,
-				180.0f, new org.newdawn.slick.geom.Vector2f(150, 500), 1.0f,
+				180.0f, new org.newdawn.slick.geom.Vector2f(500, 500), 1.0f,
 				25.0f, 75.0f);
 	}
 
