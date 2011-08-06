@@ -29,6 +29,11 @@ public class Tourmaline extends GameEntity implements GameObject, Drawable,
 	}
 	
 	@Override
+	public boolean collides() {
+		return false;
+	}
+	
+	@Override
 	public void init() {
 		
 	}

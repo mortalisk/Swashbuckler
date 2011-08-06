@@ -12,14 +12,9 @@ public class Physics implements CollisionListener {
 	private Level level;
 	World world = null;
 
-	public Physics() {
-		world = new World(new net.phys2d.math.Vector2f(0, 500), 1,
-				new QuadSpaceStrategy(20, 5));
-	}
-
 	public Physics(float gravity) {
-		world = new World(new net.phys2d.math.Vector2f(0, gravity), 5,
-				new QuadSpaceStrategy(20, 5));
+		world = new World(new net.phys2d.math.Vector2f(0, gravity), 1,
+				new QuadSpaceStrategy(5, 5));
 	}
 
 	public void setLevel(Level level) {
@@ -34,8 +29,10 @@ public class Physics implements CollisionListener {
 		if (level != null) {
 			for (int i = level.getGameObjectList().size() - 1; i >= 0; i--) {
 				GameObject gameObject = level.getGameObjectList().get(i);
+				//if (gameObject.collides()) {
+					world.add(gameObject.getBody());
+				//}
 				gameObject.setWorld(world);
-				world.add(gameObject.getBody());
 				gameObject.getBody().setUserData(gameObject);
 			}
 		}

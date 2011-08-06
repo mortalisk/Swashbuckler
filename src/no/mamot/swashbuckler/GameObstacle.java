@@ -77,5 +77,15 @@ public final class GameObstacle implements GameObject, Drawable {
 		
 	}
 
+	@Override
+	public boolean collidesWithMan() {
+		return true;
+	}
+
+	@Override
+	public boolean collides() {
+		return true;
+	}
+
 
 }

@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
 import no.mamot.swashbuckler.GameEntity;
@@ -136,49 +137,51 @@ public class LevelSaver {
 		JAXBElement<T> doc = (JAXBElement<T>) u.unmarshal(inputStream);
 		return doc.getValue();
 	}
-	
+
 	public void loadLevelForEditor(String name) {
 		try {
 			LevelType levelType = unmarshal(LevelType.class,
-					new FileInputStream("data/levels/" +name +".level.xml"));
-			
+					new FileInputStream("data/levels/" + name + ".level.xml"));
+
 			// clear stuff
 			entityCreator.getEntityList().clear();
 			polygonCreator.getObstacles().clear();
 			Level level = entityCreator.getLevel();
 			level.getDrawableList().clear();
 			level.getUpdatableList().clear();
-			
-			
+
 			// SET ENTITIES
 			List<EntityType> entities = levelType.getEntities().getEntities();
 			for (EntityType et : entities) {
-				Entity entity = new Entity(TypeEnum.valueOf(et.getType().toString()), (float)et.getX(), (float)et.getY());
+				Entity entity = new Entity(TypeEnum.valueOf(et.getType()
+						.toString()), (float) et.getX(), (float) et.getY());
 				entityCreator.getEntityList().add(entity);
 				level.getDrawableList().add(entity);
 			}
-			
+
 			// SET PLAYER
-			Entity swashbuckler = new Entity(TypeEnum.SWASHBUCKLER, (float)levelType.getPlayer().getX(), (float)levelType.getPlayer().getY());
+			Entity swashbuckler = new Entity(TypeEnum.SWASHBUCKLER,
+					(float) levelType.getPlayer().getX(), (float) levelType
+							.getPlayer().getY());
 			entityCreator.setSwashbuckler(swashbuckler);
 			level.getDrawableList().add(swashbuckler);
-			
+
 			// SET OBSTACLES
-			List<ObstacleType> obstacles = levelType.getObstacles().getObstacle();
+			List<ObstacleType> obstacles = levelType.getObstacles()
+					.getObstacle();
 			for (ObstacleType ot : obstacles) {
 				List<PointType> points = ot.getShape().getPoints().getPoint();
-				float[] poly = new float[points.size()*2];
-				for (int i = 0; i<points.size(); i+=1) {
-					poly[i*2] = points.get(i).getX();
-					poly[i*2+1] = points.get(i).getY();
+				float[] poly = new float[points.size() * 2];
+				for (int i = 0; i < points.size(); i += 1) {
+					poly[i * 2] = points.get(i).getX();
+					poly[i * 2 + 1] = points.get(i).getY();
 				}
 				Shape polygon = new Polygon(poly);
 				Obstacle obstacle = new Obstacle(polygon, ot.getTexture());
 				polygonCreator.getObstacles().add(obstacle);
 				level.getDrawableList().add(obstacle);
 			}
-			
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,7 +241,6 @@ public class LevelSaver {
 				level.getUpdatableList().add(entity);
 
 			}
-
 			return level;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

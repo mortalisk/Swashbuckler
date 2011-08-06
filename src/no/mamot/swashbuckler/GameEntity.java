@@ -59,5 +59,15 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 	public void collisionOccured(CollisionEvent event, GameObject other, World world) {
 		
 	}
+	
+	@Override
+	public boolean collidesWithMan() {
+		return true;
+	}
+	
+	@Override
+	public boolean collides() {
+		return true;
+	}
 
 }
