@@ -1,5 +1,7 @@
 package no.mamot.swashbuckler.weapon;
 
+import javax.script.SimpleScriptContext;
+
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
@@ -98,7 +100,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	@Override
 	public void draw(Graphics g) {
 
-		
+		ShapeRenderer.draw(new org.newdawn.slick.geom.Circle(body.getPosition().getX(), body.getPosition().getY(), 10));
 		if (collision){
 			setEnableParticleEffect(true);
 			showBullet = false;
