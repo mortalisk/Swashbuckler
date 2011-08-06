@@ -34,6 +34,7 @@ public class Heal extends GameEntity {
 		body.setEnabled(false);
 		healSound = new Sound("data/Sound/healing.wav");
 		
+		
 	}	
 	
 
