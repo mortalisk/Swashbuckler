@@ -7,6 +7,7 @@ import net.phys2d.raw.World;
 import no.mamot.engine.Drawable;
 import no.mamot.engine.GameObject;
 import no.mamot.engine.Updateable;
+import no.mamot.swashbuckler.weapon.WeaponAttack;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -25,6 +26,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	private float bodyRadius = 0;
 	private float playerScore = 0;
 	private float playerHP = 0;
+	private WeaponAttack weapon = null;
 
 	private Sound jump = null;
 
@@ -167,5 +169,13 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 			canJump = true;
 		}
 		
+	}
+	
+	public void setWeapon (WeaponAttack newAttack){
+		this.weapon = newAttack;
+	}
+
+	public void attack(float X, float Y) {
+		weapon.attack(X, Y);		
 	}
 }

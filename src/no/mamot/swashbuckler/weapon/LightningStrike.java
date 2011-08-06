@@ -1,4 +1,4 @@
-package no.mamot.swashbuckler;
+package no.mamot.swashbuckler.weapon;
 
 import net.phys2d.math.ROVector2f;
 import net.phys2d.raw.Body;
@@ -9,6 +9,8 @@ import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Circle;
 import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
+import no.mamot.swashbuckler.GameEntity;
+import no.mamot.swashbuckler.Swashbuckler;
 
 
 import org.newdawn.slick.Graphics;
@@ -17,7 +19,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleSystem;
 
-public class LightningStrike extends GameEntity {
+public class LightningStrike extends GameEntity implements WeaponAttack{
 
 	private Image image = null;
 	private ParticleSystem system;
@@ -88,7 +90,7 @@ public class LightningStrike extends GameEntity {
 			system.render();
 		}		
 		else {
-			g.drawImage(image, body.getPosition().getX(), body.getPosition().getY());
+			
 		}
 	}
 	@Override
@@ -98,7 +100,7 @@ public class LightningStrike extends GameEntity {
 		long time = System.currentTimeMillis();
 		float distance = player.getPosition().distance(getPosition());
 		if((time-timeWhenSpawned) > 400 ) {
-			remove();
+			setEnableParticleEffect(false);
 			
 		}
 	
@@ -120,6 +122,13 @@ public class LightningStrike extends GameEntity {
 	@Override
 	public void collisionOccured(CollisionEvent event, GameObject other,World world) {
 		
+	}
+	@Override
+	public void attack(float mouseX, float mouseY) {
+		body.setPosition(mouseX, mouseY);
+		system.setPosition(mouseX, mouseY);
+		timeWhenSpawned = System.currentTimeMillis();
+		setEnableParticleEffect(true);
 	}
 
 }

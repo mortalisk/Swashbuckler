@@ -8,6 +8,7 @@ import no.mamot.engine.Level;
 import no.mamot.engine.View;
 import no.mamot.engine.ViewImpl;
 import no.mamot.swashbuckler.editor.LevelSaver;
+import no.mamot.swashbuckler.weapon.LightningStrike;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -83,16 +84,8 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	
 	private void attack(Input input) {
 		// use command pattern..
-		LightningStrike strike = new LightningStrike(level.getMan());
-		strike.setPlayer(level.getMan());
-		strike.setPlayerLevel(level);
-		//strike.setPosition(level.getMan().getPosition().getX(),level.getMan().getPosition().getY());
-		strike.setPosition(input.getMouseX() + camera.getTopLeftCorner().x,
+		level.getMan().attack(input.getMouseX() + camera.getTopLeftCorner().x,
 				input.getMouseY() + camera.getTopLeftCorner().y);
-		strike.init();
-		level.getDrawableList().add(strike);
-		level.getGameObjectList().add(strike);
-		level.getUpdatableList().add(strike);
 	}
 
 	@Override
@@ -107,10 +100,26 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 		Sound music = new Sound("data/Music/backgroundSound2.wav");
 		music.loop();
+		
+		
+		setupAttack();
+	}
+
+	private void setupAttack() {
+		LightningStrike strike = new LightningStrike(level.getMan());
+		strike.setPlayer(level.getMan());
+		strike.setPlayerLevel(level);		
+		strike.init();
+		level.getDrawableList().add(strike);
+		level.getGameObjectList().add(strike);
+		level.getUpdatableList().add(strike);
+		level.getMan().setWeapon(strike);
 	}
 
 	public Swashbuckler getMan() {
 		return level.getMan();
 	}
+	
+	
 
 }
