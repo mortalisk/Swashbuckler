@@ -77,22 +77,22 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		HealEmitterValue gravity = new HealEmitterValue();
 		gravity.setValue(0.0f);		
 		HealEmitterValue angle = new HealEmitterValue();
-		angle.setValue(60.0f);		
+		angle.setValue(360.0f);		
 		HealEmitterValue growth = new HealEmitterValue();
-		growth.setValue(-44.0f);		
+		growth.setValue(-34.0f);		
 		healEmitter.gravityFactor = gravity;
 		healEmitter.angularOffset = angle;
 		healEmitter.growthFactor = growth;
-		healEmitter.spawnCount.setMin(20.0f);
-		healEmitter.spawnCount.setMax(20.0f);
-		healEmitter.initialSize.setMin(13.0f);
-		healEmitter.initialSize.setMax(13.0f);
-		healEmitter.spawnInterval.setMin(250.0f);
-		healEmitter.spawnInterval.setMax(250.0f);
+		healEmitter.spawnCount.setMin(10.0f);
+		healEmitter.spawnCount.setMax(10.0f);
+		healEmitter.initialSize.setMin(19.0f);
+		healEmitter.initialSize.setMax(19.0f);
+		healEmitter.spawnInterval.setMin(160.0f);
+		healEmitter.spawnInterval.setMax(160.0f);
 		healEmitter.initialLife.setMin(1000.0f);
 		healEmitter.initialLife.setMax(1000.0f);
-		healEmitter.speed.setMin(50.0f);
-		healEmitter.speed.setMax(50.0f);
+		healEmitter.speed.setMin(60.0f);
+		healEmitter.speed.setMax(60.0f);
 		system.addEmitter(healEmitter);
 		system.setBlendingMode(ParticleSystem.BLEND_COMBINE);	
 		body.addExcludedBody(playerLevel.getMan().getBody());
@@ -100,15 +100,15 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	@Override
 	public void draw(Graphics g) {
 
-		ShapeRenderer.draw(new org.newdawn.slick.geom.Circle(body.getPosition().getX(), body.getPosition().getY(), 10));
+		//ShapeRenderer.draw(new org.newdawn.slick.geom.Circle(body.getPosition().getX(), body.getPosition().getY(), 10));
 
 		if (particleEnable){
 			system.setPosition(body.getPosition().getX(), body.getPosition().getY());
 			system.render();
 		}		
-		if (showBullet) {
-			bulletImage.draw(body.getPosition().getX(), body.getPosition().getY());
-		}
+		//if (showBullet) {
+		//	bulletImage.draw(body.getPosition().getX(), body.getPosition().getY());
+		//}
 	
 	}
 	@Override
@@ -117,7 +117,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		long time = System.currentTimeMillis();
 		
 		if(collision&& (time-timeOfCollision) > 400 ) {
-			setEnableParticleEffect(false);
+			//setEnableParticleEffect(false);
 			collision = false;
 			body.setEnabled(false);
 			
@@ -143,7 +143,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		collision = true;
 		system.setPosition(body.getPosition().getX(), body.getPosition().getY());
 		timeOfCollision = System.currentTimeMillis();
-		setEnableParticleEffect(true);
+		setEnableParticleEffect(false);
 		
 	}
 	
@@ -155,6 +155,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	@Override
 	public void attack(float mouseX, float mouseY) {
 		remove();
+		setEnableParticleEffect(true);
 		long time = System.currentTimeMillis();
 		if (showBullet && time - timeOfShot < 5) return;
 		//remove();
