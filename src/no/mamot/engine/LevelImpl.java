@@ -31,6 +31,7 @@ public class LevelImpl implements Level {
 		gameObjects.remove(o);
 		drawables.remove(o);
 		updateables.remove(o);
+		
 	}
 
 	public Swashbuckler getMan() {

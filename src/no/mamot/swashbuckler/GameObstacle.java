@@ -86,6 +86,12 @@ public final class GameObstacle implements GameObject, Drawable {
 	public boolean collides() {
 		return true;
 	}
+	
+	@Override
+	public void takeDamage(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

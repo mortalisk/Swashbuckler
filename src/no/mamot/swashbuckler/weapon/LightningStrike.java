@@ -144,6 +144,7 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 		system.setPosition(body.getPosition().getX(), body.getPosition().getY());
 		timeOfCollision = System.currentTimeMillis();
 		setEnableParticleEffect(false);
+		other.takeDamage(20);
 		
 	}
 	

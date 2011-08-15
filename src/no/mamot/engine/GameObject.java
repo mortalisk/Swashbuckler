@@ -22,5 +22,7 @@ public interface GameObject {
 	void setWorld(World world);
 
 	void collisionOccured(CollisionEvent event, GameObject other, World world);
+	
+	void takeDamage(int amount);
 
 }

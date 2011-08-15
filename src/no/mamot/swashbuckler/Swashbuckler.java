@@ -25,7 +25,6 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	private boolean goingLeft = false;
 	private float bodyRadius = 0;
 	private float playerScore = 0;
-	private float playerHP = 0;
 	private WeaponAttack weapon = null;
 
 	private Sound jump = null;
@@ -59,7 +58,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		body.setIsResting(false);
 		body.setMaxVelocity(maxVelocity.x, maxVelocity.y);
 
-		this.playerHP = playerHP;
+		this.health = playerHP;
 
 		jump = new Sound("data/Sound/Swashbuckler_Jump3.wav");
 	}
@@ -140,16 +139,16 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 	}
 
 	public float getHP() {
-		return playerHP;
+		return health;
 	}
 
 	public void addHP(int hp) {
-		playerHP += hp;
-		if (playerHP >100) {
-			playerHP = 100;
+		health += hp;
+		if (health >100) {
+			health = 100;
 		}
 		
-		if (playerHP <= 0) {
+		if (health <= 0) {
 			// TODO: DEAD!
 		}
 	}

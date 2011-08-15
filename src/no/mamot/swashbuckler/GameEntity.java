@@ -17,6 +17,8 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 	protected Body body;
 	
 	protected World world;
+	
+	float health = 100.0f;
 
 	public void init() {
 		
@@ -68,6 +70,22 @@ public abstract class GameEntity implements Drawable, Updateable, GameObject {
 	@Override
 	public boolean collides() {
 		return true;
+	}
+	
+	@Override
+	public void takeDamage(int amount) {
+		health -= amount;
+		
+		if (health <= 0) {
+			die();
+		}
+	}
+
+	private void die() {
+			// TODO make fancy animation
+		playerLevel.removeObject(this);
+		world.remove(this.getBody());
+		System.out.println("I am dead " + this);
 	}
 
 }
