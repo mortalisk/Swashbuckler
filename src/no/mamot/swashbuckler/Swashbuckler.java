@@ -65,6 +65,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 
 	public final void draw(Graphics g) {
 		
+		
 		getImage().draw(body.getPosition().getX() - 10,
 				body.getPosition().getY() - bodyRadius * 1.5f);
 		// ShapeRenderer.draw(this.getShape());
@@ -159,7 +160,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 
 	@Override
 	public void update(int delta) {
-
+		
 	}
 
 	@Override
