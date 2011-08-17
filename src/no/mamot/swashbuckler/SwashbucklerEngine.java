@@ -1,5 +1,13 @@
 package no.mamot.swashbuckler;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import no.mamot.engine.Camera;
 import no.mamot.engine.Engine;
 import no.mamot.engine.GameProxy;
@@ -24,13 +32,14 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	int screenHeight = 768;
 	int screenWidth = 1024;
 	private Physics physics;
+	int nextLevel = 0;
 
 	public SwashbucklerEngine() throws SlickException {
 		view = new ViewImpl(screenWidth, screenHeight);
 		camera = view.getCamera();
 		gameProxy = new GameProxy("Swashbuckler", view, this, this,
 				screenWidth, screenHeight);
-		physics = new Physics(500);
+		
 
 	}
 
@@ -41,6 +50,14 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 		for (int i = level.getUpdatableList().size() - 1; i >= 0; i--) {
 			level.getUpdatableList().get(i).update(delta);
+		}
+		if (level.getFinished()){
+			
+			try {
+				loadNextLevel();
+			} catch (SlickException e) {				
+				e.printStackTrace();				
+			}
 		}
 	}
 
@@ -90,19 +107,46 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 
 	@Override
 	public void init() throws SlickException {
-		level = levelLoader.loadLevel();
-		
-		camera.setCenter(level.getMan().getPosition().getX(), level.getMan().getPosition().getY());
+		loadNextLevel();
 
-		view.setLevel(level);
-		physics.setLevel(level);
-		physics.init();
+
 
 		Sound music = new Sound("data/Music/backgroundSound2.wav");
 		music.loop();
 		
 		
 		setupAttack();
+	}
+
+	private void loadNextLevel() throws SlickException {
+		
+		List <String> levels = getLevels();		
+		if (nextLevel >= levels.size()){
+			System.exit(2);
+		}
+		level = levelLoader.loadLevel(levels.get(nextLevel));		
+		camera.setCenter(level.getMan().getPosition().getX(), level.getMan().getPosition().getY());
+		view.setLevel(level);
+		physics = new Physics(500);
+		physics.setLevel(level);
+		physics.init();
+		nextLevel++;
+		
+	}
+
+	private List<String> getLevels() {
+		Scanner fr;
+		List<String> levels = new ArrayList<String>();
+		try {
+			fr = new Scanner(new File("data/levels/levelsequence.cfg"));
+			while(fr.hasNext()){
+				levels.add(fr.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return levels;
+
 	}
 
 	private void setupAttack() {

@@ -103,6 +103,8 @@ Updateable {
 		 spinning = false;
 		 flying = false;
 		System.out.println("END OF LINE");
+	    playerLevel.setFinished(true);
+	   
 	}
 
 	@Override

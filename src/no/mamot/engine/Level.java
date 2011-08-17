@@ -15,5 +15,9 @@ public interface Level {
 	void removeObject(Object object);
 	
 	Swashbuckler getMan();
+
+	void setFinished(boolean finished);
+	
+	boolean getFinished();
 	
 }

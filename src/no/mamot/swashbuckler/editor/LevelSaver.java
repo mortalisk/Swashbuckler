@@ -194,10 +194,10 @@ public class LevelSaver {
 		}
 	}
 
-	public Level loadLevel() throws SlickException {
+	public Level loadLevel(String name) throws SlickException {
 		try {
 			LevelType levelType = unmarshal(LevelType.class,
-					new FileInputStream("data/levels/hei.level.xml"));
+					new FileInputStream("data/levels/"+name+".level.xml"));
 			LevelImpl level = new LevelImpl();
 
 			float manX = (float) levelType.getPlayer().getX();

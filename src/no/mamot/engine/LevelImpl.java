@@ -6,6 +6,7 @@ import java.util.List;
 import no.mamot.swashbuckler.Swashbuckler;
 
 public class LevelImpl implements Level {
+	private boolean levelFinished;
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();
 	private List<Drawable> drawables = new ArrayList<Drawable>();
 	private List<Updateable> updateables = new ArrayList<Updateable>();
@@ -40,6 +41,16 @@ public class LevelImpl implements Level {
 
 	public void setMan(Swashbuckler man) {
 		this.man = man;
+	}
+
+	@Override
+	public void setFinished(boolean finished) {
+		levelFinished = finished;		
+	}
+
+	@Override
+	public boolean getFinished() {
+		return levelFinished;
 	}
 	
 	
