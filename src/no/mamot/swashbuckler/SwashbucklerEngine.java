@@ -109,13 +109,8 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 	public void init() throws SlickException {
 		loadNextLevel();
 
-
-
 		Sound music = new Sound("data/Music/backgroundSound2.wav");
 		music.loop();
-		
-		
-		setupAttack();
 	}
 
 	private void loadNextLevel() throws SlickException {
@@ -131,6 +126,8 @@ public class SwashbucklerEngine implements Engine, InputHandler {
 		physics.setLevel(level);
 		physics.init();
 		nextLevel++;
+		
+		setupAttack();
 		
 	}
 
