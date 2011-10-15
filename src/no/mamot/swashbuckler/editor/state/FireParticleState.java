@@ -1,17 +1,12 @@
 package no.mamot.swashbuckler.editor.state;
 
-import org.newdawn.slick.SlickException;
-
 import no.mamot.swashbuckler.editor.EntityCreator;
-import no.mamot.swashbuckler.editor.LevelEditor;
-import no.mamot.swashbuckler.editor.Obstacle;
-
 import no.mamot.swashbuckler.editor.TypeEnum;
 
+import org.newdawn.slick.SlickException;
+
 public class FireParticleState implements LevelEditorState {
-
-
-	private LevelEditor levelEditor;
+	
 	private EntityCreator entityCreator = null;
 	
 	public FireParticleState(EntityCreator entityCreator) {

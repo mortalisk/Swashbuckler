@@ -3,7 +3,6 @@ package no.mamot.swashbuckler.editor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -14,8 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileFilter;
-
-import no.mamot.swashbuckler.editor.state.StateFactory;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI

@@ -11,7 +11,6 @@ import no.mamot.engine.Updateable;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Vector2f;
 
 public final class Robot extends GameEntity implements GameObject, Drawable,
@@ -24,8 +23,6 @@ public final class Robot extends GameEntity implements GameObject, Drawable,
 	private float attackSpeed = 0;
 	private float attackTimer = 0;
 	private float attackSkill = 0;
-
-	private Sound jump = null;
 
 	Vector2f before = new Vector2f();
 	private Image imageLeft = null;
@@ -67,22 +64,16 @@ public final class Robot extends GameEntity implements GameObject, Drawable,
 		this.attackSpeed = attackSpeed;
 		this.attackSkill = attackSkill;
 		this.viewRadius = viewRadius;
-
-		jump = new Sound("data/Sound/Robot_Jump.wav");
 	}
 
 	public void left(int delta) {
 		goingLeft = true;
 		body.addForce(leftForce);
-
-		// TODO: play walking sound???
 	}
 
 	public void right(int delta) {
 		goingLeft = false;
 		body.addForce(rightForce);
-
-		// TODO: play walking sound???
 	}
 
 	public void jump() {
@@ -90,9 +81,6 @@ public final class Robot extends GameEntity implements GameObject, Drawable,
 		if (body.isResting()) {
 			body.addForce(jumpForce);
 			body.setIsResting(false);
-
-			// TODO: play jump sound
-			// jump.play();
 		}
 	}
 

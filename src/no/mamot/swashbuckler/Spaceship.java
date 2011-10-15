@@ -2,7 +2,6 @@ package no.mamot.swashbuckler;
 
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
-import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
@@ -13,7 +12,6 @@ import no.mamot.engine.Updateable;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.opengl.renderer.Renderer;
 
 public class Spaceship extends GameEntity implements GameObject, Drawable,
 Updateable {

@@ -38,7 +38,6 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 			-50000, 0);
 	private net.phys2d.math.Vector2f rightForce = new net.phys2d.math.Vector2f(
 			50000, 0);
-	private boolean canJump;
 
 	public Swashbuckler(String imageFile, String entityName, float radius,
 			float x, float y, Vector2f maxVelocity, float playerHP)
@@ -169,14 +168,7 @@ public final class Swashbuckler extends GameEntity implements GameObject,
 		
 		ROVector2f cn = event.getPoint();
 		System.out.println(cn);
-		System.out.println(event);
-		
-		if (cn.getY() > body.getPosition().getY()) {
-			canJump = true;
-		} else {
-			canJump = false;
-		}
-		
+		System.out.println(event);	
 	}
 	
 	public void setWeapon (WeaponAttack newAttack){

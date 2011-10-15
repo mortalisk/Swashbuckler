@@ -1,39 +1,28 @@
 package no.mamot.swashbuckler.weapon;
 
-import javax.script.SimpleScriptContext;
-
 import net.phys2d.math.ROVector2f;
 import net.phys2d.math.Vector2f;
 import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
-import net.phys2d.raw.StaticBody;
 import net.phys2d.raw.World;
-import net.phys2d.raw.shapes.Box;
 import net.phys2d.raw.shapes.Circle;
 import no.mamot.engine.GameObject;
-import no.mamot.engine.Level;
 import no.mamot.swashbuckler.GameEntity;
 import no.mamot.swashbuckler.Swashbuckler;
-
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.ShapeRenderer;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleSystem;
 
 public class LightningStrike extends GameEntity implements WeaponAttack{
 
 	private Image particleImage = null;
-	private Image bulletImage = null;
 	private ParticleSystem system;
-	private int heal = 5;
 	private boolean particleEnable = true;
 	private long timeOfCollision = 0;
 	private long timeOfShot = 0;
-	private Shape thisShape;
 	private boolean collision = false;
 	private boolean showBullet = false;
 	private Circle shape;
@@ -43,7 +32,6 @@ public class LightningStrike extends GameEntity implements WeaponAttack{
 	public LightningStrike (Swashbuckler player) {
 		try {
 			particleImage = new Image("data/particles/Lightning.png", false);
-			bulletImage = new Image("data/Weapons/Lightninggun.png", false);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

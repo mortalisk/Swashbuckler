@@ -13,13 +13,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import no.mamot.engine.GameObject;
 import no.mamot.engine.Level;
 import no.mamot.engine.LevelImpl;
 import no.mamot.swashbuckler.GameEntity;
 import no.mamot.swashbuckler.GameObstacle;
 import no.mamot.swashbuckler.Swashbuckler;
-import no.mamot.swashbuckler.SwashbucklerEngine;
 import no.mamot.swashbuckler.xml.EntityEnum;
 import no.mamot.swashbuckler.xml.EntityType;
 import no.mamot.swashbuckler.xml.LevelType;
