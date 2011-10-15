@@ -1,6 +1,5 @@
 package no.mamot.swashbuckler;
 
-import net.phys2d.raw.Body;
 import net.phys2d.raw.CollisionEvent;
 import net.phys2d.raw.CollisionListener;
 import net.phys2d.raw.World;

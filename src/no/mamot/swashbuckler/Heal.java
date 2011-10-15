@@ -13,7 +13,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.particles.ConfigurableEmitter;
 import org.newdawn.slick.particles.ParticleSystem;
-import org.newdawn.slick.particles.effects.FireEmitter;
 
 public class Heal extends GameEntity {
 
