@@ -1,0 +1,19 @@
+Swashbuckler
+A game of tourmaline gathering and robot dismanteling
+
+Prerequisites
+* java -> http://www.oracle.com/technetwork/java/javase/downloads/index.html
+* sbt -> https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
+
+Instructions (in the top level folder):
+1. Install java and sbt (see links above)
+2. sbt run
+3. Play!
+
+To generate eclipse project files:
+sbt eclipse
+
+Errors
+Contact Morten
+ 
+
