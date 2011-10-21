@@ -5,13 +5,17 @@ Prerequisites
 * java -> http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * sbt -> https://github.com/harrah/xsbt/wiki/Getting-Started-Setup
 
-Instructions (in the top level folder):
-1. Install java and sbt (see links above)
-2. sbt run
+Instructions (in project folder):
+1. run "sh generate.sh" in most OS's or "generate.bat" on Windows
+2. run "sbt" and type
+	a. update
+	b. update
+	c. run
 3. Play!
 
 To generate eclipse project files:
 sbt eclipse
+Now add your platforms native libraries in eclipse (right click, properties on lwjgl.jar). You will find them under target/scala-X.X.X/resource_managed/main/lwjgl-resources/YOUR-OS
 
 Errors
 Contact Morten
